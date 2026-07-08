@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="تدريبي">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💪</text></svg>">
+<title>تدريبي - Ahmed's Training</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0f0f0f;
+  --card: #1a1a1a;
+  --card2: #222;
+  --accent: #3b82f6;
+  --accent2: #8b5cf6;
+  --green: #22c55e;
+  --orange: #f59e0b;
+  --red: #ef4444;
+  --text: #f0f0f0;
+  --text2: #a0a0a0;
+  --border: #2a2a2a;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: 80px;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.header h1 { font-size: 22px; font-weight: 700; }
+.header .week-info {
+  font-size: 13px;
+  color: var(--text2);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.week-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.badge-strength { background: #3b82f633; color: #3b82f6; }
+.badge-hypertrophy { background: #8b5cf633; color: #8b5cf6; }
+.badge-endurance { background: #22c55e33; color: #22c55e; }
+.badge-deload { background: #f59e0b33; color: #f59e0b; }
+
+/* Day picker */
+.day-picker {
+  display: flex;
+  gap: 8px;
+  padding: 12px 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.day-btn {
+  flex-shrink: 0;
+  padding: 10px 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--text2);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.day-btn .day-sub { display: block; font-size: 10px; font-weight: 400; color: var(--text2); margin-top: 2px; }
+.day-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.day-btn.active .day-sub { color: rgba(255,255,255,0.7); }
+
+/* Workout cards */
+.workout-section { padding: 0 20px; }
+
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 16px 0 8px;
+}
+
+.exercise-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.exercise-card .left { flex: 1; }
+.exercise-card .ex-name { font-size: 15px; font-weight: 600; }
+.exercise-card .ex-notes { font-size: 12px; color: var(--text2); margin-top: 2px; }
+.exercise-card .right { text-align: right; flex-shrink: 0; }
+.exercise-card .ex-sets { font-size: 18px; font-weight: 700; color: var(--accent); }
+.exercise-card .ex-sets .reps-label { font-size: 12px; font-weight: 400; color: var(--text2); }
+.exercise-card .ex-meta { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+/* Timer */
+.timer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card2);
+  color: var(--text2);
+  font-size: 11px;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: all 0.2s;
+}
+.timer-btn.running { background: var(--green); color: #000; border-color: var(--green); }
+.timer-btn:hover { background: var(--card); }
+
+/* Cardio card */
+.cardio-card {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border: 1px solid #2a2a4e;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+}
+.cardio-card .cardio-title { font-size: 15px; font-weight: 600; color: var(--accent2); }
+.cardio-card .cardio-detail { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+/* Warm-up toggle */
+.warmup-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 12px 20px;
+}
+.warmup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.warmup-header h3 { font-size: 14px; font-weight: 600; }
+.toggle-arrow { transition: transform 0.2s; font-size: 12px; }
+.toggle-arrow.open { transform: rotate(180deg); }
+.warmup-content { margin-top: 10px; display: none; }
+.warmup-content.show { display: block; }
+.warmup-step { font-size: 13px; padding: 4px 0; color: var(--text2); display: flex; gap: 8px; }
+.warmup-step .num { color: var(--accent); font-weight: 600; }
+
+/* Bottom tabs */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #0f0f0f;
+  border-top: 1px solid var(--border);
+  display: flex;
+  z-index: 200;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+.tab-btn {
+  flex: 1;
+  padding: 8px 0 6px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  background: none;
+}
+.tab-btn .tab-icon { font-size: 20px; display: block; margin-bottom: 2px; }
+.tab-btn.active { color: var(--accent); }
+.tab-btn.active .tab-icon { color: var(--accent); }
+
+/* Screen management */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* Medical / Nutrition screens */
+.info-section { padding: 0 20px; }
+.info-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+}
+.info-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.info-card p, .info-card li { font-size: 13px; color: var(--text2); line-height: 1.5; }
+.info-card ul { padding-left: 16px; }
+.info-card li { margin-bottom: 4px; }
+
+/* Rest timer modal */
+.timer-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+}
+.timer-modal.show { display: flex; }
+.timer-modal-content {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  text-align: center;
+  width: 280px;
+}
+.timer-display { font-size: 64px; font-weight: 700; font-variant-numeric: tabular-nums; margin: 16px 0; }
+.timer-display.running { color: var(--green); }
+.timer-label { font-size: 13px; color: var(--text2); margin-bottom: 4px; }
+.timer-actions { display: flex; gap: 8px; justify-content: center; }
+.timer-btn-big {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.timer-btn-start { background: var(--green); color: #000; }
+.timer-btn-stop { background: var(--red); color: #fff; }
+.timer-btn-close { background: var(--card2); color: var(--text2); border: 1px solid var(--border); }
+
+/* Log sheet */
+.log-input {
+  width: 100%;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--text);
+  font-size: 14px;
+  margin-top: 4px;
+}
+.log-input:focus { outline: none; border-color: var(--accent); }
+.log-row { display: flex; gap: 8px; margin-top: 6px; }
+.log-row input { flex: 1; }
+
+/* Responsive */
+@media (min-width: 600px) {
+  .workout-section, .info-section, .day-picker, .warmup-section { max-width: 600px; margin-left: auto; margin-right: auto; }
+  .header { text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <h1>💪 تدريبي</h1>
+  <div class="week-info" id="weekInfo">Loading...</div>
+</div>
+
+<!-- Day Picker -->
+<div class="day-picker" id="dayPicker">
+  <button class="day-btn active" data-day="mon">
+    الاثنين
+    <span class="day-sub">Push Focus</span>
+  </button>
+  <button class="day-btn" data-day="wed">
+    الأربعاء
+    <span class="day-sub">Pull/Hinge</span>
+  </button>
+  <button class="day-btn" data-day="fri">
+    الجمعة
+    <span class="day-sub">Full Body</span>
+  </button>
+</div>
+
+<!-- TABS -->
+<div class="tab-content">
+
+  <!-- WORKOUT SCREEN -->
+  <div class="screen active" id="screenWorkout">
+    <!-- Warm-up -->
+    <div class="warmup-section">
+      <div class="warmup-header" onclick="toggleWarmup()">
+        <h3>🔥 Knee & Body Warm-up</h3>
+        <span class="toggle-arrow" id="warmupArrow">▼</span>
+      </div>
+      <div class="warmup-content" id="warmupContent">
+        <div class="warmup-step"><span class="num">1</span> Leg swings — 30s each direction <button class="timer-btn" onclick="openVideo('Leg swings')">🎥</button></div>
+        <div class="warmup-step"><span class="num">2</span> Bodyweight squats (parallel, slow) — 15 reps <button class="timer-btn" onclick="openVideo('Bodyweight squats')">🎥</button></div>
+        <div class="warmup-step"><span class="num">3</span> Glute bridge hold — 3 × 20s <button class="timer-btn" onclick="openVideo('Glute bridge')">🎥</button></div>
+        <div class="warmup-step"><span class="num">4</span> Low-load leg extension — 15 reps <button class="timer-btn" onclick="openVideo('Leg extension')">🎥</button></div>
+        <div class="warmup-step"><span class="num">5</span> Knee circles — 30s each direction <button class="timer-btn" onclick="openVideo('Knee warm-up')">🎥</button></div>
+        <div class="warmup-step"><span class="num">6</span> Couch stretch — 60s per side <button class="timer-btn" onclick="openVideo('Couch stretch')">🎥</button></div>
+        <div class="warmup-step" style="color:var(--orange);margin-top:6px;">⚠️ Plus 2 warm-up sets per first exercise (50%, then 70% of working weight)</div>
+      </div>
+    </div>
+
+    <!-- Workout exercises -->
+    <div class="workout-section" id="workoutDisplay">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <!-- MEDICAL SCREEN -->
+  <div class="screen" id="screenMedical">
+    <div class="info-section">
+      <div class="info-card">
+        <h3>🩺 Anal Fissure — Breathe!</h3>
+        <ul>
+          <li>Exhale on exertion — never hold your breath on heavy reps</li>
+          <li>Brace inward (draw in belly), not outward</li>
+          <li>Trap bar deadlift > conventional (less pressure)</li>
+          <li>If you feel "pressure" → too heavy, reduce load</li>
+          <li>No 1RM testing, stay at RIR 1-3 on strength</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>💧 Kidney Stone — Hydrate</h3>
+        <ul>
+          <li><strong>3L+ water every day</strong></li>
+          <li>🍋 Lemon water (½ lemon) every morning</li>
+          <li>Sip 500ml during training</li>
+          <li>Normal calcium from food (binds oxalates)</li>
+          <li>Avoid: excess sodium, high-dose vit C supplements</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>🦵 Left Knee — Warm Up</h3>
+        <ul>
+          <li>Always do the knee warm-up (see workout tab)</li>
+          <li>Squat to parallel only — go deeper gradually if no pain</li>
+          <li>Prefer leg press if squat bothers you</li>
+          <li>Glute exercises (hip thrust, RDL) = better knee tracking</li>
+          <li>If it hurts → substitute with the alt exercise</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- NUTRITION SCREEN -->
+  <div class="screen" id="screenNutrition">
+    <div class="info-section">
+      <div class="info-card">
+        <h3>🥗 The 5 Simple Rules</h3>
+        <ol style="padding-left:20px;">
+          <li><strong>Protein in every meal</strong> — eggs, meat, chicken, fish, laban, whey</li>
+          <li><strong>Plate method</strong> — Training days: ½ carbs. Rest days: ¼ carbs.</li>
+          <li><strong>Cut junk</strong> — No soda. Fried food ≤1x/wk. Sweets ≤2x/wk.</li>
+          <li><strong>Olive oil daily</strong> — 1-2 tbsp. Don't fear healthy fats.</li>
+          <li><strong>3L water</strong> + lemon water morning (kidney stone!)</li>
+        </ol>
+      </div>
+      <div class="info-card">
+        <h3>🍽️ Training Day (M/W/F)</h3>
+        <ul>
+          <li>☀️ Breakfast: 3 eggs + 2 toast + laban + olives</li>
+          <li>🏋️ Lunch (pre-gym): Chicken + rice + salad (generous)</li>
+          <li>⚡ Post-workout: Whey + banana (or chicken sandwich)</li>
+          <li>🌙 Dinner: Fish/beef + veg + ¼ plate rice</li>
+          <li>🛌 Before bed: Cup of yogurt / روب</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>🛌 Rest Day (Tue/Thu/Sat/Sun)</h3>
+        <ul>
+          <li>☀️ Breakfast: 3 eggs + 1 toast + veg + laban</li>
+          <li>🥗 Lunch: Chicken + salad (skip rice or ¼ plate)</li>
+          <li>🌙 Dinner: Fish/meat + veg only (no carbs)</li>
+          <li>🛌 Before bed: Yogurt / روب</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOG SCREEN -->
+  <div class="screen" id="screenLog">
+    <div class="info-section" style="padding-top:12px;">
+      <div class="info-card" id="logCard">
+        <h3>📝 Today's Log</h3>
+        <div id="logEntries">Select a workout day to log your lifts.</div>
+        <button onclick="saveLog()" style="margin-top:12px;width:100%;padding:12px;border:none;border-radius:12px;background:var(--accent);color:#fff;font-size:15px;font-weight:600;cursor:pointer;">💾 Save Log</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Bottom tab bar -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('workout')">
+    <span class="tab-icon">🏋️</span>
+    Workout
+  </button>
+  <button class="tab-btn" onclick="switchTab('medical')">
+    <span class="tab-icon">🩺</span>
+    Health
+  </button>
+  <button class="tab-btn" onclick="switchTab('nutrition')">
+    <span class="tab-icon">🥗</span>
+    Nutrition
+  </button>
+  <button class="tab-btn" onclick="switchTab('log')">
+    <span class="tab-icon">📝</span>
+    Log
+  </button>
+</div>
+
+<script>
+// ====== DATA ======
+// ====== VIDEO DEMOS ======
+const VIDEOS = {
+  'Leg Press': 'https://youtube.com/shorts/nDh_BlnLCGc',
+  'Barbell Bench Press': 'https://youtube.com/shorts/t3f2L7NRRUY',
+  'Bench': 'https://youtube.com/shorts/t3f2L7NRRUY',
+  'Barbell Bench (lighter)': 'https://youtube.com/shorts/t3f2L7NRRUY',
+  'Barbell Row': 'https://youtube.com/shorts/Nqh7q3zDCoQ',
+  'Row': 'https://youtube.com/shorts/Nqh7q3zDCoQ',
+  'Standing OHP': 'https://youtube.com/shorts/zoN5EH50Dro',
+  'Trap Bar Deadlift': 'https://youtube.com/shorts/kpyCkyVIxjI',
+  'Weighted Pull-ups': 'https://youtube.com/watch?v=eGo4IYlbE5g',
+  'Pull-ups': 'https://youtube.com/watch?v=eGo4IYlbE5g',
+  'Incline DB Press': 'https://youtube.com/shorts/miOlFmAWKhs',
+  'Incline DB Bench': 'https://youtube.com/shorts/miOlFmAWKhs',
+  'Face Pull': 'https://youtube.com/watch?v=sHSY0Ao8QHs',
+  'Hip Thrust': 'https://youtube.com/watch?v=SEdqd1n0cvg',
+  'Front Squat (or Goblet)': 'https://youtube.com/shorts/r6Z_h_WAX5o',
+  'Front Squat': 'https://youtube.com/shorts/r6Z_h_WAX5o',
+  'DB Overhead Press': 'https://youtube.com/shorts/2D0TyoHv_EY',
+  'Lat Pulldown (wide)': 'https://youtube.com/shorts/02Qci1-0Aao',
+  'Lat Pulldown': 'https://youtube.com/shorts/02Qci1-0Aao',
+  'Goblet Squat': 'https://youtube.com/shorts/7-80HiXX1K8',
+  'RDL': 'https://youtube.com/shorts/82mM5vVWEzA',
+  'DB Shoulder Press': 'https://youtube.com/shorts/2D0TyoHv_EY',
+  'Tricep Pushdown': 'https://youtube.com/shorts/kQCDCkwfKMY',
+  'Tricep Pushdown (rope)': 'https://youtube.com/shorts/kQCDCkwfKMY',
+  'DB Row (one-arm)': 'https://youtube.com/shorts/aFtWSOruuhs',
+  'DB Row': 'https://youtube.com/shorts/aFtWSOruuhs',
+  'Lateral Raise': 'https://youtube.com/watch?v=9quyOwej-Mc',
+  'DB Lateral Raise': 'https://youtube.com/watch?v=9quyOwej-Mc',
+  'Bicep Curl': 'https://youtube.com/watch?v=BqPxoVad4yc',
+  'DB Curl': 'https://youtube.com/watch?v=BqPxoVad4yc',
+  'EZ Bar Curl': 'https://youtube.com/watch?v=BqPxoVad4yc',
+  'Cable Row': 'https://youtube.com/shorts/8QuMq1GMMng',
+  'Cable Row (close grip)': 'https://youtube.com/shorts/8QuMq1GMMng',
+  'Cable Fly': 'https://youtube.com/shorts/I-Ue34qLxc4',
+  'Cable Fly (or machine chest)': 'https://youtube.com/shorts/I-Ue34qLxc4',
+  'KB Swings': 'https://youtube.com/shorts/aSYap2yhW8s',
+  'Push-ups': 'https://youtube.com/watch?v=IODxDxX7oi4',
+  'Face Pull + Tricep Pushdown': 'https://youtube.com/watch?v=sHSY0Ao8QHs',
+  'Face Pull + Tricep Pushdown superset': 'https://youtube.com/watch?v=sHSY0Ao8QHs',
+  'Dumbbell Press': 'https://youtube.com/shorts/2D0TyoHv_EY',
+  'Dumbbell Overhead Press': 'https://youtube.com/shorts/2D0TyoHv_EY',
+};
+
+// ====== WARM-UP VIDEOS ======
+const WARMUP_VIDEOS = {
+  'Leg swings': 'https://youtube.com/shorts/faNtt5MT3IU',
+  'Bodyweight squats': 'https://youtube.com/shorts/doTWfDS99Vs',
+  'Glute bridge': 'https://youtube.com/shorts/X_IGw8U_e38',
+  'Glute bridge hold': 'https://youtube.com/shorts/X_IGw8U_e38',
+  'Leg extension': 'https://youtube.com/shorts/jhb0mFuBZOI',
+  'Knee warm-up': 'https://youtube.com/shorts/3WItGyYBVIw',
+  'Knee circles': 'https://youtube.com/shorts/3WItGyYBVIw',
+  'Couch stretch': 'https://youtube.com/shorts/SG4k-o_vfUs',
+};
+
+function openVideo(name) {
+  // Check warm-up videos first
+  if (WARMUP_VIDEOS[name]) {
+    location.href = WARMUP_VIDEOS[name];
+    return;
+  }
+  // Check exercise videos
+  const url = VIDEOS[name];
+  if (url) {
+    location.href = url;
+    return;
+  }
+  // Try partial match in exercise videos
+  for (const key in VIDEOS) {
+    if (name.includes(key) || key.includes(name)) {
+      location.href = VIDEOS[key];
+      return;
+    }
+  }
+  alert('No video found for: ' + name);
+}
+
+const BLOCKS = {
+  strength: {
+    label: 'Strength', weeks: '1-4', reps: '3-6', rest: '3 min', rir: '1-2',
+    cls: 'badge-strength',
+    days: {
+      mon: {
+        label: 'Push Focus',
+        exercises: [
+          { name: 'Leg Press', sets: 4, reps: 5, rest: '3:00', rir: '1-2', note: 'Feet mid-high, shoulder width. Don\'t lock out.' },
+          { name: 'Barbell Bench Press', sets: 5, reps: 5, rest: '3:00', rir: '1-2', note: 'Grip shoulder-width. Touch lower chest. No bounce.' },
+          { name: 'Barbell Row', sets: 4, reps: 5, rest: '3:00', rir: '1-2', note: '45° back angle. Pull to sternum.' },
+          { name: 'Standing OHP', sets: 4, reps: 5, rest: '3:00', rir: '1-2', note: 'From front rack. Brace glutes.' },
+        ],
+        cardio: { type: 'HIIT', detail: 'Bike: 30s sprint / 60s easy × 8 rounds', duration: '12 min' }
+      },
+      wed: {
+        label: 'Pull/Hinge Focus',
+        exercises: [
+          { name: 'Trap Bar Deadlift', sets: 4, reps: 5, rest: '3:00', rir: '1-2', note: '⚠️ EXHALE on every rep. Moderate load.' },
+          { name: 'Weighted Pull-ups', sets: 4, reps: 5, rest: '3:00', rir: '1-2', note: 'Full dead-hang. Or lat pulldown 4×5.' },
+          { name: 'Incline DB Press', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: '30° incline. Deep stretch.' },
+          { name: 'Face Pull', sets: 3, reps: 12, rest: '1:00', rir: '1-2', note: 'High pull to forehead. Shoulder health.' },
+        ],
+        cardio: { type: 'LISS', detail: 'Incline walk 10-15%', duration: '25 min', pace: 'Conversational' }
+      },
+      fri: {
+        label: 'Full Body Power',
+        exercises: [
+          { name: 'Hip Thrust', sets: 4, reps: 6, rest: '3:00', rir: '1-2', note: 'Squeeze glutes at top 1s.' },
+          { name: 'Front Squat (or Goblet)', sets: 4, reps: 6, rest: '3:00', rir: '1-2', note: 'Parallel only. If knee hurts → leg press.' },
+          { name: 'DB Overhead Press', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Seated. Palms forward.' },
+          { name: 'Lat Pulldown (wide)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Pull to upper chest. No swing.' },
+        ],
+        cardio: { type: 'HIIT', detail: 'Rower: 250m sprint / 60s paddle × 8', duration: '~12 min' }
+      }
+    }
+  },
+  hypertrophy: {
+    label: 'Hypertrophy', weeks: '5-8', reps: '8-12', rest: '90s', rir: '0-1',
+    cls: 'badge-hypertrophy',
+    days: {
+      mon: {
+        label: 'Push Focus',
+        exercises: [
+          { name: 'Leg Press', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Last rep = you might miss the next one.' },
+          { name: 'Incline DB Bench', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: '30° incline. Stretch at bottom.' },
+          { name: 'DB Row (one-arm)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Support on bench. Pull to hip.' },
+          { name: 'Lateral Raise', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Slight lean. Thumbs up.' },
+          { name: 'Bicep Curl', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Strict. Elbows pinned.' },
+        ],
+        cardio: { type: 'HIIT', detail: 'Bike: 30s sprint / 60s easy × 8', duration: '12 min' }
+      },
+      wed: {
+        label: 'Pull/Hinge Focus',
+        exercises: [
+          { name: 'RDL', sets: 3, reps: 10, rest: '1:30', rir: '0-1', note: 'Soft knees. Push hips back. Light weight.' },
+          { name: 'DB Shoulder Press', sets: 3, reps: 10, rest: '1:30', rir: '0-1', note: 'Neutral grip (palms facing).' },
+          { name: 'Pull-ups', sets: 3, reps: 10, rest: '1:30', rir: '0-1', note: 'Or lat pulldown 3×10.' },
+          { name: 'Tricep Pushdown (rope)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Elbows fixed. Spread at bottom.' },
+        ],
+        cardio: { type: 'LISS', detail: 'Incline walk 10-15%', duration: '25 min' }
+      },
+      fri: {
+        label: 'Full Body Pump',
+        exercises: [
+          { name: 'Goblet Squat', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Parallel only. DB at chest.' },
+          { name: 'Hip Thrust', sets: 3, reps: 10, rest: '1:30', rir: '0-1', note: 'Hold top 1s.' },
+          { name: 'Cable Row (close grip)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Squeeze back at peak.' },
+          { name: 'Cable Fly (or machine chest)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Hug motion. Stretch at open.' },
+          { name: 'Face Pull', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Rear delt + shoulder health.' },
+        ],
+        cardio: { type: 'HIIT', detail: 'Rower: 250m sprint / 60s paddle × 8', duration: '~12 min' }
+      }
+    }
+  },
+  endurance: {
+    label: 'Endurance', weeks: '9-12', reps: '10-15', rest: '60-90s', rir: '0-1',
+    cls: 'badge-endurance',
+    days: {
+      mon: {
+        label: 'Metabolic Push',
+        exercises: [
+          { name: 'Goblet Squat', sets: 3, reps: 12, rest: '1:15', rir: '0-1', note: 'Fast but controlled.' },
+          { name: 'Barbell Bench (lighter)', sets: 3, reps: 10, rest: '1:15', rir: '0-1', note: 'Lighter than Block A. Speed focus.' },
+          { name: 'Barbell Row', sets: 3, reps: 10, rest: '1:15', rir: '0-1', note: 'Moderate weight.' },
+          { name: 'DB Lateral Raise', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Higher reps = burn.' },
+        ],
+        cardio: { type: 'HIIT', detail: 'Bike: 30s sprint / 45s easy × 10', duration: '~12 min' }
+      },
+      wed: {
+        label: 'Full Body Flow',
+        exercises: [
+          { name: 'KB Swings', sets: 4, reps: 15, rest: '1:00', rir: '-', note: 'Hip-driven. Moderate weight.' },
+          { name: 'Push-ups', sets: 4, reps: 'to failure', rest: '1:00', rir: '0', note: 'Last rep = last good rep.' },
+          { name: 'Pull-ups', sets: 3, reps: 'to failure', rest: '1:15', rir: '0', note: 'Or 12 if you can.' },
+          { name: 'Face Pull + Tricep Pushdown', sets: 3, reps: 12+12, rest: '1:00', rir: '0-1', note: 'Superset. No rest between.' },
+        ],
+        cardio: { type: 'LISS', detail: 'Incline walk 10-15%', duration: '30 min' }
+      },
+      fri: {
+        label: 'Full Body Pump',
+        exercises: [
+          { name: 'Leg Press', sets: 3, reps: 12, rest: '1:15', rir: '0-1', note: 'Quad pump. Controlled.' },
+          { name: 'Incline DB Bench', sets: 3, reps: 12, rest: '1:15', rir: '0-1', note: 'Light enough to move fast.' },
+          { name: 'Cable Row', sets: 3, reps: 12, rest: '1:15', rir: '0-1', note: 'Squeeze and hold.' },
+          { name: 'DB Curl', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Alternating. Stretch at bottom.' },
+        ],
+        cardio: { type: 'HIIT', detail: 'Rower: 250m sprint / 45s paddle × 10', duration: '~15 min' }
+      }
+    }
+  }
+};
+
+const DAY_NAMES = { mon: 'الاثنين', wed: 'الأربعاء', fri: 'الجمعة' };
+
+// ====== STATE ======
+let currentDay = 'mon';
+let currentBlock = 'strength';
+let timerInterval = null;
+let timerSeconds = 0;
+let timerRunning = false;
+
+// ====== INIT ======
+function getCurrentBlock() {
+  const startDate = new Date('2026-07-06'); // First Monday
+  const today = new Date();
+  const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+  const weekNum = Math.floor(diffDays / 7) + 1;
+  if (weekNum <= 4) return 'strength';
+  if (weekNum <= 8) return 'hypertrophy';
+  return 'endurance';
+}
+
+function renderWeekInfo() {
+  const startDate = new Date('2026-07-06');
+  const today = new Date();
+  const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+  const weekNum = Math.floor(diffDays / 7) + 1;
+  const block = BLOCKS[currentBlock];
+  const isDeload = weekNum === 4 || weekNum === 8 || weekNum === 12;
+
+  let html = `Week ${Math.max(1, Math.min(12, weekNum))}`;
+  html += ` &middot; <span class="week-badge ${block.cls}">${block.label}</span>`;
+  html += ` &middot; Reps ${block.reps} &middot; RIR ${block.rir} &middot; Rest ${block.rest}`;
+  if (isDeload) html += ` &middot; <span class="week-badge badge-deload">DELOAD</span>`;
+  document.getElementById('weekInfo').innerHTML = html;
+}
+
+function renderWorkout() {
+  const block = BLOCKS[currentBlock];
+  const day = block.days[currentDay];
+  const container = document.getElementById('workoutDisplay');
+
+  let html = '';
+
+  // Block info
+  html += `<div class="section-title">${block.label} — ${day.label} (${DAY_NAMES[currentDay]})</div>`;
+
+  // Exercises
+  day.exercises.forEach(ex => {
+    const setsReps = typeof ex.reps === 'string' ? ex.reps : `${ex.reps}`;
+    html += `<div class="exercise-card">`;
+    html += `<div class="left"><div class="ex-name">${ex.name}</div>`;
+    if (ex.note) html += `<div class="ex-notes">${ex.note}</div>`;
+    html += `</div>`;
+    html += `<div class="right">`;
+    html += `<div class="ex-sets">${ex.sets}×${setsReps} <span class="reps-label"></span></div>`;
+    html += `<div class="ex-meta">Rest ${ex.rest} · RIR ${ex.rir} <button class="timer-btn" onclick="openTimer('${ex.rest}')">⏱</button><button class="timer-btn" onclick="openVideo('${ex.name.replace(/'/g, "\\'")}')">🎥</button></div>`;
+    html += `</div></div>`;
+  });
+
+  // Cardio
+  if (day.cardio) {
+    html += `<div class="cardio-card">`;
+    html += `<div class="cardio-title">${day.cardio.type} — ${day.cardio.detail}</div>`;
+    html += `<div class="cardio-detail">Duration: ${day.cardio.duration}`;
+    if (day.cardio.pace) html += ` · ${day.cardio.pace}`;
+    html += `</div></div>`;
+  }
+
+  // Deload note
+  const weekNum = getWeekNum();
+  if (weekNum === 4 || weekNum === 8 || weekNum === 12) {
+    html += `<div class="cardio-card" style="background:linear-gradient(135deg,#1a1a1a,#2a2a00);border-color:#4a4a00;">
+      <div class="cardio-title" style="color:var(--orange);">⚠️ DELOAD WEEK</div>
+      <div class="cardio-detail">Reduce ALL sets by 50%. Keep same weight. Do the same exercises with half the sets.</div>
+    </div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+function getWeekNum() {
+  const startDate = new Date('2026-07-06');
+  const today = new Date();
+  const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+  return Math.floor(diffDays / 7) + 1;
+}
+
+// ====== DAY PICKER ======
+document.querySelectorAll('.day-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    currentDay = this.dataset.day;
+    renderWorkout();
+  });
+});
+
+// ====== TAB SWITCHING ======
+function switchTab(tab) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('screen' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+  event.target.closest('.tab-btn').classList.add('active');
+
+  if (tab === 'log') renderLog();
+}
+
+// ====== WARMUP TOGGLE ======
+function toggleWarmup() {
+  const content = document.getElementById('warmupContent');
+  const arrow = document.getElementById('warmupArrow');
+  content.classList.toggle('show');
+  arrow.classList.toggle('open');
+}
+
+// ====== TIMER ======
+let timerModalTemp = null;
+
+function openTimer(restStr) {
+  // Parse rest: "3:00" -> 180, "1:30" -> 90, "60s" -> 60
+  let totalSecs = 0;
+  if (restStr.includes(':')) {
+    const parts = restStr.split(':');
+    totalSecs = parseInt(parts[0]) * 60 + parseInt(parts[1]);
+  } else {
+    totalSecs = parseInt(restStr);
+  }
+
+  timerSeconds = totalSecs;
+  timerRunning = false;
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+
+  const modal = document.getElementById('timerModal') || createTimerModal();
+  modal.classList.add('show');
+  document.getElementById('timerDisplay').textContent = formatTime(timerSeconds);
+  document.getElementById('timerDisplay').classList.remove('running');
+  document.getElementById('timerLabel').textContent = `Rest ${restStr}`;
+  document.getElementById('timerBtnStart').textContent = '▶ Start';
+  document.getElementById('timerBtnStart').className = 'timer-btn-big timer-btn-start';
+}
+
+function createTimerModal() {
+  const div = document.createElement('div');
+  div.className = 'timer-modal';
+  div.id = 'timerModal';
+  div.innerHTML = `
+    <div class="timer-modal-content">
+      <div class="timer-label" id="timerLabel">Rest</div>
+      <div class="timer-display" id="timerDisplay">3:00</div>
+      <div class="timer-actions">
+        <button class="timer-btn-big timer-btn-start" id="timerBtnStart" onclick="toggleTimer()">▶ Start</button>
+        <button class="timer-btn-big timer-btn-close" onclick="closeTimer()">✕</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(div);
+  return div;
+}
+
+function toggleTimer() {
+  const btn = document.getElementById('timerBtnStart');
+  if (!timerRunning) {
+    timerRunning = true;
+    document.getElementById('timerDisplay').classList.add('running');
+    btn.textContent = '⏹ Stop';
+    btn.className = 'timer-btn-big timer-btn-stop';
+    timerInterval = setInterval(() => {
+      timerSeconds--;
+      if (timerSeconds <= 0) {
+        timerSeconds = 0;
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timerRunning = false;
+        document.getElementById('timerDisplay').classList.remove('running');
+        btn.textContent = '✓ Done';
+        btn.className = 'timer-btn-big timer-btn-start';
+        // Vibrate on mobile
+        if (navigator.vibrate) navigator.vibrate(500);
+      }
+      document.getElementById('timerDisplay').textContent = formatTime(timerSeconds);
+    }, 1000);
+  } else {
+    // Reset
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timerRunning = false;
+    document.getElementById('timerDisplay').classList.remove('running');
+  }
+}
+
+function closeTimer() {
+  const modal = document.getElementById('timerModal');
+  if (modal) modal.classList.remove('show');
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+}
+
+function formatTime(secs) {
+  const m = Math.floor(secs / 60);
+  const s = secs % 60;
+  return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+// ====== LOG ======
+function renderLog() {
+  const block = BLOCKS[currentBlock];
+  const day = block.days[currentDay];
+  const container = document.getElementById('logEntries');
+
+  let html = '';
+  html += `<div style="font-size:13px;color:var(--text2);margin-bottom:8px;">${block.label} — ${day.label} (${DAY_NAMES[currentDay]})</div>`;
+
+  day.exercises.forEach((ex, i) => {
+    const saved = localStorage.getItem(`log_${currentBlock}_${currentDay}_${i}`);
+    const val = saved || '';
+    const setsReps = typeof ex.reps === 'string' ? ex.reps : `${ex.reps}`;
+    html += `<div style="margin-top:8px;"><strong style="font-size:13px;">${ex.name}</strong> <span style="color:var(--text2);font-size:12px;">${ex.sets}×${setsReps}</span>`;
+    html += `<div class="log-row"><input class="log-input" placeholder="Weight" id="log_weight_${i}" value="${val.split('|')[0] || ''}">`;
+    html += `<input class="log-input" placeholder="Reps done" id="log_reps_${i}" value="${val.split('|')[1] || ''}">`;
+    html += `<input class="log-input" placeholder="RPE" id="log_rpe_${i}" style="width:60px;" value="${val.split('|')[2] || ''}"></div></div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function saveLog() {
+  const block = BLOCKS[currentBlock];
+  const day = block.days[currentDay];
+  day.exercises.forEach((ex, i) => {
+    const w = document.getElementById(`log_weight_${i}`)?.value || '';
+    const r = document.getElementById(`log_reps_${i}`)?.value || '';
+    const p = document.getElementById(`log_rpe_${i}`)?.value || '';
+    localStorage.setItem(`log_${currentBlock}_${currentDay}_${i}`, `${w}|${r}|${p}`);
+  });
+  // Show saved feedback
+  const btn = document.querySelector('#logCard button');
+  const orig = btn.textContent;
+  btn.textContent = '✅ Saved!';
+  setTimeout(() => btn.textContent = orig, 1500);
+}
+
+// ====== SWIPE TO CHANGE DAY ======
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+document.addEventListener('touchend', e => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+  const diff = touchStartX - touchEndX;
+  if (Math.abs(diff) < 50) return;
+
+  const days = ['mon', 'wed', 'fri'];
+  const idx = days.indexOf(currentDay);
+
+  if (diff > 0 && idx < 2) { // swipe left -> next day
+    currentDay = days[idx + 1];
+  } else if (diff < 0 && idx > 0) { // swipe right -> prev day
+    currentDay = days[idx - 1];
+  } else return;
+
+  // Update day buttons
+  document.querySelectorAll('.day-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.day === currentDay);
+  });
+  renderWorkout();
+}
+
+// ====== INIT ======
+currentBlock = getCurrentBlock();
+renderWeekInfo();
+renderWorkout();
+
+// Keyboard shortcut: space to open timer for first exercise
+document.addEventListener('keydown', e => {
+  if (e.key === ' ' && document.querySelector('.timer-btn')) {
+    e.preventDefault();
+    document.querySelector('.timer-btn').click();
+  }
+});
+</script>
+</body>
+</html>
