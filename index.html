@@ -308,19 +308,13 @@ body {
   <!-- WORKOUT SCREEN -->
   <div class="screen active" id="screenWorkout">
     <!-- Warm-up -->
-    <div class="warmup-section">
+    <div class="warmup-section" id="warmupSection">
       <div class="warmup-header" onclick="toggleWarmup()">
-        <h3>🔥 Knee & Body Warm-up</h3>
+        <h3 id="warmupTitle">🔥 Warm-up</h3>
         <span class="toggle-arrow" id="warmupArrow">▼</span>
       </div>
       <div class="warmup-content" id="warmupContent">
-        <div class="warmup-step"><span class="num">1</span> Leg swings — 30s each direction <button class="timer-btn" onclick="openVideo('Leg swings')">🎥</button></div>
-        <div class="warmup-step"><span class="num">2</span> Bodyweight squats (parallel, slow) — 15 reps <button class="timer-btn" onclick="openVideo('Bodyweight squats')">🎥</button></div>
-        <div class="warmup-step"><span class="num">3</span> Glute bridge hold — 3 × 20s <button class="timer-btn" onclick="openVideo('Glute bridge')">🎥</button></div>
-        <div class="warmup-step"><span class="num">4</span> Low-load leg extension — 15 reps <button class="timer-btn" onclick="openVideo('Leg extension')">🎥</button></div>
-        <div class="warmup-step"><span class="num">5</span> Knee circles — 30s each direction <button class="timer-btn" onclick="openVideo('Knee warm-up')">🎥</button></div>
-        <div class="warmup-step"><span class="num">6</span> Couch stretch — 60s per side <button class="timer-btn" onclick="openVideo('Couch stretch')">🎥</button></div>
-        <div class="warmup-step" style="color:var(--orange);margin-top:6px;">⚠️ Plus 2 warm-up sets per first exercise (50%, then 70% of working weight)</div>
+        <!-- Populated by JS -->
       </div>
     </div>
 
@@ -674,6 +668,54 @@ function renderWorkout() {
   const block = BLOCKS[currentBlock];
   const day = block.days[currentDay];
   const container = document.getElementById('workoutDisplay');
+
+  // ====== DAY-SPECIFIC WARM-UP ======
+  const warmups = {
+    mon: {
+      title: '🔥 Push Day Warm-up (Upper Body + Legs)',
+      steps: [
+        { num: 1, text: 'Arm circles + band pull-aparts', time: '2 min', vid: 'Leg swings' },
+        { num: 2, text: 'Bodyweight squats (parallel)', reps: '10 reps', vid: 'Bodyweight squats' },
+        { num: 3, text: 'Bench warm-up: empty bar', reps: '10 reps', vid: 'Bench Press (Chest)' },
+        { num: 4, text: 'Leg swings', time: '30s each', vid: 'Leg swings' },
+        { num: 5, text: 'Glute bridge hold', time: '3 × 20s', vid: 'Glute bridge' },
+        { num: 6, text: 'Couch stretch', time: '60s/side', vid: 'Couch stretch' },
+      ]
+    },
+    wed: {
+      title: '🔥 Pull/Hinge Day Warm-up (Posterior Chain)',
+      steps: [
+        { num: 1, text: 'Leg swings', time: '30s each', vid: 'Leg swings' },
+        { num: 2, text: 'Bodyweight squats (parallel, slow)', reps: '15 reps', vid: 'Bodyweight squats' },
+        { num: 3, text: 'Glute bridge hold', time: '3 × 20s', vid: 'Glute bridge' },
+        { num: 4, text: 'Deadlift warm-up: empty bar or light weight', reps: '5 reps', vid: 'Deadlift' },
+        { num: 5, text: 'Pull-ups: scapular pulls (hang & squeeze)', reps: '3 reps', vid: 'Lat Pulldown (Lats)' },
+        { num: 6, text: 'Knee circles', time: '30s each', vid: 'Knee warm-up' },
+        { num: 7, text: 'Couch stretch', time: '60s/side', vid: 'Couch stretch' },
+      ]
+    },
+    fri: {
+      title: '🔥 Full Body Day Warm-up (Everything)',
+      steps: [
+        { num: 1, text: 'Leg swings', time: '30s each', vid: 'Leg swings' },
+        { num: 2, text: 'Bodyweight squats (parallel, slow)', reps: '15 reps', vid: 'Bodyweight squats' },
+        { num: 3, text: 'Glute bridge hold', time: '3 × 20s', vid: 'Glute bridge' },
+        { num: 4, text: 'Low-load leg extension', reps: '15 reps', vid: 'Leg extension' },
+        { num: 5, text: 'Knee circles', time: '30s each', vid: 'Knee warm-up' },
+        { num: 6, text: 'Arm circles + shoulder rotations', time: '30s each', vid: 'Leg swings' },
+        { num: 7, text: 'Couch stretch', time: '60s/side', vid: 'Couch stretch' },
+      ]
+    }
+  };
+
+  const wu = warmups[currentDay];
+  document.getElementById('warmupTitle').textContent = wu.title;
+  let wuHtml = '';
+  wu.steps.forEach(s => {
+    wuHtml += `<div class="warmup-step"><span class="num">${s.num}</span> ${s.text} — ${s.time || s.reps} <button class="timer-btn" onclick="openVideo('${s.vid}')">🎥</button></div>`;
+  });
+  wuHtml += `<div class="warmup-step" style="color:var(--orange);margin-top:6px;">⚠️ Plus 2 warm-up sets per first exercise (50%, then 70% of working weight)</div>`;
+  document.getElementById('warmupContent').innerHTML = wuHtml;
 
   let html = '';
 
