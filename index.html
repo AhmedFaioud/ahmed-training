@@ -284,6 +284,7 @@ body {
 <div class="header">
   <h1>💪 تدريبي</h1>
   <div class="week-info" id="weekInfo">Loading...</div>
+  <div class="week-info" id="dateInfo" style="font-size:12px;color:var(--text2);margin-top:2px;"></div>
 </div>
 
 <!-- Day Picker -->
@@ -665,11 +666,17 @@ function renderWeekInfo() {
   const block = BLOCKS[currentBlock];
   const isDeload = weekNum === 4 || weekNum === 8 || weekNum === 12;
 
-  let html = `Week ${Math.max(1, Math.min(12, weekNum))}`;
+  let html = `Week ${Math.max(1, Math.min(12, weekNum))} of 12`;
   html += ` &middot; <span class="week-badge ${block.cls}">${block.label}</span>`;
   html += ` &middot; Reps ${block.reps} &middot; RIR ${block.rir} &middot; Rest ${block.rest}`;
   if (isDeload) html += ` &middot; <span class="week-badge badge-deload">DELOAD</span>`;
   document.getElementById('weekInfo').innerHTML = html;
+
+  // Date info
+  const options = { weekday: 'long', month: 'long', day: 'numeric' };
+  const dateStr = today.toLocaleDateString('en-US', options);
+  const nextChange = weekNum < 4 ? 'Aug 3 → Hypertrophy' : (weekNum < 8 ? 'Aug 31 → Endurance' : 'Program complete Sep 27');
+  document.getElementById('dateInfo').innerHTML = `${dateStr} · Next block: ${nextChange}`;
 }
 
 function renderWorkout() {
