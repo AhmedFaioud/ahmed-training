@@ -458,6 +458,8 @@ const VIDEOS = {
   'Hip Thrust': 'https://youtube.com/shorts/CvuVYMFd11g',
   'Front Squat (or Goblet)': 'https://youtube.com/shorts/_qv0m3tPd3s',
   'Front Squat': 'https://youtube.com/shorts/_qv0m3tPd3s',
+  'Machine Shoulder Press (Shoulders)': 'https://youtube.com/shorts/k6tzKisR3NY',
+  'Machine Shoulder Press': 'https://youtube.com/shorts/k6tzKisR3NY',
   'DB Overhead Press': 'https://youtube.com/shorts/k6tzKisR3NY',
   'DB Press (Shoulders)': 'https://youtube.com/shorts/k6tzKisR3NY',
   'Dumbbell Press': 'https://youtube.com/shorts/k6tzKisR3NY',
@@ -530,7 +532,7 @@ function openVideo(name) {
 
 const BLOCKS = {
   strength: {
-    label: 'Strength', weeks: '1-4', reps: '3-6', rest: '3 min', rir: '1-2',
+    label: 'Strength', weeks: '1-4', reps: '3-6', rest: '3 min', rir: '0-1',
     cls: 'badge-strength',
     days: {
       mon: {
@@ -557,16 +559,16 @@ const BLOCKS = {
         label: 'Full Body Power',
         exercises: [
           { name: 'B-Stance RDL (Glutes)', sets: 4, reps: 6, rest: '3:00', rir: '1-2', note: 'One foot back (toe only). Push hips back, feel glute stretch on working leg. Squeeze up.' },
-           { name: 'Front Squat (Quads)', sets: 4, reps: 6, rest: '3:00', rir: '1-2', note: 'Parallel only. If knee hurts → leg press.' },
-           { name: 'DB Press (Shoulders)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Seated. Palms forward.' },
-           { name: 'Lat Pulldown (Lats)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Pull to upper chest. No swing.' },
+          { name: 'Leg Press (Quads)', sets: 4, reps: 6, rest: '3:00', rir: '0-1', note: 'Feet mid-high. Push through heels. Squeeze quads at top.' },
+          { name: 'Machine Shoulder Press (Shoulders)', sets: 4, reps: 6, rest: '2:30', rir: '0-1', note: 'Sit, press, squeeze at top. Control the descent.' },
+          { name: 'Lat Pulldown (Lats)', sets: 4, reps: 6, rest: '2:30', rir: '0-1', note: 'Pull to upper chest. No swing.' },
         ],
         cardio: { type: 'HIIT', detail: 'Rower: 250m sprint / 60s easy paddle × 8 — Sprint hard for 250m (~45-60s), then paddle easy for 60s. Repeat 8 times. Total ~12-15 min. If no rower: Bike 30s sprint / 60s easy × 8.', duration: '~12-15 min' }
       }
     }
   },
   hypertrophy: {
-    label: 'Hypertrophy', weeks: '5-8', reps: '8-12', rest: '90s', rir: '0-1',
+    label: 'Hypertrophy', weeks: '5-8', reps: '8-12', rest: '90s', rir: '0',
     cls: 'badge-hypertrophy',
     days: {
       mon: {
@@ -593,7 +595,7 @@ const BLOCKS = {
       fri: {
         label: 'Full Body Pump',
         exercises: [
-          { name: 'Goblet Squat (Quads, Glutes)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Parallel only. DB at chest.' },
+          { name: 'Leg Press (Quads, Glutes)', sets: 4, reps: 10, rest: '1:30', rir: '0', note: 'Feet mid-high. Push through heels. Squeeze quads + glutes at top.' },
           { name: 'B-Stance RDL (Glutes)', sets: 3, reps: 10, rest: '1:30', rir: '0-1', note: 'One foot back. Hinge at hips, feel glute. Squeeze at top. Hold DB in one hand.' },
           { name: 'Cable Row (Back)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Squeeze back at peak.' },
           { name: 'Cable Fly (Chest)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Hug motion. Stretch at open.' },
