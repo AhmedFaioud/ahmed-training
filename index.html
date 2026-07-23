@@ -647,7 +647,7 @@ const DAY_NAMES = { mon: 'الاثنين', wed: 'الأربعاء', fri: 'الج
 
 // ====== STATE ======
 let currentDay = 'mon';
-let currentBlock = 'strength';
+let currentBlock = getCurrentBlock();
 let timerInterval = null;
 let timerSeconds = 0;
 let timerRunning = false;
