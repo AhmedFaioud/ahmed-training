@@ -293,9 +293,17 @@ body {
     الاثنين
     <span class="day-sub">Push Focus</span>
   </button>
+  <button class="day-btn" data-day="tue">
+    الثلاثاء
+    <span class="day-sub">Cardio LISS</span>
+  </button>
   <button class="day-btn" data-day="wed">
     الأربعاء
     <span class="day-sub">Pull/Hinge</span>
+  </button>
+  <button class="day-btn" data-day="thu">
+    الخميس
+    <span class="day-sub">Cardio HIIT</span>
   </button>
   <button class="day-btn" data-day="fri">
     الجمعة
@@ -643,11 +651,11 @@ const BLOCKS = {
   }
 };
 
-const DAY_NAMES = { mon: 'الاثنين', wed: 'الأربعاء', fri: 'الجمعة' };
+const DAY_NAMES = { mon: 'الاثنين', tue: 'الثلاثاء', wed: 'الأربعاء', thu: 'الخميس', fri: 'الجمعة' };
 
 // ====== STATE ======
 let currentDay = 'mon';
-let currentBlock = getCurrentBlock();
+let currentBlock = 'strength';
 let timerInterval = null;
 let timerSeconds = 0;
 let timerRunning = false;
@@ -688,6 +696,60 @@ function renderWorkout() {
   const block = BLOCKS[currentBlock];
   const day = block.days[currentDay];
   const container = document.getElementById('workoutDisplay');
+
+  // ====== CARDIO-ONLY DAYS (Tue / Thu) ======
+  const CARDIO_DAYS = {
+    tue: {
+      title: '🔥 Cardio Day Warm-up (Light)',
+      steps: [
+        { num: 1, text: 'Leg swings', time: '30s each', vid: 'Leg swings' },
+        { num: 2, text: 'Bodyweight squats', reps: '10 reps', vid: 'Bodyweight squats' },
+        { num: 3, text: 'Knee circles', time: '30s each', vid: 'Knee warm-up' },
+        { num: 4, text: 'Light walking or cycling', time: '5 min easy', vid: 'Rower' },
+      ],
+      exercise: null,
+      cardio: { type: 'LISS', detail: 'Incline walk 10-15% — OR — Cycling (high seat, low resistance) — OR — Swimming. 40 min at conversational pace (120-140 bpm).', duration: '40 min', pace: 'Easy, can speak' }
+    },
+    thu: {
+      title: '🔥 Cardio Day Warm-up (Light)',
+      steps: [
+        { num: 1, text: 'Leg swings', time: '30s each', vid: 'Leg swings' },
+        { num: 2, text: 'Bodyweight squats', reps: '10 reps', vid: 'Bodyweight squats' },
+        { num: 3, text: 'Knee circles', time: '30s each', vid: 'Knee warm-up' },
+        { num: 4, text: 'Light walking or cycling', time: '5 min easy', vid: 'Rower' },
+      ],
+      exercise: null,
+      cardio: { type: 'HIIT', detail: 'Bike: 30s sprint / 60s easy × 8 — OR — Rower: 250m sprint / 60s paddle × 8. Sprint hard, recover easy.', duration: '12-15 min', pace: 'Sprints 8-9/10 effort' }
+    }
+  };
+
+  // Cardio-only days
+  if (CARDIO_DAYS[currentDay]) {
+    const cd = CARDIO_DAYS[currentDay];
+
+    // Warm-up
+    document.getElementById('warmupTitle').textContent = cd.title;
+    let wuHtml = '';
+    cd.steps.forEach(s => {
+      wuHtml += `<div class="warmup-step"><span class="num">${s.num}</span> ${s.text} — ${s.time || s.reps} <button class="timer-btn" onclick="openVideo('${s.vid}')">🎥</button></div>`;
+    });
+    document.getElementById('warmupContent').innerHTML = wuHtml;
+
+    // Content
+    let html = '';
+    html += `<div class="section-title">Cardio — ${DAY_NAMES[currentDay]} (${block.label})</div>`;
+    html += `<div class="cardio-card">`;
+    html += `<div class="cardio-title">${cd.cardio.type}</div>`;
+    html += `<div class="cardio-detail">${cd.cardio.detail}</div>`;
+    html += `<div class="cardio-detail">Duration: ${cd.cardio.duration} · Pace: ${cd.cardio.pace}</div>`;
+    html += `</div>`;
+    html += `<div class="cardio-card" style="background:linear-gradient(135deg,#1a2e1a,#162116);border-color:#2a4a2a;">
+      <div class="cardio-title" style="color:var(--green);">💧 Hydration Reminder</div>
+      <div class="cardio-detail">Sip water throughout. Lemon water this morning? 3L total today.</div>
+    </div>`;
+    container.innerHTML = html;
+    return;
+  }
 
   // ====== DAY-SPECIFIC WARM-UP ======
   const warmups = {
@@ -901,8 +963,21 @@ function formatTime(secs) {
 // ====== LOG ======
 function renderLog() {
   const block = BLOCKS[currentBlock];
-  const day = block.days[currentDay];
   const container = document.getElementById('logEntries');
+
+  // Cardio-only days
+  if (currentDay === 'tue' || currentDay === 'thu') {
+    const label = currentDay === 'tue' ? 'Cardio LISS' : 'Cardio HIIT';
+    let html = '';
+    html += `<div style="font-size:13px;color:var(--text2);margin-bottom:8px;">${block.label} — ${label} (${DAY_NAMES[currentDay]})</div>`;
+    html += `<div class="log-row"><input class="log-input" placeholder="Duration (min)" id="log_cw" value="${localStorage.getItem(`log_${currentBlock}_${currentDay}_cw`) || ''}">`;
+    html += `<input class="log-input" placeholder="Distance (km) or rounds" id="log_cr" value="${localStorage.getItem(`log_${currentBlock}_${currentDay}_cr`) || ''}">`;
+    html += `<input class="log-input" placeholder="Avg HR / feel" id="log_cp" style="width:100px;" value="${localStorage.getItem(`log_${currentBlock}_${currentDay}_cp`) || ''}"></div>`;
+    container.innerHTML = html;
+    return;
+  }
+
+  const day = block.days[currentDay];
 
   let html = '';
   html += `<div style="font-size:13px;color:var(--text2);margin-bottom:8px;">${block.label} — ${day.label} (${DAY_NAMES[currentDay]})</div>`;
@@ -922,6 +997,19 @@ function renderLog() {
 
 function saveLog() {
   const block = BLOCKS[currentBlock];
+
+  // Cardio-only days
+  if (currentDay === 'tue' || currentDay === 'thu') {
+    localStorage.setItem(`log_${currentBlock}_${currentDay}_cw`, document.getElementById('log_cw')?.value || '');
+    localStorage.setItem(`log_${currentBlock}_${currentDay}_cr`, document.getElementById('log_cr')?.value || '');
+    localStorage.setItem(`log_${currentBlock}_${currentDay}_cp`, document.getElementById('log_cp')?.value || '');
+    const btn = document.querySelector('#logCard button');
+    const orig = btn.textContent;
+    btn.textContent = '✅ Saved!';
+    setTimeout(() => btn.textContent = orig, 1500);
+    return;
+  }
+
   const day = block.days[currentDay];
   day.exercises.forEach((ex, i) => {
     const w = document.getElementById(`log_weight_${i}`)?.value || '';
@@ -953,10 +1041,10 @@ function handleSwipe() {
   const diff = touchStartX - touchEndX;
   if (Math.abs(diff) < 50) return;
 
-  const days = ['mon', 'wed', 'fri'];
+  const days = ['mon', 'tue', 'wed', 'thu', 'fri'];
   const idx = days.indexOf(currentDay);
 
-  if (diff > 0 && idx < 2) { // swipe left -> next day
+  if (diff > 0 && idx < 4) { // swipe left -> next day
     currentDay = days[idx + 1];
   } else if (diff < 0 && idx > 0) { // swipe right -> prev day
     currentDay = days[idx - 1];
