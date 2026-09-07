@@ -311,6 +311,11 @@ body {
   </button>
 </div>
 
+<div class="warmup-section" id="septBanner" style="background:linear-gradient(135deg,#2a1a00,#1a1a00);border-color:#6a4a00;margin:8px 20px 0;">
+  <div style="font-size:13px;font-weight:600;color:#f59e0b;">📅 September — Beginner Machine Phase</div>
+  <div style="font-size:12px;color:var(--text2);margin-top:4px;">High-technique lifts swapped to machines this month (chest press, chest-supported row, machine shoulder press, hack squat). <strong style="color:var(--text);">Swap back to free weights at the start of October.</strong></div>
+</div>
+
 <!-- TABS -->
 <div class="tab-content">
 
@@ -445,6 +450,13 @@ const VIDEOS = {
   'Leg Press': 'https://youtube.com/shorts/EotSw18oR9w',
   'Barbell Bench Press': 'https://youtube.com/shorts/PTzUJkPrrDw',
   'Bench': 'https://youtube.com/shorts/PTzUJkPrrDw',
+  'Machine Chest Press (Chest)': 'https://youtube.com/shorts/VHIlmOPMWWs',
+  'Machine Chest Press': 'https://youtube.com/shorts/VHIlmOPMWWs',
+  'Machine Shoulder Press (Shoulders)': 'https://youtube.com/shorts/ii04rytCmjQ',
+  'Machine Shoulder Press': 'https://youtube.com/shorts/ii04rytCmjQ',
+  'Chest Supported Row (Back)': 'https://youtube.com/shorts/G35gTqGcXXA',
+  'Hack Squat (Quads)': 'https://youtube.com/shorts/rzsfm43_9c0',
+  'Hack Squat': 'https://youtube.com/shorts/rzsfm43_9c0',
   'Barbell Bench (lighter)': 'https://youtube.com/shorts/PTzUJkPrrDw',
   'Barbell Row': 'https://youtube.com/shorts/HRo7m_Dfpxw',
   'Row': 'https://youtube.com/shorts/HRo7m_Dfpxw',
@@ -474,8 +486,9 @@ const VIDEOS = {
   'Goblet Squat': 'https://youtube.com/shorts/ZBAd1g1z6qs',
   'RDL': 'https://youtube.com/shorts/hu3jRvTc_po',
   'DB Shoulder Press': 'https://youtube.com/shorts/k6tzKisR3NY',
-  'Tricep Pushdown': 'https://youtube.com/shorts/WC_Nk_ybUBE',
-  'Tricep Pushdown (rope)': 'https://youtube.com/shorts/WC_Nk_ybUBE',
+  'Tricep Pushdown': 'https://youtube.com/shorts/1FoWlRS2Edc',
+  'Tricep Pushdown (Triceps)': 'https://youtube.com/shorts/1FoWlRS2Edc',
+  'Triceps': 'https://youtube.com/shorts/1FoWlRS2Edc',
   'DB Row (one-arm)': 'https://youtube.com/shorts/WkFX6_GxAs8',
   'DB Row': 'https://youtube.com/shorts/WkFX6_GxAs8',
   'Lateral Raise': 'https://youtube.com/shorts/Kl3LEzQ5Zqs',
@@ -550,9 +563,9 @@ const BLOCKS = {
       mon: {
         label: 'Upper A (Chest/Back)',
         exercises: [
-          { name: 'Bench Press (Chest)', sets: 4, reps: 5, rest: '2:30', rir: '1-2', note: 'Touch lower chest. No bounce.' },
-          { name: 'Barbell Row (Back)', sets: 4, reps: 5, rest: '2:30', rir: '1-2', note: 'Pull to sternum. 45 deg back.' },
-          { name: 'OHP (Shoulders)', sets: 3, reps: 6, rest: '2:30', rir: '1-2', note: 'From front rack. Brace glutes.' },
+          { name: 'Machine Chest Press (Chest)', sets: 4, reps: 5, rest: '2:30', rir: '1-2', note: 'Machine = easy technique. Squeeze at top.' },
+          { name: 'Chest Supported Row (Back)', sets: 4, reps: 5, rest: '2:30', rir: '1-2', note: 'Chest on pad. Pull to sternum.' },
+          { name: 'Machine Shoulder Press (Shoulders)', sets: 3, reps: 6, rest: '2:30', rir: '1-2', note: 'Seated machine. No lockout at top.' },
           { name: 'Lat Pulldown (Lats)', sets: 3, reps: 6, rest: '2:30', rir: '1-2', note: 'Pull to upper chest.' },
           { name: 'Tricep Pushdown (Triceps)', sets: 2, reps: 8, rest: '2:30', rir: '1-2', note: 'Elbows fixed.' },
         ],
@@ -594,7 +607,7 @@ const BLOCKS = {
       fri: {
         label: 'Lower B (Quads/Glutes/Hams)',
         exercises: [
-          { name: 'Front Squat (Quads)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Parallel only. Knee-safe.' },
+          { name: 'Hack Squat (Quads)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Machine = easy technique. Parallel depth.' },
           { name: 'Leg Press (Quads, Glutes)', sets: 3, reps: 6, rest: '2:30', rir: '1-2', note: 'Feet high. Quad pump.' },
           { name: 'RDL (Hams, Glutes)', sets: 3, reps: 6, rest: '2:30', rir: '1-2', note: 'Light. Deep stretch.' },
           { name: 'Cable Pull-through (Glutes)', sets: 3, reps: 10, rest: '2:30', rir: '1-2', note: 'Squeeze at top.' },
@@ -610,9 +623,9 @@ const BLOCKS = {
       mon: {
         label: 'Upper A (Chest/Back)',
         exercises: [
-          { name: 'Bench Press (Chest)', sets: 4, reps: 8, rest: '1:30', rir: '0-1', note: 'Touch lower chest. No bounce.' },
-          { name: 'Barbell Row (Back)', sets: 4, reps: 8, rest: '1:30', rir: '0-1', note: 'Pull to sternum. 45 deg back.' },
-          { name: 'OHP (Shoulders)', sets: 3, reps: 8, rest: '1:30', rir: '0-1', note: 'From front rack. Brace glutes.' },
+          { name: 'Machine Chest Press (Chest)', sets: 4, reps: 8, rest: '1:30', rir: '0-1', note: 'Machine = easy technique. Squeeze at top.' },
+          { name: 'Chest Supported Row (Back)', sets: 4, reps: 8, rest: '1:30', rir: '0-1', note: 'Chest on pad. Pull to sternum.' },
+          { name: 'Machine Shoulder Press (Shoulders)', sets: 3, reps: 8, rest: '1:30', rir: '0-1', note: 'Seated machine. No lockout at top.' },
           { name: 'Lat Pulldown (Lats)', sets: 3, reps: 8, rest: '1:30', rir: '0-1', note: 'Pull to upper chest.' },
           { name: 'Tricep Pushdown (Triceps)', sets: 2, reps: 10, rest: '1:30', rir: '0-1', note: 'Elbows fixed.' },
         ],
@@ -654,7 +667,7 @@ const BLOCKS = {
       fri: {
         label: 'Lower B (Quads/Glutes/Hams)',
         exercises: [
-          { name: 'Front Squat (Quads)', sets: 4, reps: 8, rest: '1:30', rir: '0-1', note: 'Parallel only. Knee-safe.' },
+          { name: 'Hack Squat (Quads)', sets: 4, reps: 8, rest: '1:30', rir: '0-1', note: 'Machine = easy technique. Parallel depth.' },
           { name: 'Leg Press (Quads, Glutes)', sets: 3, reps: 12, rest: '1:30', rir: '0-1', note: 'Feet high. Quad pump.' },
           { name: 'RDL (Hams, Glutes)', sets: 3, reps: 10, rest: '1:30', rir: '0-1', note: 'Light. Deep stretch.' },
           { name: 'Cable Pull-through (Glutes)', sets: 3, reps: 12, rest: '1:30', rir: '0-1', note: 'Squeeze at top.' },
@@ -670,9 +683,9 @@ const BLOCKS = {
       mon: {
         label: 'Upper A (Chest/Back)',
         exercises: [
-          { name: 'Bench Press (Chest)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Touch lower chest. No bounce.' },
-          { name: 'Barbell Row (Back)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Pull to sternum. 45 deg back.' },
-          { name: 'OHP (Shoulders)', sets: 3, reps: 10, rest: '1:00', rir: '0-1', note: 'From front rack. Brace glutes.' },
+          { name: 'Machine Chest Press (Chest)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Machine = easy technique. Squeeze at top.' },
+          { name: 'Chest Supported Row (Back)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Chest on pad. Pull to sternum.' },
+          { name: 'Machine Shoulder Press (Shoulders)', sets: 3, reps: 10, rest: '1:00', rir: '0-1', note: 'Seated machine. No lockout at top.' },
           { name: 'Lat Pulldown (Lats)', sets: 3, reps: 10, rest: '1:00', rir: '0-1', note: 'Pull to upper chest.' },
           { name: 'Tricep Pushdown (Triceps)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Elbows fixed.' },
         ],
@@ -714,7 +727,7 @@ const BLOCKS = {
       fri: {
         label: 'Lower B (Quads/Glutes/Hams)',
         exercises: [
-          { name: 'Front Squat (Quads)', sets: 3, reps: 10, rest: '1:00', rir: '0-1', note: 'Parallel only. Knee-safe.' },
+          { name: 'Hack Squat (Quads)', sets: 3, reps: 10, rest: '1:00', rir: '0-1', note: 'Machine = easy technique. Parallel depth.' },
           { name: 'Leg Press (Quads, Glutes)', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: 'Feet high. Quad pump.' },
           { name: 'RDL (Hams, Glutes)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Light. Deep stretch.' },
           { name: 'Cable Pull-through (Glutes)', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: 'Squeeze at top.' },
@@ -779,7 +792,7 @@ function renderWorkout() {
       steps: [
         { num: 1, text: 'Arm circles + band pull-aparts', time: '2 min', vid: 'Arm circles' },
         { num: 2, text: 'Bodyweight squats (parallel)', reps: '10 reps', vid: 'Bodyweight squats' },
-        { num: 3, text: 'Bench warm-up: empty bar', reps: '10 reps', vid: 'Bench Press (Chest)' },
+        { num: 3, text: 'Machine chest press warm-up: light weight', reps: '10 reps', vid: 'Machine Chest Press (Chest)' },
         { num: 4, text: 'Leg swings', time: '30s each', vid: 'Leg swings' },
         { num: 5, text: 'Glute bridge hold', time: '3 × 20s', vid: 'Glute bridge' },
         { num: 6, text: 'Half kneeling hip flexor stretch', time: '60s/side', vid: 'Half kneeling stretch' },
