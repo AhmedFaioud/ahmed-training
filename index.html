@@ -287,33 +287,45 @@ body {
   <div class="week-info" id="dateInfo" style="font-size:12px;color:var(--text2);margin-top:2px;"></div>
 </div>
 
-<!-- Day Picker -->
+<!-- Day Picker (8-day rolling cycle) -->
 <div class="day-picker" id="dayPicker">
-  <button class="day-btn active" data-day="mon">
-    الاثنين
-    <span class="day-sub">Upper A</span>
+  <button class="day-btn active" data-day="d1">
+    يوم 1
+    <span class="day-sub">Push A</span>
   </button>
-  <button class="day-btn" data-day="tue">
-    الثلاثاء
-    <span class="day-sub">Lower A</span>
+  <button class="day-btn" data-day="d2">
+    يوم 2
+    <span class="day-sub">Pull A</span>
   </button>
-  <button class="day-btn" data-day="wed">
-    الأربعاء
-    <span class="day-sub">Push</span>
+  <button class="day-btn" data-day="d3">
+    يوم 3
+    <span class="day-sub">Legs A</span>
   </button>
-  <button class="day-btn" data-day="thu">
-    الخميس
-    <span class="day-sub">Pull</span>
+  <button class="day-btn" data-day="d4">
+    يوم 4
+    <span class="day-sub">Rest 😴</span>
   </button>
-  <button class="day-btn" data-day="fri">
-    الجمعة
-    <span class="day-sub">Lower B</span>
+  <button class="day-btn" data-day="d5">
+    يوم 5
+    <span class="day-sub">Push B</span>
+  </button>
+  <button class="day-btn" data-day="d6">
+    يوم 6
+    <span class="day-sub">Pull B</span>
+  </button>
+  <button class="day-btn" data-day="d7">
+    يوم 7
+    <span class="day-sub">Legs B</span>
+  </button>
+  <button class="day-btn" data-day="d8">
+    يوم 8
+    <span class="day-sub">Rest 😴</span>
   </button>
 </div>
 
 <div class="warmup-section" id="septBanner" style="background:linear-gradient(135deg,#2a1a00,#1a1a00);border-color:#6a4a00;margin:8px 20px 0;">
-  <div style="font-size:13px;font-weight:600;color:#f59e0b;">📅 September — Beginner Machine Phase</div>
-  <div style="font-size:12px;color:var(--text2);margin-top:4px;">High-technique lifts swapped to machines this month (chest press, seated cable row, machine shoulder press, hack squat). <strong style="color:var(--text);">Swap back to free weights at the start of October.</strong></div>
+  <div style="font-size:13px;font-weight:600;color:#f59e0b;">🔁 8-Day Rolling Cycle — machine phase (September)</div>
+  <div style="font-size:12px;color:var(--text2);margin-top:4px;">Push → Pull → Legs → Rest → Push → Pull → Legs → Rest. Every muscle 2× per cycle. <strong style="color:var(--text);">Free weights return at the start of October.</strong></div>
 </div>
 
 <!-- TABS -->
@@ -563,196 +575,254 @@ const BLOCKS = {
   strength: {
     label: 'Strength', weeks: '1-4', reps: '5-6', rest: '2-3 min', rir: '1-2', cls: 'badge-strength',
     days: {
-      mon: {
-        label: 'Upper A (Chest/Back)',
+      d1: {
+        label: 'Push A (Chest focus)',
         exercises: [
-          { name: 'Machine Chest Press (Chest)', sets: 4, reps: 5, rest: '2:30', rir: '1-2', note: 'Machine = easy technique. Squeeze at top.' },
-          { name: 'Seated Cable Row (Back)', sets: 4, reps: 5, rest: '2:30', rir: '1-2', note: 'Sit tall. Pull handles to belly button. Chest up, squeeze back.' },
-          { name: 'Machine Shoulder Press (Shoulders)', sets: 3, reps: 6, rest: '2:30', rir: '1-2', note: 'Seated machine. No lockout at top.' },
-          { name: 'Lat Pulldown (Lats)', sets: 3, reps: 6, rest: '2:30', rir: '1-2', note: 'Pull to upper chest.' },
-          { name: 'Tricep Pushdown (Triceps)', sets: 2, reps: 8, rest: '2:30', rir: '1-2', note: 'Elbows fixed.' },
-          { name: 'DB Curl (Biceps)', sets: 2, reps: 8, rest: '2:30', rir: '1-2', note: 'Strict curl. Elbows pinned. Slow down.' },
+          { name: 'Machine Chest Press (Chest)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Squeeze at top. Controlled down.' },
+          { name: 'Machine Shoulder Press (Shoulders)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'No lockout at top.' },
+          { name: 'Cable Fly (Chest)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Hug motion. Stretch at open.' },
+          { name: 'Lateral Raise (Side Delts)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Thumbs up. Control down.' },
+          { name: 'Tricep Pushdown (Triceps)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Elbows fixed at sides.' },
         ],
-        cardio: { type: 'HIIT (optional finisher)', detail: 'Bike 30s/60s x 6 OR brisk walk 15 min if legs fresh', duration: '10-15 min' }
       },
-      tue: {
-        label: 'Lower A (Quads/Glutes/Hams)',
+      d2: {
+        label: 'Pull A (Lat focus)',
+        exercises: [
+          { name: 'Lat Pulldown (Lats)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Pull to upper chest. No swing.' },
+          { name: 'Seated Cable Row (Back)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Sit tall. Pull to belly button.' },
+          { name: 'Face Pull (Rear Delts)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Pull to forehead. Elbows high.' },
+          { name: 'DB Curl (Biceps)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Strict. Elbows pinned.' },
+        ],
+      },
+      d3: {
+        label: 'Legs A (Quad focus)',
         exercises: [
           { name: 'Leg Press (Quads, Glutes)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Feet mid-high. No lockout.' },
-          { name: 'Back Extension (Post. Chain)', sets: 3, reps: 6, rest: '2:30', rir: '1-2', note: '45 deg bench. Hinge at hips. Squeeze glutes up.' },
-          { name: 'Hip Abduction Machine (Glutes)', sets: 3, reps: 8, rest: '2:30', rir: '1-2', note: 'Sit in machine. Push knees OUT against pads.' },
-          { name: 'Lying Leg Curl (Hams)', sets: 3, reps: 8, rest: '2:30', rir: '1-2', note: 'Lie face-down. Curl heels to glutes, slow down.' },
-          { name: 'Standing Calf Raise', sets: 3, reps: 10, rest: '2:30', rir: '1-2', note: 'Full stretch at bottom.' },
+          { name: 'Hack Squat (Quads)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Parallel depth. If no machine, Leg Press again.' },
+          { name: 'Lying Leg Curl (Hams)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Curl heels to glutes. Slow down.' },
+          { name: 'Hip Abduction Machine (Glutes)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Push knees OUT. Slow open.' },
+          { name: 'Standing Calf Raise', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Full stretch bottom. Slow reps.' },
         ],
-        cardio: null
       },
-      wed: {
-        label: 'Push (Chest/Shoulders/Tris)',
-        exercises: [
-          { name: 'Incline DB Press (Upper Chest)', sets: 4, reps: 8, rest: '2:30', rir: '1-2', note: '30 deg incline. Stretch at bottom.' },
-          { name: 'DB Press (Shoulders)', sets: 3, reps: 8, rest: '2:30', rir: '1-2', note: 'Seated. Palms forward.' },
-          { name: 'Lateral Raise (Side Delts)', sets: 3, reps: 10, rest: '2:30', rir: '1-2', note: 'Thumbs up. Control down.' },
-          { name: 'Cable Fly (Chest)', sets: 3, reps: 10, rest: '2:30', rir: '1-2', note: 'Hug motion.' },
-          { name: 'Tricep Pushdown (Triceps)', sets: 3, reps: 10, rest: '2:30', rir: '1-2', note: 'Spread rope at bottom.' },
-        ],
-        cardio: null
+      d4: {
+        label: 'Rest Day',
+        rest: true,
+        exercises: [],
       },
-      thu: {
-        label: 'Pull (Back/Bis/Rear Delts)',
+      d5: {
+        label: 'Push B (Shoulder focus)',
         exercises: [
-          { name: 'Cable Row (Back)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Squeeze at peak.' },
-          { name: 'Lat Pulldown (Lats)', sets: 4, reps: 8, rest: '2:30', rir: '1-2', note: 'Wide grip to upper chest.' },
-          { name: 'Face Pull (Rear Delts)', sets: 3, reps: 13, rest: '2:30', rir: '1-2', note: 'Pull to forehead.' },
-          { name: 'DB Curl (Biceps)', sets: 3, reps: 10, rest: '2:30', rir: '1-2', note: 'Strict. No swing.' },
-          { name: 'Reverse DB Fly (Rear Delts)', sets: 3, reps: 10, rest: '2:30', rir: '1-2', note: 'Light. Squeeze back.' },
+          { name: 'Machine Shoulder Press (Shoulders)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Seated. Full press up.' },
+          { name: 'Incline DB Press (Upper Chest)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: '30 deg incline. Stretch bottom.' },
+          { name: 'Lateral Raise (Side Delts)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Slow and controlled.' },
+          { name: 'Tricep Pushdown (Triceps)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Spread rope at bottom.' },
         ],
-        cardio: { type: 'HIIT (optional finisher)', detail: 'Rower 250m/60s x 6 OR bike 30s/60s x 6', duration: '10-15 min' }
       },
-      fri: {
-        label: 'Lower B (Quads/Glutes/Hams)',
+      d6: {
+        label: 'Pull B (Mid-back focus)',
         exercises: [
-          { name: 'Hack Squat (Quads)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Machine = easy technique. Parallel depth.' },
-          { name: 'Leg Press (Quads, Glutes)', sets: 3, reps: 6, rest: '2:30', rir: '1-2', note: 'Feet high. Quad pump.' },
-          { name: 'Back Extension (Post. Chain)', sets: 3, reps: 6, rest: '2:30', rir: '1-2', note: 'Hold plate at chest. Hinge down, glutes up.' },
-          { name: 'Hip Abduction Machine (Glutes)', sets: 3, reps: 10, rest: '2:30', rir: '1-2', note: 'Slow open, controlled close. Squeeze glutes.' },
-          { name: 'Standing Calf Raise', sets: 3, reps: 13, rest: '2:30', rir: '1-2', note: 'Slow reps.' },
+          { name: 'Seated Cable Row (Back)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Squeeze shoulder blades together.' },
+          { name: 'Lat Pulldown (Lats)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Wide grip to upper chest.' },
+          { name: 'Reverse DB Fly (Rear Delts)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Light weight. Squeeze back.' },
+          { name: 'DB Curl (Biceps)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Strict curl. No swing.' },
         ],
-        cardio: null
+      },
+      d7: {
+        label: 'Legs B (Posterior focus)',
+        exercises: [
+          { name: 'Leg Press (Glutes, Hams)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Feet HIGH on platform. Glute focus.' },
+          { name: 'Hack Squat (Quads)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Parallel depth. Quads.' },
+          { name: 'Back Extension (Post. Chain)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Hinge at hips. Squeeze glutes up.' },
+          { name: 'Lying Leg Curl (Hams)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Slow negative.' },
+          { name: 'Standing Calf Raise', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'Slow reps. Full range.' },
+        ],
+      },
+      d8: {
+        label: 'Rest Day',
+        rest: true,
+        exercises: [],
       },
     }
   },
   hypertrophy: {
     label: 'Hypertrophy', weeks: '5-8', reps: '8-12', rest: '90s', rir: '0-1', cls: 'badge-hypertrophy',
     days: {
-      mon: {
-        label: 'Upper A (Chest/Back)',
+      d1: {
+        label: 'Push A (Chest focus)',
         exercises: [
-          { name: 'Machine Chest Press (Chest)', sets: 4, reps: 8, rest: '1:30', rir: '0-1', note: 'Machine = easy technique. Squeeze at top.' },
-          { name: 'Seated Cable Row (Back)', sets: 4, reps: 8, rest: '1:30', rir: '0-1', note: 'Sit tall. Pull handles to belly button. Chest up, squeeze back.' },
-          { name: 'Machine Shoulder Press (Shoulders)', sets: 3, reps: 8, rest: '1:30', rir: '0-1', note: 'Seated machine. No lockout at top.' },
-          { name: 'Lat Pulldown (Lats)', sets: 3, reps: 8, rest: '1:30', rir: '0-1', note: 'Pull to upper chest.' },
-          { name: 'Tricep Pushdown (Triceps)', sets: 2, reps: 10, rest: '1:30', rir: '0-1', note: 'Elbows fixed.' },
-          { name: 'DB Curl (Biceps)', sets: 2, reps: 10, rest: '1:30', rir: '0-1', note: 'Strict curl. Elbows pinned. Slow down.' },
+          { name: 'Machine Chest Press (Chest)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Squeeze at top. Controlled down.' },
+          { name: 'Machine Shoulder Press (Shoulders)', sets: 3, reps: 10, rest: '1:30', rir: '0-1', note: 'No lockout at top.' },
+          { name: 'Cable Fly (Chest)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Hug motion. Stretch at open.' },
+          { name: 'Lateral Raise (Side Delts)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Thumbs up. Control down.' },
+          { name: 'Tricep Pushdown (Triceps)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Elbows fixed at sides.' },
         ],
-        cardio: { type: 'HIIT (optional finisher)', detail: 'Bike 30s/60s x 6 OR brisk walk 15 min if legs fresh', duration: '10-15 min' }
       },
-      tue: {
-        label: 'Lower A (Quads/Glutes/Hams)',
+      d2: {
+        label: 'Pull A (Lat focus)',
         exercises: [
-          { name: 'Leg Press (Quads, Glutes)', sets: 4, reps: 8, rest: '1:30', rir: '0-1', note: 'Feet mid-high. No lockout.' },
-          { name: 'Back Extension (Post. Chain)', sets: 3, reps: 8, rest: '1:30', rir: '0-1', note: '45 deg bench. Hinge at hips. Squeeze glutes up.' },
-          { name: 'Hip Abduction Machine (Glutes)', sets: 3, reps: 10, rest: '1:30', rir: '0-1', note: 'Sit in machine. Push knees OUT against pads.' },
-          { name: 'Lying Leg Curl (Hams)', sets: 3, reps: 10, rest: '1:30', rir: '0-1', note: 'Lie face-down. Curl heels to glutes, slow down.' },
-          { name: 'Standing Calf Raise', sets: 3, reps: 12, rest: '1:30', rir: '0-1', note: 'Full stretch at bottom.' },
+          { name: 'Lat Pulldown (Lats)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Pull to upper chest. No swing.' },
+          { name: 'Seated Cable Row (Back)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Sit tall. Pull to belly button.' },
+          { name: 'Face Pull (Rear Delts)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Pull to forehead. Elbows high.' },
+          { name: 'DB Curl (Biceps)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Strict. Elbows pinned.' },
         ],
-        cardio: null
       },
-      wed: {
-        label: 'Push (Chest/Shoulders/Tris)',
+      d3: {
+        label: 'Legs A (Quad focus)',
         exercises: [
-          { name: 'Incline DB Press (Upper Chest)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: '30 deg incline. Stretch at bottom.' },
-          { name: 'DB Press (Shoulders)', sets: 3, reps: 10, rest: '1:30', rir: '0-1', note: 'Seated. Palms forward.' },
-          { name: 'Lateral Raise (Side Delts)', sets: 3, reps: 12, rest: '1:30', rir: '0-1', note: 'Thumbs up. Control down.' },
-          { name: 'Cable Fly (Chest)', sets: 3, reps: 12, rest: '1:30', rir: '0-1', note: 'Hug motion.' },
-          { name: 'Tricep Pushdown (Triceps)', sets: 3, reps: 12, rest: '1:30', rir: '0-1', note: 'Spread rope at bottom.' },
+          { name: 'Leg Press (Quads, Glutes)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Feet mid-high. No lockout.' },
+          { name: 'Hack Squat (Quads)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Parallel depth. If no machine, Leg Press again.' },
+          { name: 'Lying Leg Curl (Hams)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Curl heels to glutes. Slow down.' },
+          { name: 'Hip Abduction Machine (Glutes)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Push knees OUT. Slow open.' },
+          { name: 'Standing Calf Raise', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Full stretch bottom. Slow reps.' },
         ],
-        cardio: null
       },
-      thu: {
-        label: 'Pull (Back/Bis/Rear Delts)',
+      d4: {
+        label: 'Rest Day',
+        rest: true,
+        exercises: [],
+      },
+      d5: {
+        label: 'Push B (Shoulder focus)',
         exercises: [
-          { name: 'Cable Row (Back)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Squeeze at peak.' },
+          { name: 'Machine Shoulder Press (Shoulders)', sets: 3, reps: 10, rest: '1:30', rir: '0-1', note: 'Seated. Full press up.' },
+          { name: 'Incline DB Press (Upper Chest)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: '30 deg incline. Stretch bottom.' },
+          { name: 'Lateral Raise (Side Delts)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Slow and controlled.' },
+          { name: 'Tricep Pushdown (Triceps)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Spread rope at bottom.' },
+        ],
+      },
+      d6: {
+        label: 'Pull B (Mid-back focus)',
+        exercises: [
+          { name: 'Seated Cable Row (Back)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Squeeze shoulder blades together.' },
           { name: 'Lat Pulldown (Lats)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Wide grip to upper chest.' },
-          { name: 'Face Pull (Rear Delts)', sets: 3, reps: 15, rest: '1:30', rir: '0-1', note: 'Pull to forehead.' },
-          { name: 'DB Curl (Biceps)', sets: 3, reps: 12, rest: '1:30', rir: '0-1', note: 'Strict. No swing.' },
-          { name: 'Reverse DB Fly (Rear Delts)', sets: 3, reps: 12, rest: '1:30', rir: '0-1', note: 'Light. Squeeze back.' },
+          { name: 'Reverse DB Fly (Rear Delts)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Light weight. Squeeze back.' },
+          { name: 'DB Curl (Biceps)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Strict curl. No swing.' },
         ],
-        cardio: { type: 'HIIT (optional finisher)', detail: 'Rower 250m/60s x 6 OR bike 30s/60s x 6', duration: '10-15 min' }
       },
-      fri: {
-        label: 'Lower B (Quads/Glutes/Hams)',
+      d7: {
+        label: 'Legs B (Posterior focus)',
         exercises: [
-          { name: 'Hack Squat (Quads)', sets: 4, reps: 8, rest: '1:30', rir: '0-1', note: 'Machine = easy technique. Parallel depth.' },
-          { name: 'Leg Press (Quads, Glutes)', sets: 3, reps: 12, rest: '1:30', rir: '0-1', note: 'Feet high. Quad pump.' },
-          { name: 'Back Extension (Post. Chain)', sets: 3, reps: 10, rest: '1:30', rir: '0-1', note: 'Hold plate at chest. Hinge down, glutes up.' },
-          { name: 'Hip Abduction Machine (Glutes)', sets: 3, reps: 12, rest: '1:30', rir: '0-1', note: 'Slow open, controlled close. Squeeze glutes.' },
-          { name: 'Standing Calf Raise', sets: 3, reps: 15, rest: '1:30', rir: '0-1', note: 'Slow reps.' },
+          { name: 'Leg Press (Glutes, Hams)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Feet HIGH on platform. Glute focus.' },
+          { name: 'Hack Squat (Quads)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Parallel depth. Quads.' },
+          { name: 'Back Extension (Post. Chain)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Hinge at hips. Squeeze glutes up.' },
+          { name: 'Lying Leg Curl (Hams)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Slow negative.' },
+          { name: 'Standing Calf Raise', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Slow reps. Full range.' },
         ],
-        cardio: null
+      },
+      d8: {
+        label: 'Rest Day',
+        rest: true,
+        exercises: [],
       },
     }
   },
   endurance: {
-    label: 'Endurance', weeks: '9-12', reps: '10-15', rest: '60-90s', rir: '0-1', cls: 'badge-endurance',
+    label: 'Endurance', weeks: '9-12', reps: '12-15', rest: '60-90s', rir: '0-1', cls: 'badge-endurance',
     days: {
-      mon: {
-        label: 'Upper A (Chest/Back)',
+      d1: {
+        label: 'Push A (Chest focus)',
         exercises: [
-          { name: 'Machine Chest Press (Chest)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Machine = easy technique. Squeeze at top.' },
-          { name: 'Seated Cable Row (Back)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Sit tall. Pull handles to belly button. Chest up, squeeze back.' },
-          { name: 'Machine Shoulder Press (Shoulders)', sets: 3, reps: 10, rest: '1:00', rir: '0-1', note: 'Seated machine. No lockout at top.' },
-          { name: 'Lat Pulldown (Lats)', sets: 3, reps: 10, rest: '1:00', rir: '0-1', note: 'Pull to upper chest.' },
-          { name: 'Tricep Pushdown (Triceps)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Elbows fixed.' },
-          { name: 'DB Curl (Biceps)', sets: 2, reps: 12, rest: '1:00', rir: '0-1', note: 'Strict curl. Elbows pinned. Slow down.' },
+          { name: 'Machine Chest Press (Chest)', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: 'Squeeze at top. Controlled down.' },
+          { name: 'Machine Shoulder Press (Shoulders)', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: 'No lockout at top.' },
+          { name: 'Cable Fly (Chest)', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: 'Hug motion. Stretch at open.' },
+          { name: 'Lateral Raise (Side Delts)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Thumbs up. Control down.' },
+          { name: 'Tricep Pushdown (Triceps)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Elbows fixed at sides.' },
         ],
-        cardio: { type: 'HIIT (optional finisher)', detail: 'Bike 30s/60s x 6 OR brisk walk 15 min if legs fresh', duration: '10-15 min' }
       },
-      tue: {
-        label: 'Lower A (Quads/Glutes/Hams)',
+      d2: {
+        label: 'Pull A (Lat focus)',
         exercises: [
-          { name: 'Leg Press (Quads, Glutes)', sets: 3, reps: 10, rest: '1:00', rir: '0-1', note: 'Feet mid-high. No lockout.' },
-          { name: 'Back Extension (Post. Chain)', sets: 3, reps: 10, rest: '1:00', rir: '0-1', note: '45 deg bench. Hinge at hips. Squeeze glutes up.' },
-          { name: 'Hip Abduction Machine (Glutes)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Sit in machine. Push knees OUT against pads.' },
-          { name: 'Lying Leg Curl (Hams)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Lie face-down. Curl heels to glutes, slow down.' },
-          { name: 'Standing Calf Raise', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: 'Full stretch at bottom.' },
+          { name: 'Lat Pulldown (Lats)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Pull to upper chest. No swing.' },
+          { name: 'Seated Cable Row (Back)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Sit tall. Pull to belly button.' },
+          { name: 'Face Pull (Rear Delts)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Pull to forehead. Elbows high.' },
+          { name: 'DB Curl (Biceps)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Strict. Elbows pinned.' },
         ],
-        cardio: null
       },
-      wed: {
-        label: 'Push (Chest/Shoulders/Tris)',
+      d3: {
+        label: 'Legs A (Quad focus)',
         exercises: [
-          { name: 'Incline DB Press (Upper Chest)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: '30 deg incline. Stretch at bottom.' },
-          { name: 'DB Press (Shoulders)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Seated. Palms forward.' },
-          { name: 'Lateral Raise (Side Delts)', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: 'Thumbs up. Control down.' },
-          { name: 'Cable Fly (Chest)', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: 'Hug motion.' },
-          { name: 'Tricep Pushdown (Triceps)', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: 'Spread rope at bottom.' },
+          { name: 'Leg Press (Quads, Glutes)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Feet mid-high. No lockout.' },
+          { name: 'Hack Squat (Quads)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Parallel depth. If no machine, Leg Press again.' },
+          { name: 'Lying Leg Curl (Hams)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Curl heels to glutes. Slow down.' },
+          { name: 'Hip Abduction Machine (Glutes)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Push knees OUT. Slow open.' },
+          { name: 'Standing Calf Raise', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Full stretch bottom. Slow reps.' },
         ],
-        cardio: null
       },
-      thu: {
-        label: 'Pull (Back/Bis/Rear Delts)',
-        exercises: [
-          { name: 'Cable Row (Back)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Squeeze at peak.' },
-          { name: 'Lat Pulldown (Lats)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Wide grip to upper chest.' },
-          { name: 'Face Pull (Rear Delts)', sets: 3, reps: 17, rest: '1:00', rir: '0-1', note: 'Pull to forehead.' },
-          { name: 'DB Curl (Biceps)', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: 'Strict. No swing.' },
-          { name: 'Reverse DB Fly (Rear Delts)', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: 'Light. Squeeze back.' },
-        ],
-        cardio: { type: 'HIIT (optional finisher)', detail: 'Rower 250m/60s x 6 OR bike 30s/60s x 6', duration: '10-15 min' }
+      d4: {
+        label: 'Rest Day',
+        rest: true,
+        exercises: [],
       },
-      fri: {
-        label: 'Lower B (Quads/Glutes/Hams)',
+      d5: {
+        label: 'Push B (Shoulder focus)',
         exercises: [
-          { name: 'Hack Squat (Quads)', sets: 3, reps: 10, rest: '1:00', rir: '0-1', note: 'Machine = easy technique. Parallel depth.' },
-          { name: 'Leg Press (Quads, Glutes)', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: 'Feet high. Quad pump.' },
-          { name: 'Back Extension (Post. Chain)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'Hold plate at chest. Hinge down, glutes up.' },
-          { name: 'Hip Abduction Machine (Glutes)', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: 'Slow open, controlled close. Squeeze glutes.' },
-          { name: 'Standing Calf Raise', sets: 3, reps: 17, rest: '1:00', rir: '0-1', note: 'Slow reps.' },
+          { name: 'Machine Shoulder Press (Shoulders)', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: 'Seated. Full press up.' },
+          { name: 'Incline DB Press (Upper Chest)', sets: 3, reps: 14, rest: '1:00', rir: '0-1', note: '30 deg incline. Stretch bottom.' },
+          { name: 'Lateral Raise (Side Delts)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Slow and controlled.' },
+          { name: 'Tricep Pushdown (Triceps)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Spread rope at bottom.' },
         ],
-        cardio: null
+      },
+      d6: {
+        label: 'Pull B (Mid-back focus)',
+        exercises: [
+          { name: 'Seated Cable Row (Back)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Squeeze shoulder blades together.' },
+          { name: 'Lat Pulldown (Lats)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Wide grip to upper chest.' },
+          { name: 'Reverse DB Fly (Rear Delts)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Light weight. Squeeze back.' },
+          { name: 'DB Curl (Biceps)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Strict curl. No swing.' },
+        ],
+      },
+      d7: {
+        label: 'Legs B (Posterior focus)',
+        exercises: [
+          { name: 'Leg Press (Glutes, Hams)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Feet HIGH on platform. Glute focus.' },
+          { name: 'Hack Squat (Quads)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Parallel depth. Quads.' },
+          { name: 'Back Extension (Post. Chain)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Hinge at hips. Squeeze glutes up.' },
+          { name: 'Lying Leg Curl (Hams)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Slow negative.' },
+          { name: 'Standing Calf Raise', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Slow reps. Full range.' },
+        ],
+      },
+      d8: {
+        label: 'Rest Day',
+        rest: true,
+        exercises: [],
       },
     }
   },
 };
 
-const DAY_NAMES = { mon: 'الاثنين', tue: 'الثلاثاء', wed: 'الأربعاء', thu: 'الخميس', fri: 'الجمعة' };
+const DAY_NAMES = { d1: 'Day 1', d2: 'Day 2', d3: 'Day 3', d4: 'Day 4', d5: 'Day 5', d6: 'Day 6', d7: 'Day 7', d8: 'Day 8' };
+const CYCLE_ORDER = ['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8'];
 
 // ====== STATE ======
-let currentDay = 'mon';
+let currentDay = 'd1';
 let currentBlock = 'strength';
 let timerInterval = null;
 let timerSeconds = 0;
 let timerRunning = false;
+
+// ====== CYCLE ======
+// The 8-day rolling cycle: Push, Pull, Legs, Rest, Push, Pull, Legs, Rest.
+// Set the date you started Day 1 below.
+const CYCLE_START = new Date('2026-09-08'); // Day 1 start date
+
+function getCycleDay() {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const start = new Date(CYCLE_START);
+  start.setHours(0,0,0,0);
+  let diff = Math.floor((today - start) / (1000 * 60 * 60 * 24));
+  if (diff < 0) diff = 0;
+  const idx = diff % 8;
+  return CYCLE_ORDER[idx];
+}
+
+function getCycleNumber() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const start = new Date(CYCLE_START); start.setHours(0,0,0,0);
+  let diff = Math.floor((today - start) / (1000 * 60 * 60 * 24));
+  if (diff < 0) diff = 0;
+  return Math.floor(diff / 8) + 1;
+}
 
 // ====== INIT ======
 function getCurrentBlock() {
@@ -773,17 +843,19 @@ function renderWeekInfo() {
   const block = BLOCKS[currentBlock];
   const isDeload = weekNum === 4 || weekNum === 8 || weekNum === 12;
 
-  let html = `Week ${Math.max(1, Math.min(12, weekNum))} of 12`;
+  const cycDay = getCycleDay();
+  const cycNum = getCycleNumber();
+  let html = `Cycle ${cycNum} · Day ${cycDay.slice(1)} of 8`;
   html += ` &middot; <span class="week-badge ${block.cls}">${block.label}</span>`;
-  html += ` &middot; Reps ${block.reps} &middot; RIR ${block.rir} &middot; Rest ${block.rest}`;
+  html += ` &middot; Reps ${block.reps} &middot; RIR ${block.rir}`;
   if (isDeload) html += ` &middot; <span class="week-badge badge-deload">DELOAD</span>`;
   document.getElementById('weekInfo').innerHTML = html;
 
   // Date info
   const options = { weekday: 'long', month: 'long', day: 'numeric' };
   const dateStr = today.toLocaleDateString('en-US', options);
-  const nextChange = weekNum < 4 ? 'Aug 3 → Hypertrophy' : (weekNum < 8 ? 'Aug 31 → Endurance' : 'Program complete Sep 27');
-  document.getElementById('dateInfo').innerHTML = `${dateStr} · Next block: ${nextChange}`;
+  const nextChange = weekNum < 4 ? 'Aug 3 → Hypertrophy' : (weekNum < 8 ? 'Aug 31 → Endurance' : 'Block complete');
+  document.getElementById('dateInfo').innerHTML = `${dateStr} · ${BLOCKS[currentBlock].days[cycDay] ? BLOCKS[currentBlock].days[cycDay].label : ''} · Next block: ${nextChange}`;
 }
 
 function renderWorkout() {
@@ -791,67 +863,72 @@ function renderWorkout() {
   const day = block.days[currentDay];
   const container = document.getElementById('workoutDisplay');
 
-  // ====== DAY-SPECIFIC WARM-UP ======
-  const warmups = {
-    mon: {
-      title: '🔥 Upper A Warm-up (Chest, Back, Shoulders)',
+  // ====== WARM-UP (by session type) ======
+  const WARMUPS = {
+    push: {
+      title: 'Push Warm-up (Chest, Shoulders, Triceps)',
       steps: [
         { num: 1, text: 'Arm circles + band pull-aparts', time: '2 min', vid: 'Arm circles' },
-        { num: 2, text: 'Bodyweight squats (parallel)', reps: '10 reps', vid: 'Bodyweight squats' },
-        { num: 3, text: 'Machine chest press warm-up: light weight', reps: '10 reps', vid: 'Machine Chest Press (Chest)' },
-        { num: 4, text: 'Leg swings', time: '30s each', vid: 'Leg swings' },
-        { num: 5, text: 'Glute bridge hold', time: '3 × 20s', vid: 'Glute bridge' },
-        { num: 6, text: 'Half kneeling hip flexor stretch', time: '60s/side', vid: 'Half kneeling stretch' },
+        { num: 2, text: 'Bodyweight squats', reps: '10 reps', vid: 'Bodyweight squats' },
+        { num: 3, text: 'Chest press warm-up: light weight', reps: '10 reps', vid: 'Machine Chest Press (Chest)' },
+        { num: 4, text: 'Shoulder press warm-up: light weight', reps: '10 reps', vid: 'Machine Shoulder Press (Shoulders)' },
+        { num: 5, text: 'Half kneeling hip flexor stretch', time: '45s/side', vid: 'Half kneeling stretch' },
       ]
     },
-    tue: {
-      title: '🔥 Lower A Warm-up (Quads, Glutes, Hams)',
+    pull: {
+      title: 'Pull Warm-up (Back, Biceps, Rear Delts)',
+      steps: [
+        { num: 1, text: 'Arm circles + band pull-aparts', time: '2 min', vid: 'Arm circles' },
+        { num: 2, text: 'Scapular pulls (hang & squeeze)', reps: '5 reps', vid: 'Scapular pulls' },
+        { num: 3, text: 'Lat pulldown warm-up: light weight', reps: '12 reps', vid: 'Lat Pulldown (Lats)' },
+        { num: 4, text: 'Cable row warm-up: light weight', reps: '12 reps', vid: 'Seated Cable Row (Back)' },
+        { num: 5, text: 'Half kneeling hip flexor stretch', time: '45s/side', vid: 'Half kneeling stretch' },
+      ]
+    },
+    legs: {
+      title: 'Legs Warm-up (Quads, Glutes, Hams)',
       steps: [
         { num: 1, text: 'Leg swings', time: '30s each', vid: 'Leg swings' },
         { num: 2, text: 'Bodyweight squats (parallel, slow)', reps: '15 reps', vid: 'Bodyweight squats' },
         { num: 3, text: 'Glute bridge hold', time: '3 × 20s', vid: 'Glute bridge' },
         { num: 4, text: 'Low-load leg extension', reps: '15 reps', vid: 'Leg extension' },
         { num: 5, text: 'Knee circles', time: '30s each', vid: 'Knee warm-up' },
-        { num: 6, text: 'Half kneeling hip flexor stretch', time: '60s/side', vid: 'Half kneeling stretch' },
+        { num: 6, text: 'Half kneeling hip flexor stretch', time: '45s/side', vid: 'Half kneeling stretch' },
       ]
     },
-    wed: {
-      title: '🔥 Push Day Warm-up (Chest, Shoulders, Triceps)',
-      steps: [
-        { num: 1, text: 'Arm circles + band pull-aparts', time: '2 min', vid: 'Arm circles' },
-        { num: 2, text: 'Bodyweight squats', reps: '10 reps', vid: 'Bodyweight squats' },
-        { num: 3, text: 'Incline DB warm-up: light weight', reps: '10 reps', vid: 'Incline DB Press (Upper Chest)' },
-        { num: 4, text: 'Leg swings', time: '30s each', vid: 'Leg swings' },
-        { num: 5, text: 'Glute bridge hold', time: '3 × 20s', vid: 'Glute bridge' },
-        { num: 6, text: 'Half kneeling hip flexor stretch', time: '60s/side', vid: 'Half kneeling stretch' },
-      ]
-    },
-    thu: {
-      title: '🔥 Pull Day Warm-up (Back, Biceps, Rear Delts)',
-      steps: [
-        { num: 1, text: 'Arm circles + band pull-aparts', time: '2 min', vid: 'Arm circles' },
-        { num: 2, text: 'Bodyweight squats', reps: '10 reps', vid: 'Bodyweight squats' },
-        { num: 3, text: 'Cable row warm-up: light weight', reps: '10 reps', vid: 'Cable Row (Back)' },
-        { num: 4, text: 'Scapular pulls (hang & squeeze)', reps: '3 reps', vid: 'Scapular pulls' },
-        { num: 5, text: 'Leg swings', time: '30s each', vid: 'Leg swings' },
-        { num: 6, text: 'Half kneeling hip flexor stretch', time: '60s/side', vid: 'Half kneeling stretch' },
-      ]
-    },
-    fri: {
-      title: '🔥 Lower B Warm-up (Quads, Glutes, Hams)',
-      steps: [
-        { num: 1, text: 'Leg swings', time: '30s each', vid: 'Leg swings' },
-        { num: 2, text: 'Bodyweight squats (parallel, slow)', reps: '15 reps', vid: 'Bodyweight squats' },
-        { num: 3, text: 'Glute bridge hold', time: '3 × 20s', vid: 'Glute bridge' },
-        { num: 4, text: 'Low-load leg extension', reps: '15 reps', vid: 'Leg extension' },
-        { num: 5, text: 'Knee circles', time: '30s each', vid: 'Knee warm-up' },
-        { num: 6, text: 'Half kneeling hip flexor stretch', time: '60s/side', vid: 'Half kneeling stretch' },
-      ]
+    rest: {
+      title: 'Rest Day — Recovery',
+      steps: []
     }
   };
 
-  const wu = warmups[currentDay];
-  document.getElementById('warmupTitle').textContent = wu.title;
+  const kindMap = { d1: 'push', d2: 'pull', d3: 'legs', d4: 'rest', d5: 'push', d6: 'pull', d7: 'legs', d8: 'rest' };
+  const wu = WARMUPS[kindMap[currentDay]] || WARMUPS.rest;
+
+  // ====== REST DAY ======
+  if (day.rest || kindMap[currentDay] === 'rest') {
+    document.getElementById('warmupTitle').textContent = '😴 Rest Day — Recover & Grow';
+    document.getElementById('warmupContent').innerHTML =
+      '<div class="warmup-step">Muscle is built on rest days, not in the gym. Take it easy today.</div>';
+    let rhtml = '';
+    rhtml += `<div class="section-title">Rest Day (${DAY_NAMES[currentDay]})</div>`;
+    rhtml += `<div class="cardio-card" style="background:linear-gradient(135deg,#1a2e1a,#162116);border-color:#2a4a2a;">
+      <div class="cardio-title" style="color:var(--green);">✅ Do Today</div>
+      <div class="cardio-detail">• 7-9 hours sleep — non-negotiable<br>• 3L water + lemon water morning<br>• Protein in every meal (5x)<br>• Optional: 20-30 min easy walk (good for recovery + fat loss)</div>
+    </div>`;
+    rhtml += `<div class="cardio-card" style="background:linear-gradient(135deg,#2a1a1a,#1a1010);border-color:#4a2a2a;">
+      <div class="cardio-title" style="color:#ef4444;">🚫 Avoid Today</div>
+      <div class="cardio-detail">• No heavy lifting<br>• No HIIT or sprints<br>• No new max attempts — recovery is when muscle is built</div>
+    </div>`;
+    rhtml += `<div class="cardio-card">
+      <div class="cardio-title">🔁 Tomorrow</div>
+      <div class="cardio-detail">${currentDay === 'd4' ? 'Day 5 — Push B (Shoulder focus)' : 'Day 1 — Push A (Chest focus) — next cycle begins'}</div>
+    </div>`;
+    container.innerHTML = rhtml;
+    return;
+  }
+
+  document.getElementById('warmupTitle').textContent = '🔥 ' + wu.title;
   let wuHtml = '';
   wu.steps.forEach(s => {
     wuHtml += `<div class="warmup-step"><span class="num">${s.num}</span> ${s.text} — ${s.time || s.reps} <button class="timer-btn" onclick="openVideo('${s.vid}')">🎥</button></div>`;
@@ -1030,6 +1107,15 @@ function renderLog() {
   let html = '';
   html += `<div style="font-size:13px;color:var(--text2);margin-bottom:8px;">${block.label} — ${day.label} (${DAY_NAMES[currentDay]})</div>`;
 
+  if (day.rest || !day.exercises || day.exercises.length === 0) {
+    html += `<div class="cardio-card" style="background:linear-gradient(135deg,#1a2e1a,#162116);border-color:#2a4a2a;">
+      <div class="cardio-title" style="color:var(--green);">😴 Rest Day</div>
+      <div class="cardio-detail">No lifting today. Log how you feel, sleep, and steps if you want.</div>
+    </div>`;
+    container.innerHTML = html;
+    return;
+  }
+
   day.exercises.forEach((ex, i) => {
     const saved = localStorage.getItem(`log_${currentBlock}_${currentDay}_${i}`);
     const val = saved || '';
@@ -1077,10 +1163,10 @@ function handleSwipe() {
   const diff = touchStartX - touchEndX;
   if (Math.abs(diff) < 50) return;
 
-  const days = ['mon', 'tue', 'wed', 'thu', 'fri'];
+  const days = CYCLE_ORDER;
   const idx = days.indexOf(currentDay);
 
-  if (diff > 0 && idx < 4) { // swipe left -> next day
+  if (diff > 0 && idx < days.length - 1) { // swipe left -> next day
     currentDay = days[idx + 1];
   } else if (diff < 0 && idx > 0) { // swipe right -> prev day
     currentDay = days[idx - 1];
@@ -1095,6 +1181,10 @@ function handleSwipe() {
 
 // ====== INIT ======
 currentBlock = getCurrentBlock();
+currentDay = getCycleDay();
+document.querySelectorAll('.day-btn').forEach(b => {
+  b.classList.toggle('active', b.dataset.day === currentDay);
+});
 renderWeekInfo();
 renderWorkout();
 
