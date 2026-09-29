@@ -556,6 +556,8 @@ const VIDEOS = {
   'Towel Wrist Curl (Forearms)': 'https://youtube.com/shorts/mwfM_0xBh1s',
   'Towel Wrist Curl (Forearms, wrists)': 'https://youtube.com/shorts/mwfM_0xBh1s',
   'Towel Reverse Wrist Curl (Forearms)': 'https://youtube.com/shorts/mwfM_0xBh1s',
+  'Leg Press (Quads, Glutes)': 'https://youtube.com/shorts/EotSw18oR9w',
+  'Leg Press (Glutes, Hams)': 'https://youtube.com/shorts/EotSw18oR9w',
 };
 
 // ====== WARM-UP VIDEOS ======
@@ -579,7 +581,7 @@ const WARMUP_VIDEOS = {
 function hasVideo(name) {
   if (WARMUP_VIDEOS[name]) return true;
   if (VIDEOS[name]) return true;
-  for (const key in VIDEOS) { if (name.includes(key) || key.includes(name)) return true; }
+  for (const key in VIDEOS) { if (key.length >= 10 && (name.includes(key) || key.includes(name))) return true; }
   return false;
 }
 
@@ -597,7 +599,7 @@ function openVideo(name) {
   }
   // Try partial match in exercise videos
   for (const key in VIDEOS) {
-    if (name.includes(key) || key.includes(name)) {
+    if (key.length >= 10 && (name.includes(key) || key.includes(name))) {
       location.href = VIDEOS[key];
       return;
     }
