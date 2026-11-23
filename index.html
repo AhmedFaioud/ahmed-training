@@ -432,6 +432,18 @@ body::before {
   font-size: 10.5px;
   font-weight: 750;
 }
+.warmup-step { align-items: flex-start; padding: 9px 0; }
+.wu-body { flex: 1; min-width: 0; }
+.wu-top { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+.wu-text { font-size: 12.5px; color: var(--text-2); line-height: 1.45; }
+.wu-dur { font-size: 10.5px; font-weight: 700; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.phase { font-size: 8.5px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; padding: 2.5px 6px; border-radius: 5px; white-space: nowrap; }
+.p-raise      { background: rgba(251,191,36,.16);  color: #fcd34d; }
+.p-activate   { background: rgba(52,211,153,.16);  color: #5ee2ac; }
+.p-mobilise   { background: rgba(79,140,255,.16);  color: #7ba9ff; }
+.p-potentiate { background: rgba(139,92,246,.18);  color: #b79dff; }
+.p-specific   { background: rgba(255,255,255,.07); color: var(--text-2); }
+.wu-note { font-size: 10.5px; color: var(--text-3); margin-top: 10px; padding-top: 9px; border-top: 1px solid var(--line); line-height: 1.5; }
 .warmup-step .timer-btn { width: 28px; height: 28px; font-size: 12px; margin-left: auto; }
 
 /* ============ INFO SCREENS ============ */
@@ -935,11 +947,16 @@ const BLOCKS = {
       d1: {
         label: 'Push Day', kind: 'push',
         warmup:         [
-          { text: 'Arm circles + band pull-aparts', dur: '2 min', vid: 'Arm circles' },
-          { text: 'Bodyweight squats (light)', dur: '10 reps', vid: 'Bodyweight squats' },
-          { text: 'Push-up or light chest press warm-up', dur: '10 reps', vid: null },
-          { text: 'Shoulder press warm-up (light)', dur: '10 reps', vid: 'Machine Shoulder Press (Shoulders)' },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place + light arm swings', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', vid: null },
+          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', vid: null },
+          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', vid: 'Arm circles' },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
+          { phase: 'Mobilise', text: 'Doorway chest opener', dur: '30 s', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Machine Chest Press (Chest)' },
+          { phase: 'Specific', text: 'Rotator cuff external rotation (light)', dur: '2 × 12', vid: null },
         ],
         cooldown:         [
           { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
@@ -969,11 +986,16 @@ const BLOCKS = {
       d2: {
         label: 'Pull Day', kind: 'pull',
         warmup:         [
-          { text: 'Arm circles + band pull-aparts', dur: '2 min', vid: 'Arm circles' },
-          { text: 'Scapular pulls (hang & squeeze)', dur: '5 reps', vid: 'Scapular pulls' },
-          { text: 'Light lat pulldown or band pull-down', dur: '12 reps', vid: 'Lat Pulldown (Lats)' },
-          { text: 'Light row warm-up', dur: '12 reps', vid: 'Seated Cable Row (Back)' },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place + arm swings', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Scapular pulldowns (hang or towel)', dur: '2 × 10', vid: 'Scapular pulls' },
+          { phase: 'Activate', text: 'Prone Y-T-W raises', dur: '2 × 8 each', vid: null },
+          { phase: 'Mobilise', text: 'Cat-camel', dur: '8 reps', vid: null },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
+          { phase: 'Mobilise', text: 'Overhead arm swings (lats)', dur: '30 s', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
+          { phase: 'Specific', text: 'Grip + wrist prep (circles, light squeeze)', dur: '30 s', vid: null },
         ],
         cooldown:         [
           { text: 'Lat stretch (hold rack, sit back)', dur: '30s/side', vid: null },
@@ -1004,12 +1026,18 @@ const BLOCKS = {
       d3: {
         label: 'Leg Day + Core + Cardio', kind: 'legs',
         warmup:         [
-          { text: 'Leg swings', dur: '30s each', vid: 'Leg swings' },
-          { text: 'Bodyweight squats (parallel, slow)', dur: '15 reps', vid: 'Bodyweight squats' },
-          { text: 'Glute bridge hold', dur: '3 x 20s', vid: 'Glute bridge' },
-          { text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
-          { text: 'Knee circles', dur: '30s each', vid: 'Knee warm-up' },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', vid: 'Glute bridge' },
+          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', vid: null },
+          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', vid: null },
+          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Leg swings — side / side', dur: '10 / side', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', vid: 'Knee circles' },
+          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', vid: null },
+          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
+          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Leg Press (Quads, Glutes)' },
         ],
         cooldown:         [
           { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
@@ -1047,11 +1075,15 @@ const BLOCKS = {
       d5: {
         label: 'Upper Body Day', kind: 'upper',
         warmup:         [
-          { text: 'Arm circles + band pull-aparts', dur: '2 min', vid: 'Arm circles' },
-          { text: 'Scapular pulls (hang & squeeze)', dur: '5 reps', vid: 'Scapular pulls' },
-          { text: 'Light chest press warm-up', dur: '10 reps', vid: 'Machine Chest Press (Chest)' },
-          { text: 'Light row warm-up', dur: '12 reps', vid: 'Seated Cable Row (Back)' },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place + arm swings', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', vid: null },
+          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', vid: null },
+          { phase: 'Activate', text: 'Scapular pulldowns', dur: '2 × 10', vid: 'Scapular pulls' },
+          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', vid: 'Arm circles' },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Machine Chest Press (Chest)' },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5', dur: '~2 min', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
         ],
         cooldown:         [
           { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
@@ -1085,12 +1117,18 @@ const BLOCKS = {
       d6: {
         label: 'Lower Body Day', kind: 'lower',
         warmup:         [
-          { text: 'Leg swings', dur: '30s each', vid: 'Leg swings' },
-          { text: 'Bodyweight squats (parallel, slow)', dur: '15 reps', vid: 'Bodyweight squats' },
-          { text: 'Glute bridge hold', dur: '3 x 20s', vid: 'Glute bridge' },
-          { text: 'Knee circles', dur: '30s each', vid: 'Knee warm-up' },
-          { text: 'Wrist circles + light wrist curls', dur: '15 reps', vid: null },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', vid: 'Glute bridge' },
+          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', vid: null },
+          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', vid: null },
+          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', vid: 'Knee circles' },
+          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', vid: null },
+          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
+          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Leg Press (Quads, Glutes)' },
+          { phase: 'Specific', text: 'Wrist + forearm prep (circles, light holds)', dur: '30 s', vid: null },
         ],
         cooldown:         [
           { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
@@ -1133,11 +1171,16 @@ const BLOCKS = {
       d1: {
         label: 'Push Day', kind: 'push',
         warmup:         [
-          { text: 'Arm circles + band pull-aparts', dur: '2 min', vid: 'Arm circles' },
-          { text: 'Bodyweight squats (light)', dur: '10 reps', vid: 'Bodyweight squats' },
-          { text: 'Push-up or light chest press warm-up', dur: '10 reps', vid: null },
-          { text: 'Shoulder press warm-up (light)', dur: '10 reps', vid: 'Machine Shoulder Press (Shoulders)' },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place + light arm swings', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', vid: null },
+          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', vid: null },
+          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', vid: 'Arm circles' },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
+          { phase: 'Mobilise', text: 'Doorway chest opener', dur: '30 s', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Machine Chest Press (Chest)' },
+          { phase: 'Specific', text: 'Rotator cuff external rotation (light)', dur: '2 × 12', vid: null },
         ],
         cooldown:         [
           { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
@@ -1167,11 +1210,16 @@ const BLOCKS = {
       d2: {
         label: 'Pull Day', kind: 'pull',
         warmup:         [
-          { text: 'Arm circles + band pull-aparts', dur: '2 min', vid: 'Arm circles' },
-          { text: 'Scapular pulls (hang & squeeze)', dur: '5 reps', vid: 'Scapular pulls' },
-          { text: 'Light lat pulldown or band pull-down', dur: '12 reps', vid: 'Lat Pulldown (Lats)' },
-          { text: 'Light row warm-up', dur: '12 reps', vid: 'Seated Cable Row (Back)' },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place + arm swings', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Scapular pulldowns (hang or towel)', dur: '2 × 10', vid: 'Scapular pulls' },
+          { phase: 'Activate', text: 'Prone Y-T-W raises', dur: '2 × 8 each', vid: null },
+          { phase: 'Mobilise', text: 'Cat-camel', dur: '8 reps', vid: null },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
+          { phase: 'Mobilise', text: 'Overhead arm swings (lats)', dur: '30 s', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
+          { phase: 'Specific', text: 'Grip + wrist prep (circles, light squeeze)', dur: '30 s', vid: null },
         ],
         cooldown:         [
           { text: 'Lat stretch (hold rack, sit back)', dur: '30s/side', vid: null },
@@ -1202,12 +1250,18 @@ const BLOCKS = {
       d3: {
         label: 'Leg Day + Core + Cardio', kind: 'legs',
         warmup:         [
-          { text: 'Leg swings', dur: '30s each', vid: 'Leg swings' },
-          { text: 'Bodyweight squats (parallel, slow)', dur: '15 reps', vid: 'Bodyweight squats' },
-          { text: 'Glute bridge hold', dur: '3 x 20s', vid: 'Glute bridge' },
-          { text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
-          { text: 'Knee circles', dur: '30s each', vid: 'Knee warm-up' },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', vid: 'Glute bridge' },
+          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', vid: null },
+          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', vid: null },
+          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Leg swings — side / side', dur: '10 / side', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', vid: 'Knee circles' },
+          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', vid: null },
+          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
+          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Leg Press (Quads, Glutes)' },
         ],
         cooldown:         [
           { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
@@ -1245,11 +1299,15 @@ const BLOCKS = {
       d5: {
         label: 'Upper Body Day', kind: 'upper',
         warmup:         [
-          { text: 'Arm circles + band pull-aparts', dur: '2 min', vid: 'Arm circles' },
-          { text: 'Scapular pulls (hang & squeeze)', dur: '5 reps', vid: 'Scapular pulls' },
-          { text: 'Light chest press warm-up', dur: '10 reps', vid: 'Machine Chest Press (Chest)' },
-          { text: 'Light row warm-up', dur: '12 reps', vid: 'Seated Cable Row (Back)' },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place + arm swings', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', vid: null },
+          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', vid: null },
+          { phase: 'Activate', text: 'Scapular pulldowns', dur: '2 × 10', vid: 'Scapular pulls' },
+          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', vid: 'Arm circles' },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Machine Chest Press (Chest)' },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5', dur: '~2 min', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
         ],
         cooldown:         [
           { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
@@ -1283,12 +1341,18 @@ const BLOCKS = {
       d6: {
         label: 'Lower Body Day', kind: 'lower',
         warmup:         [
-          { text: 'Leg swings', dur: '30s each', vid: 'Leg swings' },
-          { text: 'Bodyweight squats (parallel, slow)', dur: '15 reps', vid: 'Bodyweight squats' },
-          { text: 'Glute bridge hold', dur: '3 x 20s', vid: 'Glute bridge' },
-          { text: 'Knee circles', dur: '30s each', vid: 'Knee warm-up' },
-          { text: 'Wrist circles + light wrist curls', dur: '15 reps', vid: null },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', vid: 'Glute bridge' },
+          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', vid: null },
+          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', vid: null },
+          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', vid: 'Knee circles' },
+          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', vid: null },
+          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
+          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Leg Press (Quads, Glutes)' },
+          { phase: 'Specific', text: 'Wrist + forearm prep (circles, light holds)', dur: '30 s', vid: null },
         ],
         cooldown:         [
           { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
@@ -1331,11 +1395,16 @@ const BLOCKS = {
       d1: {
         label: 'Push Day', kind: 'push',
         warmup:         [
-          { text: 'Arm circles + band pull-aparts', dur: '2 min', vid: 'Arm circles' },
-          { text: 'Bodyweight squats (light)', dur: '10 reps', vid: 'Bodyweight squats' },
-          { text: 'Push-up or light chest press warm-up', dur: '10 reps', vid: null },
-          { text: 'Shoulder press warm-up (light)', dur: '10 reps', vid: 'Machine Shoulder Press (Shoulders)' },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place + light arm swings', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', vid: null },
+          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', vid: null },
+          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', vid: 'Arm circles' },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
+          { phase: 'Mobilise', text: 'Doorway chest opener', dur: '30 s', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Machine Chest Press (Chest)' },
+          { phase: 'Specific', text: 'Rotator cuff external rotation (light)', dur: '2 × 12', vid: null },
         ],
         cooldown:         [
           { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
@@ -1365,11 +1434,16 @@ const BLOCKS = {
       d2: {
         label: 'Pull Day', kind: 'pull',
         warmup:         [
-          { text: 'Arm circles + band pull-aparts', dur: '2 min', vid: 'Arm circles' },
-          { text: 'Scapular pulls (hang & squeeze)', dur: '5 reps', vid: 'Scapular pulls' },
-          { text: 'Light lat pulldown or band pull-down', dur: '12 reps', vid: 'Lat Pulldown (Lats)' },
-          { text: 'Light row warm-up', dur: '12 reps', vid: 'Seated Cable Row (Back)' },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place + arm swings', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Scapular pulldowns (hang or towel)', dur: '2 × 10', vid: 'Scapular pulls' },
+          { phase: 'Activate', text: 'Prone Y-T-W raises', dur: '2 × 8 each', vid: null },
+          { phase: 'Mobilise', text: 'Cat-camel', dur: '8 reps', vid: null },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
+          { phase: 'Mobilise', text: 'Overhead arm swings (lats)', dur: '30 s', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
+          { phase: 'Specific', text: 'Grip + wrist prep (circles, light squeeze)', dur: '30 s', vid: null },
         ],
         cooldown:         [
           { text: 'Lat stretch (hold rack, sit back)', dur: '30s/side', vid: null },
@@ -1400,12 +1474,18 @@ const BLOCKS = {
       d3: {
         label: 'Leg Day + Core + Cardio', kind: 'legs',
         warmup:         [
-          { text: 'Leg swings', dur: '30s each', vid: 'Leg swings' },
-          { text: 'Bodyweight squats (parallel, slow)', dur: '15 reps', vid: 'Bodyweight squats' },
-          { text: 'Glute bridge hold', dur: '3 x 20s', vid: 'Glute bridge' },
-          { text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
-          { text: 'Knee circles', dur: '30s each', vid: 'Knee warm-up' },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', vid: 'Glute bridge' },
+          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', vid: null },
+          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', vid: null },
+          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Leg swings — side / side', dur: '10 / side', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', vid: 'Knee circles' },
+          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', vid: null },
+          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
+          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Leg Press (Quads, Glutes)' },
         ],
         cooldown:         [
           { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
@@ -1443,11 +1523,15 @@ const BLOCKS = {
       d5: {
         label: 'Upper Body Day', kind: 'upper',
         warmup:         [
-          { text: 'Arm circles + band pull-aparts', dur: '2 min', vid: 'Arm circles' },
-          { text: 'Scapular pulls (hang & squeeze)', dur: '5 reps', vid: 'Scapular pulls' },
-          { text: 'Light chest press warm-up', dur: '10 reps', vid: 'Machine Chest Press (Chest)' },
-          { text: 'Light row warm-up', dur: '12 reps', vid: 'Seated Cable Row (Back)' },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place + arm swings', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', vid: null },
+          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', vid: null },
+          { phase: 'Activate', text: 'Scapular pulldowns', dur: '2 × 10', vid: 'Scapular pulls' },
+          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', vid: 'Arm circles' },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Machine Chest Press (Chest)' },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5', dur: '~2 min', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
         ],
         cooldown:         [
           { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
@@ -1481,12 +1565,18 @@ const BLOCKS = {
       d6: {
         label: 'Lower Body Day', kind: 'lower',
         warmup:         [
-          { text: 'Leg swings', dur: '30s each', vid: 'Leg swings' },
-          { text: 'Bodyweight squats (parallel, slow)', dur: '15 reps', vid: 'Bodyweight squats' },
-          { text: 'Glute bridge hold', dur: '3 x 20s', vid: 'Glute bridge' },
-          { text: 'Knee circles', dur: '30s each', vid: 'Knee warm-up' },
-          { text: 'Wrist circles + light wrist curls', dur: '15 reps', vid: null },
-          { text: 'Half kneeling hip flexor stretch', dur: '45s/side', vid: 'Half kneeling stretch' },
+          { phase: 'Raise', text: 'March in place', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
+          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', vid: 'Glute bridge' },
+          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', vid: null },
+          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', vid: null },
+          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', vid: 'Knee circles' },
+          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', vid: null },
+          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
+          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Leg Press (Quads, Glutes)' },
+          { phase: 'Specific', text: 'Wrist + forearm prep (circles, light holds)', dur: '30 s', vid: null },
         ],
         cooldown:         [
           { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
@@ -1632,12 +1722,19 @@ function renderWorkout() {
   const wu = day.warmup || [];
   document.getElementById('warmupTitle').textContent = '🔥 Warm-up';
   let wuHtml = '';
+  const phaseClass = { Raise: 'p-raise', Activate: 'p-activate', Mobilise: 'p-mobilise', Potentiate: 'p-potentiate', Specific: 'p-specific' };
   wu.forEach((s, i) => {
-    wuHtml += `<div class="warmup-step"><span class="num">${i+1}</span> ${s.text} — ${s.dur}`;
-    if (s.vid) wuHtml += ` <button class="timer-btn" onclick="openVideo('${s.vid}')">&#127916;</button>`;
+    const pc = phaseClass[s.phase] || 'p-mobilise';
+    wuHtml += `<div class="warmup-step">`;
+    wuHtml += `<span class="num">${i + 1}</span>`;
+    wuHtml += `<div class="wu-body"><div class="wu-top">`;
+    if (s.phase) wuHtml += `<span class="phase ${pc}">${s.phase}</span>`;
+    wuHtml += `<span class="wu-dur">${s.dur}</span></div>`;
+    wuHtml += `<div class="wu-text">${s.text}</div></div>`;
+    if (s.vid) wuHtml += `<button class="timer-btn" onclick="openVideo('${s.vid}')">&#9654;</button>`;
     wuHtml += `</div>`;
   });
-  wuHtml += `<div class="warmup-step" style="color:var(--orange);margin-top:6px;">&#9888;&#65039; Plus 2 warm-up sets on the FIRST exercise (50%, then 70% of working weight)</div>`;
+  wuHtml += `<div class="wu-note">Total ~10-12 min. Static stretching belongs in the cool-down, not here.</div>`;
   document.getElementById('warmupContent').innerHTML = wuHtml;
 
   // ====== WORKOUT ======
