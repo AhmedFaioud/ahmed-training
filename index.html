@@ -436,6 +436,7 @@ body::before {
 .wu-body { flex: 1; min-width: 0; }
 .wu-top { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
 .wu-text { font-size: 12.5px; color: var(--text-2); line-height: 1.45; }
+.wu-how { font-size: 11px; color: var(--text-3); line-height: 1.55; margin-top: 4px; padding-left: 9px; border-left: 2px solid var(--line-2); }
 .wu-dur { font-size: 10.5px; font-weight: 700; color: var(--text-3); font-variant-numeric: tabular-nums; }
 .phase { font-size: 8.5px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; padding: 2.5px 6px; border-radius: 5px; white-space: nowrap; }
 .p-raise      { background: rgba(251,191,36,.16);  color: #fcd34d; }
@@ -947,16 +948,16 @@ const BLOCKS = {
       d1: {
         label: 'Push Day', kind: 'push',
         warmup:         [
-          { phase: 'Raise', text: 'March in place + light arm swings', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
-          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', vid: null },
-          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', vid: null },
-          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', vid: 'Arm circles' },
-          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
-          { phase: 'Mobilise', text: 'Doorway chest opener', dur: '30 s', vid: null },
-          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Machine Chest Press (Chest)' },
-          { phase: 'Specific', text: 'Rotator cuff external rotation (light)', dur: '2 × 12', vid: null },
+          { phase: 'Raise', text: 'March in place + light arm swings', dur: '2 min', how: 'Walk on the spot lifting your knees, arms swinging loosely.', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', how: 'Jump your feet out wide while raising your arms overhead, then back.', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', how: 'Jog on the spot bringing each knee up to waist height, slowly.', vid: null },
+          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', how: 'Back against a wall, arms in a goalpost shape. Slide arms up and down keeping contact with the wall.', vid: null },
+          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', how: 'In push-up position with arms straight. Pinch shoulder blades together, then push them apart. Elbows stay locked.', vid: null },
+          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', how: 'Arms straight out to the sides. Draw small circles forward, then backward.', vid: 'Arm circles' },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', how: 'Lie on your side with knees bent. Open the top arm across your body and let your chest turn. Follow your hand with your eyes, then close.', vid: null },
+          { phase: 'Mobilise', text: 'Doorway chest opener', dur: '30 s', how: 'Put your forearm on a door frame at shoulder height and step forward until you feel the chest stretch.', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on your first pressing exercise: about half your working weight x10, then 70% x5, then 85% x3. No effort needed - these are just to prepare.', vid: 'Machine Chest Press (Chest)' },
+          { phase: 'Specific', text: 'Rotator cuff external rotation (light)', dur: '2 × 12', how: 'Elbow at your side bent 90 degrees, forearm pointing forward. Rotate the forearm outward against light resistance, then return.', vid: null },
         ],
         cooldown:         [
           { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
@@ -987,15 +988,15 @@ const BLOCKS = {
         label: 'Pull Day', kind: 'pull',
         warmup:         [
           { phase: 'Raise', text: 'March in place + arm swings', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
-          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Scapular pulldowns (hang or towel)', dur: '2 × 10', vid: 'Scapular pulls' },
-          { phase: 'Activate', text: 'Prone Y-T-W raises', dur: '2 × 8 each', vid: null },
-          { phase: 'Mobilise', text: 'Cat-camel', dur: '8 reps', vid: null },
-          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
-          { phase: 'Mobilise', text: 'Overhead arm swings (lats)', dur: '30 s', vid: null },
-          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
-          { phase: 'Specific', text: 'Grip + wrist prep (circles, light squeeze)', dur: '30 s', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', how: 'Jump your feet out wide while raising your arms overhead, then back.', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', how: 'Jog on the spot bringing each knee up to waist height, slowly.', vid: null },
+          { phase: 'Activate', text: 'Scapular pulldowns (hang or towel)', dur: '2 × 10', how: 'Hang from a bar, or hold a towel high with both hands. Pull your shoulder blades DOWN without bending the elbows.', vid: 'Scapular pulls' },
+          { phase: 'Activate', text: 'Prone Y-T-W raises', dur: '2 × 8 each', how: 'Lie face down. Lift straight arms overhead (Y), then out to the sides (T), then elbows bent (W). Small movements.', vid: null },
+          { phase: 'Mobilise', text: 'Cat-camel', dur: '8 reps', how: 'On hands and knees. Arch your back upward, then let it sag down. Slow and smooth.', vid: null },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', how: 'Lie on your side with knees bent. Open the top arm across your body and let your chest turn. Follow your hand with your eyes, then close.', vid: null },
+          { phase: 'Mobilise', text: 'Overhead arm swings (lats)', dur: '30 s', how: 'Swing your arms in a wide arc overhead and slightly behind you, feeling the side of your ribs stretch.', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on your first pulling exercise: about half your working weight x10, then 70% x5, then 85% x3. These should feel easy.', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
+          { phase: 'Specific', text: 'Grip + wrist prep (circles, light squeeze)', dur: '30 s', how: 'Open and close your fists, circle both wrists, then squeeze a towel for a few seconds.', vid: null },
         ],
         cooldown:         [
           { text: 'Lat stretch (hold rack, sit back)', dur: '30s/side', vid: null },
@@ -1026,18 +1027,18 @@ const BLOCKS = {
       d3: {
         label: 'Leg Day + Core + Cardio', kind: 'legs',
         warmup:         [
-          { phase: 'Raise', text: 'March in place', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', vid: 'Glute bridge' },
-          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', vid: null },
-          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', vid: null },
-          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', vid: 'Leg swings' },
-          { phase: 'Mobilise', text: 'Leg swings — side / side', dur: '10 / side', vid: 'Leg swings' },
-          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', vid: 'Knee circles' },
-          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', vid: null },
-          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
-          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Leg Press (Quads, Glutes)' },
+          { phase: 'Raise', text: 'March in place', dur: '2 min', how: 'Walk on the spot lifting your knees to hip height.', vid: null },
+          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', how: 'Any easy cardio machine or a fast walk for 2 minutes.', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', how: 'Jog on the spot bringing each knee up to waist height, slowly.', vid: null },
+          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', how: 'Lie on your back, feet flat and knees bent. Lift your hips until your body is a straight line, squeeze glutes, lower.', vid: 'Glute bridge' },
+          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', how: 'Lie on your side, knees bent, feet together. Lift the top knee without moving the feet, then lower.', vid: null },
+          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', how: 'On hands and knees. Stretch one arm forward and the opposite leg back at the same time. Hold 2 seconds, switch sides.', vid: null },
+          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', how: 'Hold something solid. Swing one leg forward and back in a relaxed arc, then swap legs.', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Leg swings — side / side', dur: '10 / side', how: 'Face your support. Swing one leg across your body and out to the side, then swap.', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', how: 'Feet together, hands on knees. Draw small circles with both knees, 15 each direction.', vid: 'Knee circles' },
+          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', how: 'Half-kneel with one foot forward. Rock your knee forward over the toes without lifting the heel.', vid: null },
+          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', how: 'On the leg-extension machine with a very light weight, straighten your knees slowly 15 times.', vid: 'Leg extension' },
+          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on the leg press: about half your working weight x10, then 70% x5, then 85% x3. Easy effort only.', vid: 'Leg Press (Quads, Glutes)' },
         ],
         cooldown:         [
           { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
@@ -1076,14 +1077,14 @@ const BLOCKS = {
         label: 'Upper Body Day', kind: 'upper',
         warmup:         [
           { phase: 'Raise', text: 'March in place + arm swings', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', vid: null },
-          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', vid: null },
-          { phase: 'Activate', text: 'Scapular pulldowns', dur: '2 × 10', vid: 'Scapular pulls' },
-          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', vid: 'Arm circles' },
-          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
-          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Machine Chest Press (Chest)' },
-          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5', dur: '~2 min', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', how: 'Jump your feet out wide while raising your arms overhead, then back.', vid: null },
+          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', how: 'Back against a wall, arms in a goalpost shape. Slide arms up and down keeping contact with the wall.', vid: null },
+          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', how: 'In push-up position with arms straight. Pinch shoulder blades together, then push them apart. Elbows stay locked.', vid: null },
+          { phase: 'Activate', text: 'Scapular pulldowns', dur: '2 × 10', how: 'Hang from a bar, or hold a towel high. Pull shoulder blades down without bending elbows.', vid: 'Scapular pulls' },
+          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', how: 'Arms straight out to the sides. Draw small circles forward, then backward.', vid: 'Arm circles' },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', how: 'Lie on your side with knees bent. Open the top arm across your body and let your chest turn. Follow your hand with your eyes, then close.', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on your first pressing exercise: about half your working weight x10, then 70% x5, then 85% x3. No effort needed - these are just to prepare.', vid: 'Machine Chest Press (Chest)' },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5', dur: '~2 min', how: 'Warm-up sets on your first pulling exercise: half your working weight x10, then 70% x5. Easy effort only.', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
         ],
         cooldown:         [
           { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
@@ -1117,18 +1118,18 @@ const BLOCKS = {
       d6: {
         label: 'Lower Body Day', kind: 'lower',
         warmup:         [
-          { phase: 'Raise', text: 'March in place', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', vid: 'Glute bridge' },
-          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', vid: null },
-          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', vid: null },
-          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', vid: 'Leg swings' },
-          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', vid: 'Knee circles' },
-          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', vid: null },
-          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
-          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Leg Press (Quads, Glutes)' },
-          { phase: 'Specific', text: 'Wrist + forearm prep (circles, light holds)', dur: '30 s', vid: null },
+          { phase: 'Raise', text: 'March in place', dur: '2 min', how: 'Walk on the spot lifting your knees to hip height.', vid: null },
+          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', how: 'Any easy cardio machine or a fast walk for 2 minutes.', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', how: 'Jog on the spot bringing each knee up to waist height, slowly.', vid: null },
+          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', how: 'Lie on your back, feet flat and knees bent. Lift your hips until your body is a straight line, squeeze glutes, lower.', vid: 'Glute bridge' },
+          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', how: 'Lie on your side, knees bent, feet together. Lift the top knee without moving the feet, then lower.', vid: null },
+          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', how: 'On hands and knees. Stretch one arm forward and the opposite leg back at the same time. Hold 2 seconds, switch sides.', vid: null },
+          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', how: 'Hold something solid. Swing one leg forward and back in a relaxed arc, then swap legs.', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', how: 'Feet together, hands on knees. Draw small circles with both knees, 15 each direction.', vid: 'Knee circles' },
+          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', how: 'Half-kneel with one foot forward. Rock your knee forward over the toes without lifting the heel.', vid: null },
+          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', how: 'On the leg-extension machine with a very light weight, straighten your knees slowly 15 times.', vid: 'Leg extension' },
+          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on the leg press: about half your working weight x10, then 70% x5, then 85% x3. Easy effort only.', vid: 'Leg Press (Quads, Glutes)' },
+          { phase: 'Specific', text: 'Wrist + forearm prep (circles, light holds)', dur: '30 s', how: 'Circle both wrists both ways, then hold a towel and squeeze. Straighten and bend the wrists slowly.', vid: null },
         ],
         cooldown:         [
           { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
@@ -1171,16 +1172,16 @@ const BLOCKS = {
       d1: {
         label: 'Push Day', kind: 'push',
         warmup:         [
-          { phase: 'Raise', text: 'March in place + light arm swings', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
-          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', vid: null },
-          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', vid: null },
-          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', vid: 'Arm circles' },
-          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
-          { phase: 'Mobilise', text: 'Doorway chest opener', dur: '30 s', vid: null },
-          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Machine Chest Press (Chest)' },
-          { phase: 'Specific', text: 'Rotator cuff external rotation (light)', dur: '2 × 12', vid: null },
+          { phase: 'Raise', text: 'March in place + light arm swings', dur: '2 min', how: 'Walk on the spot lifting your knees, arms swinging loosely.', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', how: 'Jump your feet out wide while raising your arms overhead, then back.', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', how: 'Jog on the spot bringing each knee up to waist height, slowly.', vid: null },
+          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', how: 'Back against a wall, arms in a goalpost shape. Slide arms up and down keeping contact with the wall.', vid: null },
+          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', how: 'In push-up position with arms straight. Pinch shoulder blades together, then push them apart. Elbows stay locked.', vid: null },
+          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', how: 'Arms straight out to the sides. Draw small circles forward, then backward.', vid: 'Arm circles' },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', how: 'Lie on your side with knees bent. Open the top arm across your body and let your chest turn. Follow your hand with your eyes, then close.', vid: null },
+          { phase: 'Mobilise', text: 'Doorway chest opener', dur: '30 s', how: 'Put your forearm on a door frame at shoulder height and step forward until you feel the chest stretch.', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on your first pressing exercise: about half your working weight x10, then 70% x5, then 85% x3. No effort needed - these are just to prepare.', vid: 'Machine Chest Press (Chest)' },
+          { phase: 'Specific', text: 'Rotator cuff external rotation (light)', dur: '2 × 12', how: 'Elbow at your side bent 90 degrees, forearm pointing forward. Rotate the forearm outward against light resistance, then return.', vid: null },
         ],
         cooldown:         [
           { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
@@ -1211,15 +1212,15 @@ const BLOCKS = {
         label: 'Pull Day', kind: 'pull',
         warmup:         [
           { phase: 'Raise', text: 'March in place + arm swings', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
-          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Scapular pulldowns (hang or towel)', dur: '2 × 10', vid: 'Scapular pulls' },
-          { phase: 'Activate', text: 'Prone Y-T-W raises', dur: '2 × 8 each', vid: null },
-          { phase: 'Mobilise', text: 'Cat-camel', dur: '8 reps', vid: null },
-          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
-          { phase: 'Mobilise', text: 'Overhead arm swings (lats)', dur: '30 s', vid: null },
-          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
-          { phase: 'Specific', text: 'Grip + wrist prep (circles, light squeeze)', dur: '30 s', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', how: 'Jump your feet out wide while raising your arms overhead, then back.', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', how: 'Jog on the spot bringing each knee up to waist height, slowly.', vid: null },
+          { phase: 'Activate', text: 'Scapular pulldowns (hang or towel)', dur: '2 × 10', how: 'Hang from a bar, or hold a towel high with both hands. Pull your shoulder blades DOWN without bending the elbows.', vid: 'Scapular pulls' },
+          { phase: 'Activate', text: 'Prone Y-T-W raises', dur: '2 × 8 each', how: 'Lie face down. Lift straight arms overhead (Y), then out to the sides (T), then elbows bent (W). Small movements.', vid: null },
+          { phase: 'Mobilise', text: 'Cat-camel', dur: '8 reps', how: 'On hands and knees. Arch your back upward, then let it sag down. Slow and smooth.', vid: null },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', how: 'Lie on your side with knees bent. Open the top arm across your body and let your chest turn. Follow your hand with your eyes, then close.', vid: null },
+          { phase: 'Mobilise', text: 'Overhead arm swings (lats)', dur: '30 s', how: 'Swing your arms in a wide arc overhead and slightly behind you, feeling the side of your ribs stretch.', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on your first pulling exercise: about half your working weight x10, then 70% x5, then 85% x3. These should feel easy.', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
+          { phase: 'Specific', text: 'Grip + wrist prep (circles, light squeeze)', dur: '30 s', how: 'Open and close your fists, circle both wrists, then squeeze a towel for a few seconds.', vid: null },
         ],
         cooldown:         [
           { text: 'Lat stretch (hold rack, sit back)', dur: '30s/side', vid: null },
@@ -1250,18 +1251,18 @@ const BLOCKS = {
       d3: {
         label: 'Leg Day + Core + Cardio', kind: 'legs',
         warmup:         [
-          { phase: 'Raise', text: 'March in place', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', vid: 'Glute bridge' },
-          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', vid: null },
-          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', vid: null },
-          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', vid: 'Leg swings' },
-          { phase: 'Mobilise', text: 'Leg swings — side / side', dur: '10 / side', vid: 'Leg swings' },
-          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', vid: 'Knee circles' },
-          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', vid: null },
-          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
-          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Leg Press (Quads, Glutes)' },
+          { phase: 'Raise', text: 'March in place', dur: '2 min', how: 'Walk on the spot lifting your knees to hip height.', vid: null },
+          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', how: 'Any easy cardio machine or a fast walk for 2 minutes.', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', how: 'Jog on the spot bringing each knee up to waist height, slowly.', vid: null },
+          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', how: 'Lie on your back, feet flat and knees bent. Lift your hips until your body is a straight line, squeeze glutes, lower.', vid: 'Glute bridge' },
+          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', how: 'Lie on your side, knees bent, feet together. Lift the top knee without moving the feet, then lower.', vid: null },
+          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', how: 'On hands and knees. Stretch one arm forward and the opposite leg back at the same time. Hold 2 seconds, switch sides.', vid: null },
+          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', how: 'Hold something solid. Swing one leg forward and back in a relaxed arc, then swap legs.', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Leg swings — side / side', dur: '10 / side', how: 'Face your support. Swing one leg across your body and out to the side, then swap.', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', how: 'Feet together, hands on knees. Draw small circles with both knees, 15 each direction.', vid: 'Knee circles' },
+          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', how: 'Half-kneel with one foot forward. Rock your knee forward over the toes without lifting the heel.', vid: null },
+          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', how: 'On the leg-extension machine with a very light weight, straighten your knees slowly 15 times.', vid: 'Leg extension' },
+          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on the leg press: about half your working weight x10, then 70% x5, then 85% x3. Easy effort only.', vid: 'Leg Press (Quads, Glutes)' },
         ],
         cooldown:         [
           { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
@@ -1300,14 +1301,14 @@ const BLOCKS = {
         label: 'Upper Body Day', kind: 'upper',
         warmup:         [
           { phase: 'Raise', text: 'March in place + arm swings', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', vid: null },
-          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', vid: null },
-          { phase: 'Activate', text: 'Scapular pulldowns', dur: '2 × 10', vid: 'Scapular pulls' },
-          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', vid: 'Arm circles' },
-          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
-          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Machine Chest Press (Chest)' },
-          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5', dur: '~2 min', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', how: 'Jump your feet out wide while raising your arms overhead, then back.', vid: null },
+          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', how: 'Back against a wall, arms in a goalpost shape. Slide arms up and down keeping contact with the wall.', vid: null },
+          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', how: 'In push-up position with arms straight. Pinch shoulder blades together, then push them apart. Elbows stay locked.', vid: null },
+          { phase: 'Activate', text: 'Scapular pulldowns', dur: '2 × 10', how: 'Hang from a bar, or hold a towel high. Pull shoulder blades down without bending elbows.', vid: 'Scapular pulls' },
+          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', how: 'Arms straight out to the sides. Draw small circles forward, then backward.', vid: 'Arm circles' },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', how: 'Lie on your side with knees bent. Open the top arm across your body and let your chest turn. Follow your hand with your eyes, then close.', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on your first pressing exercise: about half your working weight x10, then 70% x5, then 85% x3. No effort needed - these are just to prepare.', vid: 'Machine Chest Press (Chest)' },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5', dur: '~2 min', how: 'Warm-up sets on your first pulling exercise: half your working weight x10, then 70% x5. Easy effort only.', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
         ],
         cooldown:         [
           { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
@@ -1341,18 +1342,18 @@ const BLOCKS = {
       d6: {
         label: 'Lower Body Day', kind: 'lower',
         warmup:         [
-          { phase: 'Raise', text: 'March in place', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', vid: 'Glute bridge' },
-          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', vid: null },
-          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', vid: null },
-          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', vid: 'Leg swings' },
-          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', vid: 'Knee circles' },
-          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', vid: null },
-          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
-          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Leg Press (Quads, Glutes)' },
-          { phase: 'Specific', text: 'Wrist + forearm prep (circles, light holds)', dur: '30 s', vid: null },
+          { phase: 'Raise', text: 'March in place', dur: '2 min', how: 'Walk on the spot lifting your knees to hip height.', vid: null },
+          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', how: 'Any easy cardio machine or a fast walk for 2 minutes.', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', how: 'Jog on the spot bringing each knee up to waist height, slowly.', vid: null },
+          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', how: 'Lie on your back, feet flat and knees bent. Lift your hips until your body is a straight line, squeeze glutes, lower.', vid: 'Glute bridge' },
+          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', how: 'Lie on your side, knees bent, feet together. Lift the top knee without moving the feet, then lower.', vid: null },
+          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', how: 'On hands and knees. Stretch one arm forward and the opposite leg back at the same time. Hold 2 seconds, switch sides.', vid: null },
+          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', how: 'Hold something solid. Swing one leg forward and back in a relaxed arc, then swap legs.', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', how: 'Feet together, hands on knees. Draw small circles with both knees, 15 each direction.', vid: 'Knee circles' },
+          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', how: 'Half-kneel with one foot forward. Rock your knee forward over the toes without lifting the heel.', vid: null },
+          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', how: 'On the leg-extension machine with a very light weight, straighten your knees slowly 15 times.', vid: 'Leg extension' },
+          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on the leg press: about half your working weight x10, then 70% x5, then 85% x3. Easy effort only.', vid: 'Leg Press (Quads, Glutes)' },
+          { phase: 'Specific', text: 'Wrist + forearm prep (circles, light holds)', dur: '30 s', how: 'Circle both wrists both ways, then hold a towel and squeeze. Straighten and bend the wrists slowly.', vid: null },
         ],
         cooldown:         [
           { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
@@ -1395,16 +1396,16 @@ const BLOCKS = {
       d1: {
         label: 'Push Day', kind: 'push',
         warmup:         [
-          { phase: 'Raise', text: 'March in place + light arm swings', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
-          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', vid: null },
-          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', vid: null },
-          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', vid: 'Arm circles' },
-          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
-          { phase: 'Mobilise', text: 'Doorway chest opener', dur: '30 s', vid: null },
-          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Machine Chest Press (Chest)' },
-          { phase: 'Specific', text: 'Rotator cuff external rotation (light)', dur: '2 × 12', vid: null },
+          { phase: 'Raise', text: 'March in place + light arm swings', dur: '2 min', how: 'Walk on the spot lifting your knees, arms swinging loosely.', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', how: 'Jump your feet out wide while raising your arms overhead, then back.', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', how: 'Jog on the spot bringing each knee up to waist height, slowly.', vid: null },
+          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', how: 'Back against a wall, arms in a goalpost shape. Slide arms up and down keeping contact with the wall.', vid: null },
+          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', how: 'In push-up position with arms straight. Pinch shoulder blades together, then push them apart. Elbows stay locked.', vid: null },
+          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', how: 'Arms straight out to the sides. Draw small circles forward, then backward.', vid: 'Arm circles' },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', how: 'Lie on your side with knees bent. Open the top arm across your body and let your chest turn. Follow your hand with your eyes, then close.', vid: null },
+          { phase: 'Mobilise', text: 'Doorway chest opener', dur: '30 s', how: 'Put your forearm on a door frame at shoulder height and step forward until you feel the chest stretch.', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on your first pressing exercise: about half your working weight x10, then 70% x5, then 85% x3. No effort needed - these are just to prepare.', vid: 'Machine Chest Press (Chest)' },
+          { phase: 'Specific', text: 'Rotator cuff external rotation (light)', dur: '2 × 12', how: 'Elbow at your side bent 90 degrees, forearm pointing forward. Rotate the forearm outward against light resistance, then return.', vid: null },
         ],
         cooldown:         [
           { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
@@ -1435,15 +1436,15 @@ const BLOCKS = {
         label: 'Pull Day', kind: 'pull',
         warmup:         [
           { phase: 'Raise', text: 'March in place + arm swings', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
-          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Scapular pulldowns (hang or towel)', dur: '2 × 10', vid: 'Scapular pulls' },
-          { phase: 'Activate', text: 'Prone Y-T-W raises', dur: '2 × 8 each', vid: null },
-          { phase: 'Mobilise', text: 'Cat-camel', dur: '8 reps', vid: null },
-          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
-          { phase: 'Mobilise', text: 'Overhead arm swings (lats)', dur: '30 s', vid: null },
-          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
-          { phase: 'Specific', text: 'Grip + wrist prep (circles, light squeeze)', dur: '30 s', vid: null },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', how: 'Jump your feet out wide while raising your arms overhead, then back.', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', how: 'Jog on the spot bringing each knee up to waist height, slowly.', vid: null },
+          { phase: 'Activate', text: 'Scapular pulldowns (hang or towel)', dur: '2 × 10', how: 'Hang from a bar, or hold a towel high with both hands. Pull your shoulder blades DOWN without bending the elbows.', vid: 'Scapular pulls' },
+          { phase: 'Activate', text: 'Prone Y-T-W raises', dur: '2 × 8 each', how: 'Lie face down. Lift straight arms overhead (Y), then out to the sides (T), then elbows bent (W). Small movements.', vid: null },
+          { phase: 'Mobilise', text: 'Cat-camel', dur: '8 reps', how: 'On hands and knees. Arch your back upward, then let it sag down. Slow and smooth.', vid: null },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', how: 'Lie on your side with knees bent. Open the top arm across your body and let your chest turn. Follow your hand with your eyes, then close.', vid: null },
+          { phase: 'Mobilise', text: 'Overhead arm swings (lats)', dur: '30 s', how: 'Swing your arms in a wide arc overhead and slightly behind you, feeling the side of your ribs stretch.', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on your first pulling exercise: about half your working weight x10, then 70% x5, then 85% x3. These should feel easy.', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
+          { phase: 'Specific', text: 'Grip + wrist prep (circles, light squeeze)', dur: '30 s', how: 'Open and close your fists, circle both wrists, then squeeze a towel for a few seconds.', vid: null },
         ],
         cooldown:         [
           { text: 'Lat stretch (hold rack, sit back)', dur: '30s/side', vid: null },
@@ -1474,18 +1475,18 @@ const BLOCKS = {
       d3: {
         label: 'Leg Day + Core + Cardio', kind: 'legs',
         warmup:         [
-          { phase: 'Raise', text: 'March in place', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', vid: 'Glute bridge' },
-          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', vid: null },
-          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', vid: null },
-          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', vid: 'Leg swings' },
-          { phase: 'Mobilise', text: 'Leg swings — side / side', dur: '10 / side', vid: 'Leg swings' },
-          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', vid: 'Knee circles' },
-          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', vid: null },
-          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
-          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Leg Press (Quads, Glutes)' },
+          { phase: 'Raise', text: 'March in place', dur: '2 min', how: 'Walk on the spot lifting your knees to hip height.', vid: null },
+          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', how: 'Any easy cardio machine or a fast walk for 2 minutes.', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', how: 'Jog on the spot bringing each knee up to waist height, slowly.', vid: null },
+          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', how: 'Lie on your back, feet flat and knees bent. Lift your hips until your body is a straight line, squeeze glutes, lower.', vid: 'Glute bridge' },
+          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', how: 'Lie on your side, knees bent, feet together. Lift the top knee without moving the feet, then lower.', vid: null },
+          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', how: 'On hands and knees. Stretch one arm forward and the opposite leg back at the same time. Hold 2 seconds, switch sides.', vid: null },
+          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', how: 'Hold something solid. Swing one leg forward and back in a relaxed arc, then swap legs.', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Leg swings — side / side', dur: '10 / side', how: 'Face your support. Swing one leg across your body and out to the side, then swap.', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', how: 'Feet together, hands on knees. Draw small circles with both knees, 15 each direction.', vid: 'Knee circles' },
+          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', how: 'Half-kneel with one foot forward. Rock your knee forward over the toes without lifting the heel.', vid: null },
+          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', how: 'On the leg-extension machine with a very light weight, straighten your knees slowly 15 times.', vid: 'Leg extension' },
+          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on the leg press: about half your working weight x10, then 70% x5, then 85% x3. Easy effort only.', vid: 'Leg Press (Quads, Glutes)' },
         ],
         cooldown:         [
           { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
@@ -1524,14 +1525,14 @@ const BLOCKS = {
         label: 'Upper Body Day', kind: 'upper',
         warmup:         [
           { phase: 'Raise', text: 'March in place + arm swings', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', vid: null },
-          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', vid: null },
-          { phase: 'Activate', text: 'Scapular pulldowns', dur: '2 × 10', vid: 'Scapular pulls' },
-          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', vid: 'Arm circles' },
-          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', vid: null },
-          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Machine Chest Press (Chest)' },
-          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5', dur: '~2 min', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
+          { phase: 'Raise', text: 'Jumping jacks', dur: '30 s', how: 'Jump your feet out wide while raising your arms overhead, then back.', vid: null },
+          { phase: 'Activate', text: 'Wall slides (or band pull-aparts)', dur: '2 × 12', how: 'Back against a wall, arms in a goalpost shape. Slide arms up and down keeping contact with the wall.', vid: null },
+          { phase: 'Activate', text: 'Scapular push-ups', dur: '2 × 10', how: 'In push-up position with arms straight. Pinch shoulder blades together, then push them apart. Elbows stay locked.', vid: null },
+          { phase: 'Activate', text: 'Scapular pulldowns', dur: '2 × 10', how: 'Hang from a bar, or hold a towel high. Pull shoulder blades down without bending elbows.', vid: 'Scapular pulls' },
+          { phase: 'Mobilise', text: 'Arm circles (both directions)', dur: '30 s each', how: 'Arms straight out to the sides. Draw small circles forward, then backward.', vid: 'Arm circles' },
+          { phase: 'Mobilise', text: 'Thoracic rotations (open book)', dur: '8 / side', how: 'Lie on your side with knees bent. Open the top arm across your body and let your chest turn. Follow your hand with your eyes, then close.', vid: null },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on your first pressing exercise: about half your working weight x10, then 70% x5, then 85% x3. No effort needed - these are just to prepare.', vid: 'Machine Chest Press (Chest)' },
+          { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5', dur: '~2 min', how: 'Warm-up sets on your first pulling exercise: half your working weight x10, then 70% x5. Easy effort only.', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
         ],
         cooldown:         [
           { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
@@ -1565,18 +1566,18 @@ const BLOCKS = {
       d6: {
         label: 'Lower Body Day', kind: 'lower',
         warmup:         [
-          { phase: 'Raise', text: 'March in place', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', vid: null },
-          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', vid: null },
-          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', vid: 'Glute bridge' },
-          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', vid: null },
-          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', vid: null },
-          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', vid: 'Leg swings' },
-          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', vid: 'Knee circles' },
-          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', vid: null },
-          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', vid: 'Leg extension' },
-          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', vid: 'Leg Press (Quads, Glutes)' },
-          { phase: 'Specific', text: 'Wrist + forearm prep (circles, light holds)', dur: '30 s', vid: null },
+          { phase: 'Raise', text: 'March in place', dur: '2 min', how: 'Walk on the spot lifting your knees to hip height.', vid: null },
+          { phase: 'Raise', text: 'Bike or brisk walk (if available)', dur: '2 min', how: 'Any easy cardio machine or a fast walk for 2 minutes.', vid: null },
+          { phase: 'Raise', text: 'High knees (easy pace)', dur: '30 s', how: 'Jog on the spot bringing each knee up to waist height, slowly.', vid: null },
+          { phase: 'Activate', text: 'Glute bridge', dur: '2 × 12', how: 'Lie on your back, feet flat and knees bent. Lift your hips until your body is a straight line, squeeze glutes, lower.', vid: 'Glute bridge' },
+          { phase: 'Activate', text: 'Clamshell / hip abduction', dur: '2 × 12 / side', how: 'Lie on your side, knees bent, feet together. Lift the top knee without moving the feet, then lower.', vid: null },
+          { phase: 'Activate', text: 'Bird-dog', dur: '2 × 8 / side', how: 'On hands and knees. Stretch one arm forward and the opposite leg back at the same time. Hold 2 seconds, switch sides.', vid: null },
+          { phase: 'Mobilise', text: 'Leg swings — front / back', dur: '10 / side', how: 'Hold something solid. Swing one leg forward and back in a relaxed arc, then swap legs.', vid: 'Leg swings' },
+          { phase: 'Mobilise', text: 'Knee circles — MANDATORY for your knee', dur: '30 s', how: 'Feet together, hands on knees. Draw small circles with both knees, 15 each direction.', vid: 'Knee circles' },
+          { phase: 'Mobilise', text: 'Ankle rocks (dorsiflexion)', dur: '10 / side', how: 'Half-kneel with one foot forward. Rock your knee forward over the toes without lifting the heel.', vid: null },
+          { phase: 'Potentiate', text: 'Low-load leg extension', dur: '15 reps', how: 'On the leg-extension machine with a very light weight, straighten your knees slowly 15 times.', vid: 'Leg extension' },
+          { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on the leg press: about half your working weight x10, then 70% x5, then 85% x3. Easy effort only.', vid: 'Leg Press (Quads, Glutes)' },
+          { phase: 'Specific', text: 'Wrist + forearm prep (circles, light holds)', dur: '30 s', how: 'Circle both wrists both ways, then hold a towel and squeeze. Straighten and bend the wrists slowly.', vid: null },
         ],
         cooldown:         [
           { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
@@ -1690,8 +1691,12 @@ function renderWeekInfo() {
 
   const options = { weekday: 'long', month: 'long', day: 'numeric' };
   const dateStr = today.toLocaleDateString('en-US', options);
-  const dayLabel = BLOCKS[currentBlock].days[cycDay] ? BLOCKS[currentBlock].days[cycDay].label : '';
-  document.getElementById('dateInfo').textContent = `${dateStr} · ${dayLabel}`;
+  const selDay = BLOCKS[currentBlock].days[currentDay] || BLOCKS[currentBlock].days[cycDay];
+  const dayLabel = selDay ? selDay.label : '';
+  const viewingToday = (currentDay === cycDay);
+  document.getElementById('dateInfo').textContent = viewingToday
+    ? `${dateStr} · ${dayLabel}`
+    : `${dateStr} · viewing Day ${currentDay.slice(1)} — ${dayLabel}`;
 }
 
 function renderWorkout() {
@@ -1730,7 +1735,9 @@ function renderWorkout() {
     wuHtml += `<div class="wu-body"><div class="wu-top">`;
     if (s.phase) wuHtml += `<span class="phase ${pc}">${s.phase}</span>`;
     wuHtml += `<span class="wu-dur">${s.dur}</span></div>`;
-    wuHtml += `<div class="wu-text">${s.text}</div></div>`;
+    wuHtml += `<div class="wu-text">${s.text}</div>`;
+    if (s.how) wuHtml += `<div class="wu-how">${s.how}</div>`;
+    wuHtml += `</div>`;
     if (s.vid) wuHtml += `<button class="timer-btn" onclick="openVideo('${s.vid}')">&#9654;</button>`;
     wuHtml += `</div>`;
   });
@@ -1822,6 +1829,7 @@ document.querySelectorAll('.day-btn').forEach(btn => {
     document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
     this.classList.add('active');
     currentDay = this.dataset.day;
+    renderWeekInfo();
     renderWorkout();
   });
 });
