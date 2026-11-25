@@ -444,6 +444,19 @@ body::before {
 .p-mobilise   { background: rgba(79,140,255,.16);  color: #7ba9ff; }
 .p-potentiate { background: rgba(139,92,246,.18);  color: #b79dff; }
 .p-specific   { background: rgba(255,255,255,.07); color: var(--text-2); }
+.circuit { margin-top: 11px; border-top: 1px solid var(--line); padding-top: 4px; }
+.circuit-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.circuit-row:last-child { border-bottom: 0; }
+.c-num {
+  flex-shrink: 0; width: 20px; height: 20px; display: grid; place-items: center;
+  border-radius: 6px; background: rgba(139,92,246,.16); color: #b79dff;
+  font-size: 10.5px; font-weight: 800;
+}
+.c-body { flex: 1; min-width: 0; }
+.c-name { font-size: 13px; font-weight: 650; display: block; }
+.c-mus { font-size: 9.5px; font-weight: 750; color: var(--accent); text-transform: uppercase; letter-spacing: .07em; display: block; margin-top: 2px; }
+.c-note { font-size: 11px; color: var(--text-3); line-height: 1.5; margin-top: 3px; }
+.c-vid { width: 30px; height: 30px; font-size: 12px; flex-shrink: 0; }
 .wu-note { font-size: 10.5px; color: var(--text-3); margin-top: 10px; padding-top: 9px; border-top: 1px solid var(--line); line-height: 1.5; }
 .warmup-step .timer-btn { width: 28px; height: 28px; font-size: 12px; margin-left: auto; }
 
@@ -960,10 +973,10 @@ const BLOCKS = {
           { phase: 'Specific', text: 'Rotator cuff external rotation (light)', dur: '2 × 12', how: 'Elbow at your side bent 90 degrees, forearm pointing forward. Rotate the forearm outward against light resistance, then return.', vid: null },
         ],
         cooldown:         [
-          { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
-          { text: 'Cross-body shoulder stretch', dur: '30s/side', vid: null },
-          { text: 'Overhead triceps stretch', dur: '30s/side', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Doorway chest stretch', dur: '30s/side', how: 'Forearm on a door frame at shoulder height, elbow bent 90 degrees. Step forward until you feel the chest stretch.', vid: null },
+          { text: 'Cross-body shoulder stretch', dur: '30s/side', how: 'Bring one arm across your chest, hook it with the other forearm and pull it closer. Keep the shoulder down.', vid: null },
+          { text: 'Overhead triceps stretch', dur: '30s/side', how: 'One arm overhead, bend the elbow so the hand goes behind the head, use the other hand to press the elbow back.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Machine Chest Press (Chest)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'MID chest. Squeeze at top.' },
@@ -999,10 +1012,10 @@ const BLOCKS = {
           { phase: 'Specific', text: 'Grip + wrist prep (circles, light squeeze)', dur: '30 s', how: 'Open and close your fists, circle both wrists, then squeeze a towel for a few seconds.', vid: null },
         ],
         cooldown:         [
-          { text: 'Lat stretch (hold rack, sit back)', dur: '30s/side', vid: null },
-          { text: 'Biceps wall stretch', dur: '30s/side', vid: null },
-          { text: 'Thoracic rotation (open book)', dur: '8/side', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Lat stretch (hold rack, sit back)', dur: '30s/side', how: 'Hold a rack at waist height, step back, sit hips down and back, let the chest drop. Feel the side of the back stretch.', vid: null },
+          { text: 'Biceps wall stretch', dur: '30s/side', how: 'Stand side-on to a wall, palm flat on it at shoulder height with the arm straight. Turn your body away until you feel the front of the upper arm stretch.', vid: null },
+          { text: 'Thoracic rotation (open book)', dur: '8/side', how: 'Lie on your side, knees bent. Open the top arm across the body and let the chest turn, following the hand with your eyes.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Lat Pulldown (Wide Grip) (Lats)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'VERTICAL WIDE. Pull to upper chest.' },
@@ -1041,11 +1054,11 @@ const BLOCKS = {
           { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on the leg press: about half your working weight x10, then 70% x5, then 85% x3. Easy effort only.', vid: 'Leg Press (Quads, Glutes)' },
         ],
         cooldown:         [
-          { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
-          { text: 'Hamstring stretch (seated/supine)', dur: '30s/side', vid: null },
-          { text: 'Figure-4 glute stretch', dur: '45s/side', vid: null },
-          { text: 'Calf stretch (wall)', dur: '30s/side', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Quad stretch (standing)', dur: '30s/side', how: 'Stand on one leg (hold something), pull the other foot towards the glute. Knees together, hips slightly forward.', vid: null },
+          { text: 'Hamstring stretch (seated/supine)', dur: '30s/side', how: 'Sit with one leg straight, loop a towel around the foot and gently pull the leg towards you keeping it straight.', vid: null },
+          { text: 'Figure-4 glute stretch', dur: '45s/side', how: 'Lie on your back, cross one ankle over the opposite knee, then pull the lower thigh towards your chest.', vid: null },
+          { text: 'Calf stretch (wall)', dur: '30s/side', how: 'Hands on a wall, step one leg back keeping it straight and the heel flat. Lean forward until the calf stretches.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Leg Press (Quads, Glutes)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Feet mid-high. No lockout.' },
@@ -1087,10 +1100,10 @@ const BLOCKS = {
           { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5', dur: '~2 min', how: 'Warm-up sets on your first pulling exercise: half your working weight x10, then 70% x5. Easy effort only.', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
         ],
         cooldown:         [
-          { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
-          { text: 'Lat stretch', dur: '30s/side', vid: null },
-          { text: 'Cross-body shoulder stretch', dur: '30s/side', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Doorway chest stretch', dur: '30s/side', how: 'Forearm on a door frame at shoulder height, elbow bent 90 degrees. Step forward until you feel the chest stretch.', vid: null },
+          { text: 'Lat stretch', dur: '30s/side', how: 'Hold a rack or door frame, step back and sit the hips down so the chest drops. Feel the stretch under the armpit.', vid: null },
+          { text: 'Cross-body shoulder stretch', dur: '30s/side', how: 'Bring one arm across your chest, hook it with the other forearm and pull it closer. Keep the shoulder down.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Machine Chest Press (Chest)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'CHEST 1. Mid chest.' },
@@ -1101,7 +1114,12 @@ const BLOCKS = {
             { name: 'Seated Cable Row (Back)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'BACK 2. Horizontal pull.' },
             { name: 'DB Curl (Biceps)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'ARMS 1 (biceps).' },
             { name: 'Tricep Pushdown (Triceps)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'ARMS 2 (triceps).' },
-            { name: 'Finisher Circuit: Shrug + Rear Delt Fly + Reverse Curl', sets: 2, reps: '12 each', rest: '0:30', rir: '1-2', note: '2 rounds, no rest between the 3 moves. Traps, rear delts, forearms.' },
+            { name: 'Finisher Circuit', sets: 2, reps: '12 each', rest: '0:30', rir: '1-2', note: '2 rounds, no rest between the 3 moves.',
+            circuit: [
+              { name: 'DB Shrug (Traps)', note: 'Shrug straight up, squeeze at the top.' },
+              { name: 'Reverse DB Fly (Rear Delts)', note: 'Light weight, arms wide, squeeze.' },
+              { name: 'DB Reverse Curl (Forearms)', note: 'Palms down, slow and controlled.' }
+            ] },
           ],
         home:           [
             { name: 'Push-ups (Chest)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'CHEST 1. Mid chest.' },
@@ -1112,7 +1130,12 @@ const BLOCKS = {
             { name: 'Door Towel Lat Pulldown (Lats)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'BACK 2. Towel over door top, pull down.' },
             { name: 'Towel Curl (Biceps)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'ARMS 1 (biceps). Towel on door handle.' },
             { name: 'Towel Triceps Pushdown (Triceps)', sets: 3, reps: 8, rest: '2:00', rir: '1-2', note: 'ARMS 2 (triceps). Towel over door top.' },
-            { name: 'Finisher Circuit: Prone Shrug + Prone Reverse Fly + Towel Wrist Curl', sets: 2, reps: '12 each', rest: '0:30', rir: '1-2', note: '2 rounds, no rest between the 3 moves. Traps, rear delts, forearms.' },
+            { name: 'Finisher Circuit', sets: 2, reps: '12 each', rest: '0:30', rir: '1-2', note: '2 rounds, no rest between the 3 moves.',
+            circuit: [
+              { name: 'Prone Shrug (Traps)', note: 'Face down, shrug shoulders up, hold 1s.' },
+              { name: 'Prone Reverse Fly (Rear Delts)', note: 'Face down, arms wide, lift and squeeze.' },
+              { name: 'Towel Wrist Curl (Forearms)', note: 'Towel resistance, curl up slowly.' }
+            ] },
           ],
       },
       d6: {
@@ -1132,11 +1155,11 @@ const BLOCKS = {
           { phase: 'Specific', text: 'Wrist + forearm prep (circles, light holds)', dur: '30 s', how: 'Circle both wrists both ways, then hold a towel and squeeze. Straighten and bend the wrists slowly.', vid: null },
         ],
         cooldown:         [
-          { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
-          { text: 'Hamstring stretch', dur: '30s/side', vid: null },
-          { text: 'Figure-4 glute stretch', dur: '45s/side', vid: null },
-          { text: 'Forearm/wrist stretch (both directions)', dur: '30s each', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Quad stretch (standing)', dur: '30s/side', how: 'Stand on one leg (hold something), pull the other foot towards the glute. Knees together, hips slightly forward.', vid: null },
+          { text: 'Hamstring stretch', dur: '30s/side', how: 'One leg straight, hinge forward from the hips with a flat back until you feel the back of the thigh.', vid: null },
+          { text: 'Figure-4 glute stretch', dur: '45s/side', how: 'Lie on your back, cross one ankle over the opposite knee, then pull the lower thigh towards your chest.', vid: null },
+          { text: 'Forearm/wrist stretch (both directions)', dur: '30s each', how: 'Arm straight, palm up - pull the fingers down with the other hand. Then palm down and pull the hand down. Both directions.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Leg Press (Quads, Glutes)', sets: 4, reps: 6, rest: '2:30', rir: '1-2', note: 'Feet mid-high. Full range.' },
@@ -1184,10 +1207,10 @@ const BLOCKS = {
           { phase: 'Specific', text: 'Rotator cuff external rotation (light)', dur: '2 × 12', how: 'Elbow at your side bent 90 degrees, forearm pointing forward. Rotate the forearm outward against light resistance, then return.', vid: null },
         ],
         cooldown:         [
-          { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
-          { text: 'Cross-body shoulder stretch', dur: '30s/side', vid: null },
-          { text: 'Overhead triceps stretch', dur: '30s/side', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Doorway chest stretch', dur: '30s/side', how: 'Forearm on a door frame at shoulder height, elbow bent 90 degrees. Step forward until you feel the chest stretch.', vid: null },
+          { text: 'Cross-body shoulder stretch', dur: '30s/side', how: 'Bring one arm across your chest, hook it with the other forearm and pull it closer. Keep the shoulder down.', vid: null },
+          { text: 'Overhead triceps stretch', dur: '30s/side', how: 'One arm overhead, bend the elbow so the hand goes behind the head, use the other hand to press the elbow back.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Machine Chest Press (Chest)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'MID chest. Squeeze at top.' },
@@ -1223,10 +1246,10 @@ const BLOCKS = {
           { phase: 'Specific', text: 'Grip + wrist prep (circles, light squeeze)', dur: '30 s', how: 'Open and close your fists, circle both wrists, then squeeze a towel for a few seconds.', vid: null },
         ],
         cooldown:         [
-          { text: 'Lat stretch (hold rack, sit back)', dur: '30s/side', vid: null },
-          { text: 'Biceps wall stretch', dur: '30s/side', vid: null },
-          { text: 'Thoracic rotation (open book)', dur: '8/side', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Lat stretch (hold rack, sit back)', dur: '30s/side', how: 'Hold a rack at waist height, step back, sit hips down and back, let the chest drop. Feel the side of the back stretch.', vid: null },
+          { text: 'Biceps wall stretch', dur: '30s/side', how: 'Stand side-on to a wall, palm flat on it at shoulder height with the arm straight. Turn your body away until you feel the front of the upper arm stretch.', vid: null },
+          { text: 'Thoracic rotation (open book)', dur: '8/side', how: 'Lie on your side, knees bent. Open the top arm across the body and let the chest turn, following the hand with your eyes.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Lat Pulldown (Wide Grip) (Lats)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'VERTICAL WIDE. Pull to upper chest.' },
@@ -1265,11 +1288,11 @@ const BLOCKS = {
           { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on the leg press: about half your working weight x10, then 70% x5, then 85% x3. Easy effort only.', vid: 'Leg Press (Quads, Glutes)' },
         ],
         cooldown:         [
-          { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
-          { text: 'Hamstring stretch (seated/supine)', dur: '30s/side', vid: null },
-          { text: 'Figure-4 glute stretch', dur: '45s/side', vid: null },
-          { text: 'Calf stretch (wall)', dur: '30s/side', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Quad stretch (standing)', dur: '30s/side', how: 'Stand on one leg (hold something), pull the other foot towards the glute. Knees together, hips slightly forward.', vid: null },
+          { text: 'Hamstring stretch (seated/supine)', dur: '30s/side', how: 'Sit with one leg straight, loop a towel around the foot and gently pull the leg towards you keeping it straight.', vid: null },
+          { text: 'Figure-4 glute stretch', dur: '45s/side', how: 'Lie on your back, cross one ankle over the opposite knee, then pull the lower thigh towards your chest.', vid: null },
+          { text: 'Calf stretch (wall)', dur: '30s/side', how: 'Hands on a wall, step one leg back keeping it straight and the heel flat. Lean forward until the calf stretches.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Leg Press (Quads, Glutes)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Feet mid-high. No lockout.' },
@@ -1311,10 +1334,10 @@ const BLOCKS = {
           { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5', dur: '~2 min', how: 'Warm-up sets on your first pulling exercise: half your working weight x10, then 70% x5. Easy effort only.', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
         ],
         cooldown:         [
-          { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
-          { text: 'Lat stretch', dur: '30s/side', vid: null },
-          { text: 'Cross-body shoulder stretch', dur: '30s/side', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Doorway chest stretch', dur: '30s/side', how: 'Forearm on a door frame at shoulder height, elbow bent 90 degrees. Step forward until you feel the chest stretch.', vid: null },
+          { text: 'Lat stretch', dur: '30s/side', how: 'Hold a rack or door frame, step back and sit the hips down so the chest drops. Feel the stretch under the armpit.', vid: null },
+          { text: 'Cross-body shoulder stretch', dur: '30s/side', how: 'Bring one arm across your chest, hook it with the other forearm and pull it closer. Keep the shoulder down.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Machine Chest Press (Chest)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'CHEST 1. Mid chest.' },
@@ -1325,7 +1348,12 @@ const BLOCKS = {
             { name: 'Seated Cable Row (Back)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'BACK 2. Horizontal pull.' },
             { name: 'DB Curl (Biceps)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'ARMS 1 (biceps).' },
             { name: 'Tricep Pushdown (Triceps)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'ARMS 2 (triceps).' },
-            { name: 'Finisher Circuit: Shrug + Rear Delt Fly + Reverse Curl', sets: 2, reps: '12 each', rest: '0:30', rir: '0-1', note: '2 rounds, no rest between the 3 moves. Traps, rear delts, forearms.' },
+            { name: 'Finisher Circuit', sets: 2, reps: '12 each', rest: '0:30', rir: '0-1', note: '2 rounds, no rest between the 3 moves.',
+            circuit: [
+              { name: 'DB Shrug (Traps)', note: 'Shrug straight up, squeeze at the top.' },
+              { name: 'Reverse DB Fly (Rear Delts)', note: 'Light weight, arms wide, squeeze.' },
+              { name: 'DB Reverse Curl (Forearms)', note: 'Palms down, slow and controlled.' }
+            ] },
           ],
         home:           [
             { name: 'Push-ups (Chest)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'CHEST 1. Mid chest.' },
@@ -1336,7 +1364,12 @@ const BLOCKS = {
             { name: 'Door Towel Lat Pulldown (Lats)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'BACK 2. Towel over door top, pull down.' },
             { name: 'Towel Curl (Biceps)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'ARMS 1 (biceps). Towel on door handle.' },
             { name: 'Towel Triceps Pushdown (Triceps)', sets: 3, reps: 12, rest: '1:00', rir: '0-1', note: 'ARMS 2 (triceps). Towel over door top.' },
-            { name: 'Finisher Circuit: Prone Shrug + Prone Reverse Fly + Towel Wrist Curl', sets: 2, reps: '12 each', rest: '0:30', rir: '0-1', note: '2 rounds, no rest between the 3 moves. Traps, rear delts, forearms.' },
+            { name: 'Finisher Circuit', sets: 2, reps: '12 each', rest: '0:30', rir: '0-1', note: '2 rounds, no rest between the 3 moves.',
+            circuit: [
+              { name: 'Prone Shrug (Traps)', note: 'Face down, shrug shoulders up, hold 1s.' },
+              { name: 'Prone Reverse Fly (Rear Delts)', note: 'Face down, arms wide, lift and squeeze.' },
+              { name: 'Towel Wrist Curl (Forearms)', note: 'Towel resistance, curl up slowly.' }
+            ] },
           ],
       },
       d6: {
@@ -1356,11 +1389,11 @@ const BLOCKS = {
           { phase: 'Specific', text: 'Wrist + forearm prep (circles, light holds)', dur: '30 s', how: 'Circle both wrists both ways, then hold a towel and squeeze. Straighten and bend the wrists slowly.', vid: null },
         ],
         cooldown:         [
-          { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
-          { text: 'Hamstring stretch', dur: '30s/side', vid: null },
-          { text: 'Figure-4 glute stretch', dur: '45s/side', vid: null },
-          { text: 'Forearm/wrist stretch (both directions)', dur: '30s each', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Quad stretch (standing)', dur: '30s/side', how: 'Stand on one leg (hold something), pull the other foot towards the glute. Knees together, hips slightly forward.', vid: null },
+          { text: 'Hamstring stretch', dur: '30s/side', how: 'One leg straight, hinge forward from the hips with a flat back until you feel the back of the thigh.', vid: null },
+          { text: 'Figure-4 glute stretch', dur: '45s/side', how: 'Lie on your back, cross one ankle over the opposite knee, then pull the lower thigh towards your chest.', vid: null },
+          { text: 'Forearm/wrist stretch (both directions)', dur: '30s each', how: 'Arm straight, palm up - pull the fingers down with the other hand. Then palm down and pull the hand down. Both directions.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Leg Press (Quads, Glutes)', sets: 4, reps: 10, rest: '1:30', rir: '0-1', note: 'Feet mid-high. Full range.' },
@@ -1408,10 +1441,10 @@ const BLOCKS = {
           { phase: 'Specific', text: 'Rotator cuff external rotation (light)', dur: '2 × 12', how: 'Elbow at your side bent 90 degrees, forearm pointing forward. Rotate the forearm outward against light resistance, then return.', vid: null },
         ],
         cooldown:         [
-          { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
-          { text: 'Cross-body shoulder stretch', dur: '30s/side', vid: null },
-          { text: 'Overhead triceps stretch', dur: '30s/side', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Doorway chest stretch', dur: '30s/side', how: 'Forearm on a door frame at shoulder height, elbow bent 90 degrees. Step forward until you feel the chest stretch.', vid: null },
+          { text: 'Cross-body shoulder stretch', dur: '30s/side', how: 'Bring one arm across your chest, hook it with the other forearm and pull it closer. Keep the shoulder down.', vid: null },
+          { text: 'Overhead triceps stretch', dur: '30s/side', how: 'One arm overhead, bend the elbow so the hand goes behind the head, use the other hand to press the elbow back.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Machine Chest Press (Chest)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'MID chest. Squeeze at top.' },
@@ -1447,10 +1480,10 @@ const BLOCKS = {
           { phase: 'Specific', text: 'Grip + wrist prep (circles, light squeeze)', dur: '30 s', how: 'Open and close your fists, circle both wrists, then squeeze a towel for a few seconds.', vid: null },
         ],
         cooldown:         [
-          { text: 'Lat stretch (hold rack, sit back)', dur: '30s/side', vid: null },
-          { text: 'Biceps wall stretch', dur: '30s/side', vid: null },
-          { text: 'Thoracic rotation (open book)', dur: '8/side', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Lat stretch (hold rack, sit back)', dur: '30s/side', how: 'Hold a rack at waist height, step back, sit hips down and back, let the chest drop. Feel the side of the back stretch.', vid: null },
+          { text: 'Biceps wall stretch', dur: '30s/side', how: 'Stand side-on to a wall, palm flat on it at shoulder height with the arm straight. Turn your body away until you feel the front of the upper arm stretch.', vid: null },
+          { text: 'Thoracic rotation (open book)', dur: '8/side', how: 'Lie on your side, knees bent. Open the top arm across the body and let the chest turn, following the hand with your eyes.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Lat Pulldown (Wide Grip) (Lats)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'VERTICAL WIDE. Pull to upper chest.' },
@@ -1489,11 +1522,11 @@ const BLOCKS = {
           { phase: 'Potentiate', text: 'Ramp sets on leg press — 50% ×10 · 70% ×5 · 85% ×3', dur: '~3 min', how: 'Warm-up sets on the leg press: about half your working weight x10, then 70% x5, then 85% x3. Easy effort only.', vid: 'Leg Press (Quads, Glutes)' },
         ],
         cooldown:         [
-          { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
-          { text: 'Hamstring stretch (seated/supine)', dur: '30s/side', vid: null },
-          { text: 'Figure-4 glute stretch', dur: '45s/side', vid: null },
-          { text: 'Calf stretch (wall)', dur: '30s/side', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Quad stretch (standing)', dur: '30s/side', how: 'Stand on one leg (hold something), pull the other foot towards the glute. Knees together, hips slightly forward.', vid: null },
+          { text: 'Hamstring stretch (seated/supine)', dur: '30s/side', how: 'Sit with one leg straight, loop a towel around the foot and gently pull the leg towards you keeping it straight.', vid: null },
+          { text: 'Figure-4 glute stretch', dur: '45s/side', how: 'Lie on your back, cross one ankle over the opposite knee, then pull the lower thigh towards your chest.', vid: null },
+          { text: 'Calf stretch (wall)', dur: '30s/side', how: 'Hands on a wall, step one leg back keeping it straight and the heel flat. Lean forward until the calf stretches.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Leg Press (Quads, Glutes)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Feet mid-high. No lockout.' },
@@ -1535,10 +1568,10 @@ const BLOCKS = {
           { phase: 'Potentiate', text: 'Ramp sets on 1st pull — 50% ×10 · 70% ×5', dur: '~2 min', how: 'Warm-up sets on your first pulling exercise: half your working weight x10, then 70% x5. Easy effort only.', vid: 'Lat Pulldown (Wide Grip) (Lats)' },
         ],
         cooldown:         [
-          { text: 'Doorway chest stretch', dur: '30s/side', vid: null },
-          { text: 'Lat stretch', dur: '30s/side', vid: null },
-          { text: 'Cross-body shoulder stretch', dur: '30s/side', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Doorway chest stretch', dur: '30s/side', how: 'Forearm on a door frame at shoulder height, elbow bent 90 degrees. Step forward until you feel the chest stretch.', vid: null },
+          { text: 'Lat stretch', dur: '30s/side', how: 'Hold a rack or door frame, step back and sit the hips down so the chest drops. Feel the stretch under the armpit.', vid: null },
+          { text: 'Cross-body shoulder stretch', dur: '30s/side', how: 'Bring one arm across your chest, hook it with the other forearm and pull it closer. Keep the shoulder down.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Machine Chest Press (Chest)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'CHEST 1. Mid chest.' },
@@ -1549,7 +1582,12 @@ const BLOCKS = {
             { name: 'Seated Cable Row (Back)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'BACK 2. Horizontal pull.' },
             { name: 'DB Curl (Biceps)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'ARMS 1 (biceps).' },
             { name: 'Tricep Pushdown (Triceps)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'ARMS 2 (triceps).' },
-            { name: 'Finisher Circuit: Shrug + Rear Delt Fly + Reverse Curl', sets: 2, reps: '12 each', rest: '0:30', rir: '0-1', note: '2 rounds, no rest between the 3 moves. Traps, rear delts, forearms.' },
+            { name: 'Finisher Circuit', sets: 2, reps: '12 each', rest: '0:30', rir: '0-1', note: '2 rounds, no rest between the 3 moves.',
+            circuit: [
+              { name: 'DB Shrug (Traps)', note: 'Shrug straight up, squeeze at the top.' },
+              { name: 'Reverse DB Fly (Rear Delts)', note: 'Light weight, arms wide, squeeze.' },
+              { name: 'DB Reverse Curl (Forearms)', note: 'Palms down, slow and controlled.' }
+            ] },
           ],
         home:           [
             { name: 'Push-ups (Chest)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'CHEST 1. Mid chest.' },
@@ -1560,7 +1598,12 @@ const BLOCKS = {
             { name: 'Door Towel Lat Pulldown (Lats)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'BACK 2. Towel over door top, pull down.' },
             { name: 'Towel Curl (Biceps)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'ARMS 1 (biceps). Towel on door handle.' },
             { name: 'Towel Triceps Pushdown (Triceps)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'ARMS 2 (triceps). Towel over door top.' },
-            { name: 'Finisher Circuit: Prone Shrug + Prone Reverse Fly + Towel Wrist Curl', sets: 2, reps: '12 each', rest: '0:30', rir: '0-1', note: '2 rounds, no rest between the 3 moves. Traps, rear delts, forearms.' },
+            { name: 'Finisher Circuit', sets: 2, reps: '12 each', rest: '0:30', rir: '0-1', note: '2 rounds, no rest between the 3 moves.',
+            circuit: [
+              { name: 'Prone Shrug (Traps)', note: 'Face down, shrug shoulders up, hold 1s.' },
+              { name: 'Prone Reverse Fly (Rear Delts)', note: 'Face down, arms wide, lift and squeeze.' },
+              { name: 'Towel Wrist Curl (Forearms)', note: 'Towel resistance, curl up slowly.' }
+            ] },
           ],
       },
       d6: {
@@ -1580,11 +1623,11 @@ const BLOCKS = {
           { phase: 'Specific', text: 'Wrist + forearm prep (circles, light holds)', dur: '30 s', how: 'Circle both wrists both ways, then hold a towel and squeeze. Straighten and bend the wrists slowly.', vid: null },
         ],
         cooldown:         [
-          { text: 'Quad stretch (standing)', dur: '30s/side', vid: null },
-          { text: 'Hamstring stretch', dur: '30s/side', vid: null },
-          { text: 'Figure-4 glute stretch', dur: '45s/side', vid: null },
-          { text: 'Forearm/wrist stretch (both directions)', dur: '30s each', vid: null },
-          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', vid: null },
+          { text: 'Quad stretch (standing)', dur: '30s/side', how: 'Stand on one leg (hold something), pull the other foot towards the glute. Knees together, hips slightly forward.', vid: null },
+          { text: 'Hamstring stretch', dur: '30s/side', how: 'One leg straight, hinge forward from the hips with a flat back until you feel the back of the thigh.', vid: null },
+          { text: 'Figure-4 glute stretch', dur: '45s/side', how: 'Lie on your back, cross one ankle over the opposite knee, then pull the lower thigh towards your chest.', vid: null },
+          { text: 'Forearm/wrist stretch (both directions)', dur: '30s each', how: 'Arm straight, palm up - pull the fingers down with the other hand. Then palm down and pull the hand down. Both directions.', vid: null },
+          { text: 'Deep breathing (4s in / 6s out)', dur: '2 min', how: 'Breathe in through the nose for 4 seconds, out slowly through the mouth for 6. Let the shoulders drop.', vid: null },
         ],
         gym:           [
             { name: 'Leg Press (Quads, Glutes)', sets: 3, reps: 15, rest: '1:00', rir: '0-1', note: 'Feet mid-high. Full range.' },
@@ -1771,6 +1814,24 @@ function renderWorkout() {
     if (muscle) html += `<span class="ex-muscle">${muscle}</span>`;
     html += `</div><div class="ex-load">${ex.sets}<span>&times;${setsReps}</span></div></div>`;
     if (ex.note) html += `<p class="ex-note">${ex.note}</p>`;
+    if (ex.circuit && ex.circuit.length) {
+      html += `<div class="circuit">`;
+      ex.circuit.forEach((c, ci) => {
+        const cm = (c.name || '').match(/^(.*?)\s*\(([^)]+)\)\s*$/);
+        const cName = cm ? cm[1] : (c.name || '');
+        const cMus = cm ? cm[2].replace(/,\s*/g, ' &middot; ') : '';
+        const cSafe = (c.name || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+        html += `<div class="circuit-row">`;
+        html += `<span class="c-num">${ci + 1}</span>`;
+        html += `<div class="c-body"><span class="c-name">${cName}</span>`;
+        if (cMus) html += `<span class="c-mus">${cMus}</span>`;
+        if (c.note) html += `<div class="c-note">${c.note}</div>`;
+        html += `</div>`;
+        if (hasVideo(c.name)) html += `<button class="icon-btn c-vid" onclick="openVideo('${cSafe}')" aria-label="Watch demo">&#9654;</button>`;
+        html += `</div>`;
+      });
+      html += `</div>`;
+    }
     html += `<div class="ex-foot">`;
     html += `<span class="meta-chip">&#9201; ${ex.rest}</span>`;
     html += `<span class="meta-chip">RIR ${ex.rir}</span>`;
@@ -1801,7 +1862,11 @@ function renderWorkout() {
       </div>
       <div class="warmup-content show" style="padding-top:2px;">`;
     cd.forEach((s, i) => {
-      html += `<div class="warmup-step"><span class="num">${i+1}</span><span>${s.text} &mdash; ${s.dur}</span>`;
+      html += `<div class="warmup-step"><span class="num">${i + 1}</span>`;
+      html += `<div class="wu-body"><div class="wu-top"><span class="wu-text" style="color:var(--text);font-weight:650;">${s.text}</span>`;
+      html += `<span class="wu-dur">${s.dur}</span></div>`;
+      if (s.how) html += `<div class="wu-how">${s.how}</div>`;
+      html += `</div>`;
       if (s.vid) html += `<button class="timer-btn" onclick="openVideo('${s.vid}')">&#9654;</button>`;
       html += `</div>`;
     });
