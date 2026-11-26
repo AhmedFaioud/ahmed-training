@@ -299,6 +299,21 @@ body::before {
 }
 .wt-input::placeholder { color: var(--text-3); font-weight: 600; font-size: 11.5px; }
 .wt-input:focus { border-color: var(--accent); background: rgba(255,255,255,.09); }
+.sync-status { font-size: 12.5px; color: var(--text-2); line-height: 1.5; margin: 6px 0 10px; }
+.sync-input {
+  width: 100%; height: 42px; padding: 0 13px; margin-bottom: 9px;
+  background: rgba(255,255,255,.055); border: 1px solid var(--line);
+  border-radius: 11px; color: var(--text); font-family: inherit; font-size: 13px; outline: none;
+}
+.sync-input:focus { border-color: var(--accent); }
+.sync-btn {
+  width: 100%; padding: 11px; margin-bottom: 8px;
+  border: none; border-radius: 11px;
+  background: var(--accent); color: #fff;
+  font-family: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer;
+}
+.sync-btn.ghost { background: rgba(255,255,255,.06); color: var(--text-2); border: 1px solid var(--line); }
+.sync-note { font-size: 10.5px; color: var(--text-3); line-height: 1.55; margin-top: 4px; }
 .ex-name {
   font-size: 15.5px;
   font-weight: 700;
@@ -787,6 +802,20 @@ body::before {
         <h3>📝 Today's Log</h3>
         <div id="logEntries">Select a workout day to log your lifts.</div>
         <button onclick="saveLog()" style="margin-top:12px;width:100%;padding:12px;border:none;border-radius:12px;background:var(--accent);color:#fff;font-size:15px;font-weight:600;cursor:pointer;">💾 Save Log</button>
+      </div>
+
+      <div class="info-card" id="syncCard" style="margin-top:12px;">
+        <h3>☁️ Weight backup</h3>
+        <p class="sync-status" id="syncStatus">Not connected — weights only live on this device.</p>
+        <div id="syncSetup">
+          <input class="sync-input" id="gistToken" type="password" autocomplete="off" placeholder="GitHub token (gist scope)">
+          <button class="sync-btn" onclick="gistConnect()">Connect</button>
+        </div>
+        <div id="syncActions" style="display:none;">
+          <button class="sync-btn" onclick="syncNow()">Sync now</button>
+          <button class="sync-btn ghost" onclick="gistDisconnect()">Disconnect</button>
+        </div>
+        <p class="sync-note">Saves to a private Gist in your GitHub account. Keeps this week and last week only.</p>
       </div>
     </div>
   </div>
@@ -1841,6 +1870,160 @@ function saveWeight(key, val) {
   const v = (val || '').trim();
   if (v) all[key] = v; else delete all[key];
   try { localStorage.setItem('t_weights', JSON.stringify(all)); } catch (e) {}
+  pruneWeights();
+  schedulePush();
+}
+
+// ---- keep current + previous week only ----
+function pruneWeights() {
+  const all = loadWeights();
+  const wk = getWeekNum();
+  let changed = false;
+  for (const k of Object.keys(all)) {
+    const w = parseInt(String(k).split('|')[0], 10);
+    if (!isNaN(w) && w < wk - 1) { delete all[k]; changed = true; }
+  }
+  if (changed) { try { localStorage.setItem('t_weights', JSON.stringify(all)); } catch (e) {} }
+  return all;
+}
+
+// ====== GITHUB GIST SYNC ======
+const GIST_FILE = 'training-weights.json';
+function getGistCfg() { try { return JSON.parse(localStorage.getItem('t_gist') || '{}'); } catch (e) { return {}; } }
+function setGistCfg(o) { try { localStorage.setItem('t_gist', JSON.stringify(o)); } catch (e) {} }
+
+function gistUi(msg) {
+  const st = document.getElementById('syncStatus');
+  const setup = document.getElementById('syncSetup');
+  const acts = document.getElementById('syncActions');
+  const cfg = getGistCfg();
+  const on = !!(cfg.token && cfg.gistId);
+  if (setup) setup.style.display = on ? 'none' : '';
+  if (acts) acts.style.display = on ? '' : 'none';
+  if (st) {
+    if (msg) { st.textContent = msg; return; }
+    if (!on) { st.textContent = 'Not connected — weights only live on this device.'; return; }
+    const when = cfg.lastSync ? new Date(cfg.lastSync).toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short' }) : 'not yet';
+    st.textContent = 'Connected ✓ · last sync ' + when;
+  }
+}
+
+let gistTimer = null;
+function schedulePush() {
+  const cfg = getGistCfg();
+  if (!cfg.token || !cfg.gistId) return;
+  clearTimeout(gistTimer);
+  gistTimer = setTimeout(function () { syncPush(); }, 900);
+}
+
+function gistPayload() {
+  return JSON.stringify({
+    app: 'tadribi',
+    updated: new Date().toISOString(),
+    week: getWeekNum(),
+    weights: pruneWeights()
+  }, null, 1);
+}
+
+async function syncPush() {
+  const cfg = getGistCfg();
+  if (!cfg.token || !cfg.gistId) return false;
+  try {
+    const r = await fetch('https://api.github.com/gists/' + cfg.gistId, {
+      method: 'PATCH',
+      headers: { 'Authorization': 'token ' + cfg.token, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ files: { [GIST_FILE]: { content: gistPayload() } } })
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    setGistCfg(Object.assign({}, cfg, { lastSync: new Date().toISOString() }));
+    gistUi('Saved ✓ · ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }));
+    return true;
+  } catch (e) {
+    gistUi('Sync failed — ' + e.message);
+    return false;
+  }
+}
+
+async function syncPull(silent) {
+  const cfg = getGistCfg();
+  if (!cfg.token || !cfg.gistId) return false;
+  try {
+    const r = await fetch('https://api.github.com/gists/' + cfg.gistId, {
+      headers: { 'Authorization': 'token ' + cfg.token, 'Accept': 'application/vnd.github+json' }
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const g = await r.json();
+    const f = g.files && g.files[GIST_FILE];
+    if (!f) return false;
+    let content = f.content;
+    if (f.truncated && f.raw_url) {
+      const rr = await fetch(f.raw_url);
+      content = await rr.text();
+    }
+    const data = JSON.parse(content || '{}');
+    const remote = data.weights || {};
+    const merged = Object.assign({}, loadWeights(), remote);
+    try { localStorage.setItem('t_weights', JSON.stringify(merged)); } catch (e) {}
+    pruneWeights();
+    renderWorkout();
+    if (!silent) gistUi('Loaded ✓');
+    return true;
+  } catch (e) {
+    if (!silent) gistUi('Load failed — ' + e.message);
+    return false;
+  }
+}
+
+async function syncNow() {
+  gistUi('Syncing…');
+  await syncPull(true);
+  await syncPush();
+}
+
+async function gistConnect() {
+  const el = document.getElementById('gistToken');
+  const tok = (el && el.value || '').trim();
+  if (!tok) { gistUi('Paste a GitHub token first.'); return; }
+  gistUi('Connecting…');
+  const H = { 'Authorization': 'token ' + tok, 'Accept': 'application/vnd.github+json' };
+  try {
+    const u = await fetch('https://api.github.com/user', { headers: H });
+    if (u.status === 401) { gistUi('That token was rejected. Make sure it has the "gist" scope.'); return; }
+    if (!u.ok) throw new Error('HTTP ' + u.status);
+    const user = await u.json();
+
+    // reuse an existing weights gist if there is one
+    const lr = await fetch('https://api.github.com/gists?per_page=100', { headers: H });
+    const list = await lr.json();
+    let gist = Array.isArray(list) ? list.find(function (g) { return g.files && g.files[GIST_FILE]; }) : null;
+
+    if (!gist) {
+      const cr = await fetch('https://api.github.com/gists', {
+        method: 'POST', headers: H,
+        body: JSON.stringify({
+          description: 'tadribi — training weights (private)',
+          public: false,
+          files: { [GIST_FILE]: { content: gistPayload() } }
+        })
+      });
+      if (!cr.ok) throw new Error('create failed HTTP ' + cr.status);
+      gist = await cr.json();
+    } else {
+      setGistCfg({ token: tok, gistId: gist.id });
+      await syncPull(true);
+    }
+    setGistCfg({ token: tok, gistId: gist.id, user: user.login, lastSync: new Date().toISOString() });
+    if (el) el.value = '';
+    gistUi('Connected as ' + user.login + ' ✓');
+    await syncPush();
+  } catch (e) {
+    gistUi('Connection failed — ' + e.message);
+  }
+}
+
+function gistDisconnect() {
+  setGistCfg({});
+  gistUi();
 }
 
 function renderWorkout() {
@@ -2220,6 +2403,12 @@ function handleSwipe() {
 // ====== INIT ======
 currentBlock = getCurrentBlock();
 currentDay = getCycleDay();
+pruneWeights();
+(function initSync(){
+  const cfg = getGistCfg();
+  gistUi();
+  if (cfg.token && cfg.gistId) syncPull(true).then(function(){ pruneWeights(); renderWorkout(); });
+})();
 document.querySelectorAll('.day-btn').forEach(b => {
   b.classList.toggle('active', b.dataset.day === currentDay);
 });
