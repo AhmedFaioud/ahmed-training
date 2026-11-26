@@ -143,6 +143,23 @@ body::before {
 .badge-hypertrophy { background: rgba(139,92,246,.15);  color: #b092ff; }
 .badge-endurance   { background: rgba(52,211,153,.15);  color: #5ee2ac; }
 .badge-deload      { background: rgba(251,191,36,.16);  color: #fcd34d; }
+.sticky-day {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+  display: flex; justify-content: center; align-items: center;
+  padding: 9px 16px;
+  background: rgba(8, 10, 14, .88);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  transform: translateY(-115%);
+  transition: transform .22s ease;
+  pointer-events: none;
+}
+.sticky-day.show { transform: translateY(0); }
+.sticky-day span {
+  font-size: 12.5px; font-weight: 750; letter-spacing: -0.01em;
+  color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
 .date-line {
   font-size: 11.5px;
   color: var(--text-3);
@@ -267,7 +284,21 @@ body::before {
   justify-content: space-between;
   gap: 12px;
 }
-.ex-title { min-width: 0; flex: 1; }
+.ex-title { min-width: 0; flex: 1; }.ex-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.wt-input {
+  width: 58px; height: 33px;
+  background: rgba(255,255,255,.055);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  color: var(--text);
+  font-family: inherit; font-size: 12.5px; font-weight: 750;
+  text-align: center;
+  padding: 0 4px;
+  outline: none;
+  transition: border-color .15s ease, background .15s ease;
+}
+.wt-input::placeholder { color: var(--text-3); font-weight: 600; font-size: 11.5px; }
+.wt-input:focus { border-color: var(--accent); background: rgba(255,255,255,.09); }
 .ex-name {
   font-size: 15.5px;
   font-weight: 700;
@@ -635,6 +666,9 @@ body::before {
   </div>
   <div class="date-line" id="dateInfo"></div>
 </div>
+
+<!-- Sticky day indicator -->
+<div class="sticky-day" id="stickyDay"><span id="stickyText">—</span></div>
 
 <!-- Day Picker (7-day cycle) -->
 <div class="day-picker" id="dayPicker">
@@ -1714,6 +1748,7 @@ function setMode(m) {
   document.getElementById('btnGym').classList.toggle('active', m === 'gym');
   document.getElementById('btnHome').classList.toggle('active', m === 'home');
   renderWorkout();
+  syncSticky();
   if (typeof renderLog === 'function') { /* log re-rendered on tab open */ }
 }
 
@@ -1771,20 +1806,48 @@ function renderWeekInfo() {
   if (isDeload) html += `<span class="week-badge badge-deload">Deload</span>`;
   document.getElementById('weekInfo').innerHTML = html;
 
-  const options = { weekday: 'long', month: 'long', day: 'numeric' };
-  const dateStr = today.toLocaleDateString('en-US', options);
-  const selDay = BLOCKS[currentBlock].days[currentDay] || BLOCKS[currentBlock].days[cycDay];
+  const selDay = BLOCKS[currentBlock].days[currentDay];
   const dayLabel = selDay ? selDay.label : '';
-  const viewingToday = (currentDay === cycDay);
-  document.getElementById('dateInfo').textContent = viewingToday
-    ? `${dateStr} · ${dayLabel}`
-    : `${dateStr} · viewing Day ${currentDay.slice(1)} — ${dayLabel}`;
+  const di = document.getElementById('dateInfo');
+  if (di) di.textContent = `Day ${currentDay.slice(1)} — ${dayLabel}`;
+  syncSticky();
+}
+
+// ====== STICKY DAY INDICATOR ======
+function syncSticky() {
+  const el = document.getElementById('stickyDay');
+  const txt = document.getElementById('stickyText');
+  if (!el || !txt) return;
+  const d = BLOCKS[currentBlock] && BLOCKS[currentBlock].days[currentDay];
+  const lbl = d ? d.label : '';
+  txt.textContent = `Day ${currentDay.slice(1)} — ${lbl} · ${currentMode === 'home' ? '🏠 Home' : '🏋️ Gym'}`;
+  const screen = document.getElementById('screenWorkout');
+  const onWorkout = screen && screen.classList.contains('active');
+  el.classList.toggle('show', !!onWorkout && window.scrollY > 130);
+}
+window.addEventListener('scroll', syncSticky, { passive: true });
+
+// ====== WEEK NUMBER + WEIGHT LOG ======
+function getWeekNum() {
+  const startDate = new Date('2026-07-06');
+  const diffDays = Math.floor((new Date() - startDate) / (1000 * 60 * 60 * 24));
+  return Math.floor(diffDays / 7) + 1;
+}
+function loadWeights() {
+  try { return JSON.parse(localStorage.getItem('t_weights') || '{}'); } catch (e) { return {}; }
+}
+function saveWeight(key, val) {
+  const all = loadWeights();
+  const v = (val || '').trim();
+  if (v) all[key] = v; else delete all[key];
+  try { localStorage.setItem('t_weights', JSON.stringify(all)); } catch (e) {}
 }
 
 function renderWorkout() {
   const block = BLOCKS[currentBlock];
   const day = block.days[currentDay];
   const container = document.getElementById('workoutDisplay');
+  const WTS = loadWeights();
 
   // ====== REST DAY ======
   if (day.rest) {
@@ -1851,7 +1914,14 @@ function renderWorkout() {
     html += `<article class="ex">`;
     html += `<div class="ex-top"><div class="ex-title"><span class="ex-name">${title}</span>`;
     if (muscle) html += `<span class="ex-muscle">${muscle}</span>`;
-    html += `</div><div class="ex-load">${ex.sets}<span>&times;${setsReps}</span></div></div>`;
+    const wk = getWeekNum();
+    const wName = raw.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    const wKey = `${wk}|${currentDay}|${currentMode}|${raw}`.replace(/'/g, "\\'");
+    const prevW = WTS[`${wk - 1}|${currentDay}|${currentMode}|${raw}`] || '';
+    const thisW = WTS[`${wk}|${currentDay}|${currentMode}|${raw}`] || '';
+    html += `</div><div class="ex-right"><div class="ex-load">${ex.sets}<span>&times;${setsReps}</span></div>`;
+    html += `<input class="wt-input" inputmode="decimal" value="${thisW}" placeholder="${prevW || 'kg'}" onchange="saveWeight('${wKey}', this.value)" aria-label="Weight for ${wName}" title="${prevW ? 'Last week: ' + prevW + ' - beat it' : 'Weight this week'}">`;
+    html += `</div></div>`;
     if (ex.note) html += `<p class="ex-note">${ex.note}</p>`;
     if (ex.circuit && ex.circuit.length) {
       html += `<div class="circuit">`;
@@ -1914,7 +1984,7 @@ function renderWorkout() {
 
   html += `<div class="cardio-card" style="background:rgba(255,255,255,.03);border-color:var(--line);">
     <div class="cardio-title" style="color:var(--text-2);">Reminders</div>
-    <div class="cardio-detail">&bull; Exhale on every rep &mdash; never hold your breath<br>&bull; 500&nbsp;ml water during training<br>&bull; Knee warm-up is mandatory before leg days</div>
+    <div class="cardio-detail">&bull; Exhale on every rep &mdash; never hold your breath<br>&bull; 500&nbsp;ml water during training<br>&bull; Knee warm-up is mandatory before leg days<br>&bull; Grey number in the weight box = last week &mdash; beat it this week</div>
   </div>`;
 
   container.innerHTML = html;
@@ -1955,6 +2025,7 @@ function switchTab(tab, el) {
   if (mt) mt.style.display = (tab === 'workout') ? '' : 'none';
   if (tab === 'log') renderLog();
   window.scrollTo(0, 0);
+  syncSticky();
 }
 
 // ====== WARMUP TOGGLE ======
