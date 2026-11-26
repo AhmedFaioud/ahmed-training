@@ -2181,13 +2181,23 @@ function getWeekNum() {
 }
 
 // ====== DAY PICKER ======
+function setDay(day) {
+  if (!BLOCKS[currentBlock] || !BLOCKS[currentBlock].days[day]) return;
+  currentDay = day;
+  document.querySelectorAll('.day-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.day === day);
+  });
+  renderWeekInfo();
+  renderWorkout();
+  const act = document.querySelector('.day-btn.active');
+  if (act && act.scrollIntoView) {
+    try { act.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); } catch (e) {}
+  }
+}
+
 document.querySelectorAll('.day-btn').forEach(btn => {
   btn.addEventListener('click', function() {
-    document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
-    this.classList.add('active');
-    currentDay = this.dataset.day;
-    renderWeekInfo();
-    renderWorkout();
+    setDay(this.dataset.day);
   });
 });
 
@@ -2393,11 +2403,7 @@ function handleSwipe() {
     currentDay = days[idx - 1];
   } else return;
 
-  // Update day buttons
-  document.querySelectorAll('.day-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.day === currentDay);
-  });
-  renderWorkout();
+  setDay(currentDay);
 }
 
 // ====== INIT ======
